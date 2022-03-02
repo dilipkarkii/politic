@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Modelwrapper from "./modelwrapper";
+// import Modelwrapper from "./modelwrapper";
 import axios from "axios";
+import Modelwrapper from "../model/modelwrapper";
 
-const Personal = ({ title, closeModal, isOpen }) => {
+const Award = ({ title, closeModal, isOpen }) => {
 	const [achiv, setAchiv] = useState("");
 
 	const [award, setAward] = useState();
@@ -22,8 +23,8 @@ const Personal = ({ title, closeModal, isOpen }) => {
 		await axios.post(
 			`http://politician.tk/profile/`,
 			{
-				achievements: achiv,
-				awards: "empty",
+				achievements: "empty",
+				awards: award,
 				contribution: "empty",
 				politician: userId,
 			}
@@ -34,19 +35,7 @@ const Personal = ({ title, closeModal, isOpen }) => {
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
-					<div className="mt-2 ">
-						Achivements
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setAchiv(e.target.value)}
-							id="name"
-							value={achiv}
-							placeholder="Achivements"
-							type="text"
-						/>
-					</div>
-
-					{/* <div className="mt-4">
+					<div className="mt-4">
 						Awards
 						<textarea
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
@@ -55,27 +44,7 @@ const Personal = ({ title, closeModal, isOpen }) => {
 							value={award}
 							placeholder="awards"
 						/>
-					</div> */}
-					{/* <div className="mt-4">
-						Contribution
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setCont(e.target.value)}
-							id="location"
-							value={cont}
-							placeholder="contribution"
-						/>
-					</div> */}
-					{/* <div className="mt-4">
-						politician
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setPolitician(e.target.value)}
-							id="politician"
-							value={politician}
-							placeholder="contribution"
-						/>
-					</div> */}
+					</div>
 
 					<br />
 					<button
@@ -92,4 +61,4 @@ const Personal = ({ title, closeModal, isOpen }) => {
 	);
 };
 
-export default Personal;
+export default Award;

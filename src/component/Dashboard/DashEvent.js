@@ -2,60 +2,38 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Even from "../model/even";
 import EventUpdate from "../model/EventUpdate";
-import Navbartop from "./navbar";
-import {
-	useGetAllEventQuery,
-	useDeleteEventMutation,
-} from "../../services/event";
-
-const Events = () => {
-	const userId = localStorage.getItem("userId");
-	const geteventapi = useGetAllEventQuery(userId);
-	const { data: geteventapidata, isLoading } = geteventapi;
-	const [deleteEvent, responseInfo] = useDeleteEventMutation();
-	console.log("responseInfo", responseInfo);
-	const { isSuccess } = responseInfo;
-
-	// console.log("geteventapidata", geteventapidata.event_set);
+import Dashnav from "./Dashnav";
+const DashEvent = () => {
 	let [isOpen, setIsOpen] = useState(false);
 	let [eventsData, setEventsData] = useState([]);
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [eventDetail, setEventDetail] = useState();
-	console.log(eventDetail);
 
-	console.log(eventsData);
+	console.log(eventDetail);
 
 	function closeModal() {
 		setIsOpen(false);
+		setOpenUpdate(false);
 	}
 	function openModal() {
 		setIsOpen(true);
+		setOpenUpdate(true);
 	}
-	const closeUpdateModal = () => {
-		setOpenUpdate(false);
-	};
+
 	useEffect(() => {
 		const fetchData = async () => {
-			// const res = await axios.get("http://politician.tk/event/");
-			const { data } = await axios.get(
-				`http://politician.tk/politician/${userId}/`
-			);
-			// console.log("politicanRes", politicanRes);
-			// const data = res.json();
-			console.log("data", data.event_set);
-			setEventsData(data.event_set);
+			const res = await axios.get("http://politician.tk/event/");
+			setEventsData(res.data);
 		};
 		fetchData();
 	}, []);
 	const onDelete = async (id) => {
-		deleteEvent(id);
-		// await axios.delete(`http://politician.tk/event/${id}/	`);
+		await axios.delete(`http://politician.tk/event/${id}`);
 	};
-
 	return (
 		<>
 			<div className="bg-slate-300">
-				<Navbartop />
+				<Dashnav />
 				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto">
 					<div className="inset-0 flex items-center justify-end ">
 						<button
@@ -67,13 +45,9 @@ const Events = () => {
 						</button>
 					</div>
 					<Even title="Add Events" closeModal={closeModal} isOpen={isOpen} />
-					{isLoading && <h1>hello</h1>}
-					{geteventapidata &&
-						geteventapidata.event_set.map((value) => (
-							<div
-								className="mx-3 my-4 overflow-hidden bg-white shadow sm:rounded-lg "
-								key={value.id}
-							>
+					{eventsData &&
+						eventsData.map((value) => (
+							<div className="mx-3 my-4 overflow-hidden bg-white shadow sm:rounded-lg ">
 								<div className="grid grid-cols-12 px-4 py-5 sm:px-6 bg-gray-50">
 									<h3 className="flex items-center col-span-4 text-lg font-medium leading-6 text-gray-500 ">
 										Upcomming Events
@@ -87,7 +61,6 @@ const Events = () => {
 										</button>
 										<button
 											onClick={() => (
-												// eslint-disable-next-line no-sequences
 												setOpenUpdate(true), setEventDetail(value)
 											)}
 											className="items-center px-3 py-2 text-white bg-blue-500 rounded"
@@ -140,16 +113,6 @@ const Events = () => {
 										</div>
 										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 											<dt className="text-sm font-medium text-gray-500">
-												agenda
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												<a href="www.facebook.com" target="_blank">
-													{value.agenda}
-												</a>
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
 												Links
 											</dt>
 											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -165,7 +128,7 @@ const Events = () => {
 				</div>
 				<EventUpdate
 					title="Update Events"
-					closeModal={closeUpdateModal}
+					closeModal={closeModal}
 					isOpen={openUpdate}
 					eventDetail={eventDetail}
 				/>
@@ -174,4 +137,4 @@ const Events = () => {
 	);
 };
 
-export default Events;
+export default DashEvent;

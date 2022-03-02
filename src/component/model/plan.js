@@ -3,45 +3,53 @@ import Modelwrapper from "./modelwrapper";
 import axios from "axios";
 
 const Planmodel = ({ title, closeModal, isOpen }) => {
-	const url = "http://192.168.1.106:8000/api/registeradmin";
+	const url = "http://politician.tk/plan-vision/";
 
 	const [pname, setPname] = useState();
 	const [pdes, setPdes] = useState("");
+	const userId = localStorage.getItem("userId");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(pname, pdes);
 		let config = {
 			headers: {
-				"Content-Type": "multipart/form-data",
+				"Content-Type": "application/json",
 				Accept: "application/json",
-				type: "formData",
+				// type: "formData",
 			},
 		};
-		await axios.post(url, { pname, pdes }, config);
+		await axios.post(
+			url,
+			{ plan: pname, vision: pdes, politician: userId },
+			config
+		);
 	};
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
+					<label className="block">Plan Title</label>
 					<input
 						onChange={(e) => setPname(e.target.value)}
 						id="name"
 						value={pname}
-						placeholder="name"
-						className="h-10 border-2 rounded-md w-30 border-slate-900 placeholder:text-center"
+						placeholder="Title"
+						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 					/>
 					<br />
 				</div>
-				<div className="mt-5 w-fit">
+				<div className="mt-5 ">
+					<label className="block">Plan Description</label>
 					<textarea
-						class="resize-y rounded-md border-2 border-slate-900 w-96 h-16 placeholder:text-center"
+						class="resize-y rounded-md border-2 border-slate-900 w-full h-16 px-3 py-1 placeholder:text-black"
 						onChange={(e) => setPdes(e.target.value)}
 						id="name"
 						value={pdes}
 						placeholder="Set description"
 						type="text"
 					/>
+
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"

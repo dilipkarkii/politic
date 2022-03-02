@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-import Modelwrapper from "./modelwrapper";
+import React, { useEffect, useState } from "react";
+import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
-const Gal = ({ title, closeModal, isOpen }) => {
-	const url = "http://politician.tk/gallery/";
+const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 	const [des, setDes] = useState("");
 
 	const [pic, setPic] = useState();
-	const [pid, setPid] = useState();
+	console.log("gallaryDetail", gallaryDetail);
+	useEffect(() => {
+		if (gallaryDetail) {
+			setDes(gallaryDetail.description);
+			setPic(gallaryDetail.image);
+		}
+	}, [gallaryDetail]);
 
 	let formData = new FormData();
 	formData.append("image", pic);
 	formData.append("description", des);
-	formData.append("owner", pid);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -22,9 +26,17 @@ const Gal = ({ title, closeModal, isOpen }) => {
 				"Content-Type": "multipart/form-data",
 			},
 		};
-		await axios.post(url, formData, config);
+		const formData = new FormData();
+		formData.append("description", des);
+		formData.append("image", pic);
+		formData.append("owner", 8);
+		const res = await axios.put(
+			`http://politician.tk/gallery/${gallaryDetail.id}/`,
+			formData,
+			config
+		);
+		console.log("res", res);
 	};
-
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
@@ -33,7 +45,7 @@ const Gal = ({ title, closeModal, isOpen }) => {
 					<textarea
 						className="h-32 px-3 py-1 mt-3 border-2 rounded-md w-96 border-slate-900 placeholder:text-black"
 						onChange={(e) => setDes(e.target.value)}
-						id="des"
+						id="name"
 						value={des}
 						placeholder="Set description"
 						type="text"
@@ -44,26 +56,14 @@ const Gal = ({ title, closeModal, isOpen }) => {
 					<label> Image:</label>
 					<input
 						onChange={(e) => setPic(e.target.files[0])}
-						id="img"
+						id="name"
 						className="px-1"
-						// value={pic}
-						placeholder="name"
+						// defaultvalue={pic}
+						// placeholder="name"
 						type="file"
 						multiple
 					/>
 					<br />
-					<div className="mt-4">
-						<label> owoner:</label>
-						<input
-							onChange={(e) => setPid(e.target.value)}
-							id="img"
-							className="px-1"
-							value={pid}
-							placeholder="name"
-							multiple
-						/>
-						<br />
-					</div>
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"
@@ -78,4 +78,4 @@ const Gal = ({ title, closeModal, isOpen }) => {
 	);
 };
 
-export default Gal;
+export default GalUpdate;

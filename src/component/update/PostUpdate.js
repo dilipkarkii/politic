@@ -1,51 +1,32 @@
 import React, { useState } from "react";
-import Modelwrapper from "./modelwrapper";
+import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
-const Posts = ({ title, closeModal, isOpen }) => {
-	const [Title, setTitle] = useState("");
+const PostUpdate = ({ title, closeModal, isOpen }) => {
+	const url = "http://192.108.1.106:8000/api/registeradmin";
+	const [postTitle, setpostTitle] = useState("");
 
-	const [description, setDescription] = useState();
+	const [Description, setDescription] = useState();
 	const [img, setImg] = useState([]);
 
-	const ImageHandle = async (e) => {
-		const file = e.target.files[0];
-		let formData = new FormData();
-		formData.append("image", file);
-		// e.preventDefault();
-		let config = {
-			headers: {
-				"Content-Type": "multipart/form-data",
-				// accept: "application/json",
-			},
-		};
-		const { data } = await axios.post(
-			`http://politician.tk/create_post_image/`,
-			{
-				formData,
-			},
-			config
-		);
-
-		setImg(data);
-		console.log("img", img);
-	};
+	// useEffect(() => {
+	// 	effect
+	// 	return () => {
+	// 		cleanup
+	// 	};
+	// }, [input]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// console.log(Title, description, img);
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "multipart/form-data",
-		// 		Accept: "application/json",
-		// 		type: "formData",
-		// 	},
-		// };
-		await axios.post("http://politician.tk/create_post/", {
-			title: Title,
-			description,
-			img,
-		});
+		console.log(postTitle, Description, img);
+		let config = {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Accept: "application/json",
+				type: "formData",
+			},
+		};
+		await axios.post(url, { postTitle, Description, img }, config);
 	};
 	return (
 		<>
@@ -55,9 +36,9 @@ const Posts = ({ title, closeModal, isOpen }) => {
 						Title
 						<textarea
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setTitle(e.target.value)}
+							onChange={(e) => setpostTitle(e.target.value)}
 							id="name"
-							value={Title}
+							defaultvalue={postTitle}
 							placeholder="title"
 							type="text"
 						/>
@@ -66,10 +47,10 @@ const Posts = ({ title, closeModal, isOpen }) => {
 					<div className="mt-4">
 						Description
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full px-3 py-1 border-2 rounded-md h-72 border-slate-900 placeholder:text-black"
 							onChange={(e) => setDescription(e.target.value)}
 							id="name"
-							value={description}
+							defaultvalue={Description}
 							placeholder="description"
 						/>
 					</div>
@@ -77,7 +58,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 						Image:
 						<input
 							className="px-1"
-							onChange={ImageHandle}
+							onChange={(e) => setImg(e.target.value)}
 							type="file"
 							multiple
 						/>
@@ -98,4 +79,4 @@ const Posts = ({ title, closeModal, isOpen }) => {
 	);
 };
 
-export default Posts;
+export default PostUpdate;

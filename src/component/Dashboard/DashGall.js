@@ -1,43 +1,29 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Gal from "../model/gal";
-import GalUpdate from "../update/Galupdate";
+import Dashnav from "./Dashnav";
+// import axios from "axios";
 import Navbartop from "./navbar";
-// import image from "../../img.png";
 
-const Gallary = () => {
+const Dashgall = () => {
 	let [isOpen, setIsOpen] = useState(false);
-
-	let [openUpdate, setOpenUpdate] = useState(false);
-	let [gallaryDetail, setGallaryDetail] = useState([]);
-	let [gallaryData, setGallaryData] = useState([]);
-	console.log("gallaryDetail", gallaryDetail);
-
-	console.log(gallaryData);
 
 	function closeModal() {
 		setIsOpen(false);
-		// setOpenUpdate(false);
 	}
 	function openModal() {
 		setIsOpen(true);
-		// setOpenUpdate(true);
 	}
+	// const url = "http://192.168.1.106:8000/api/registeradmin";
 
-	const closeUpdateModal = () => {
-		setOpenUpdate(false);
-	};
+	// const [des, setDes] = useState("");
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const res = await axios.get("http://politician.tk/gallery/");
-			setGallaryData(res.data);
-		};
-		fetchData();
-	}, []);
-	const onDelete = async (id) => {
-		await axios.delete(`http://politician.tk/gallery/${id}/`);
-	};
+	// const [pic, setPic] = useState();
+	// const [data, setData] = useState([]);
+	// let [isOpen, setIsOpen] = useState(false);
+
+	// function closeModal() {
+	// 	setIsOpen(false);
+	// }
 
 	// function openModal() {
 	// 	setIsOpen(true);
@@ -54,11 +40,17 @@ const Gallary = () => {
 	// 	};
 	// 	await axios.post(url, { des, pic }, config);
 	// };
-
+	const [data, setData] = useState([]);
+	useEffect(() => {
+		fetch("https://jsonplaceholder.typicode.com/photos")
+			.then((res) => res.json())
+			.then((json) => setData(json));
+	}, []);
+	console.log("data", data);
 	return (
 		<>
 			<div className="bg-slate-300">
-				<Navbartop />
+				<Dashnav />
 				{/* <!-- images goes here --> */}
 				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto">
 					<div className="inset-0 flex items-center justify-end ">
@@ -72,20 +64,17 @@ const Gallary = () => {
 					</div>
 					<Gal title="Add image" closeModal={closeModal} isOpen={isOpen} />
 					<div className="grid grid-cols-4 gap-4 mt-5">
-						{gallaryData.map((images) => (
-							<div className="" key={images.id}>
+						{data.slice(0, 10).map((datas) => (
+							<div className="">
 								<div className="relative max-w-xs bg-no-repeat bg-cover">
 									<img
-										src="../../img.png"
+										src={datas.url}
 										alt="Louvre"
 										className="block object-cover object-center w-full h-full rounded-lg"
 									/>
 									{/* px-5 bottom-0 pt-20 text-center */}
 									<div className="absolute top-0 left-0 right-0 block w-full h-full text-sm font-semibold text-gray-900 transition duration-300 ease-in-out bg-fixed border-solid rounded-lg opacity-0 hover:opacity-100 border-1 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-										<button
-											className="hover:bg-red-900"
-											onClick={() => onDelete(images.id)}
-										>
+										<button className="hover:bg-red-900">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												className="h-6 "
@@ -101,29 +90,8 @@ const Gallary = () => {
 												/>
 											</svg>
 										</button>
-										<button
-											className="mx-2 my-2 hover:bg-blue-900"
-											onClick={() => (
-												// eslint-disable-next-line no-sequences
-												setOpenUpdate(true), setGallaryDetail(images)
-											)}
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="w-5 h-5"
-												viewBox="0 0 20 20"
-												fill="blue"
-											>
-												<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-												<path
-													fillRule="evenodd"
-													d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-													clipRule="evenodd"
-												/>
-											</svg>
-										</button>
 										<p className="bottom-0 px-5 pt-20 text-center">
-											{images.description}
+											{datas.title}
 										</p>
 									</div>
 								</div>
@@ -132,14 +100,8 @@ const Gallary = () => {
 					</div>
 				</div>
 			</div>
-			<GalUpdate
-				title="Update Images"
-				closeModal={closeUpdateModal}
-				isOpen={openUpdate}
-				gallaryDetail={gallaryDetail}
-			/>
 		</>
 	);
 };
 
-export default Gallary;
+export default Dashgall;

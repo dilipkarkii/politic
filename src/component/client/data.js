@@ -5,8 +5,7 @@ const news = [
 		name: "simatokne",
 		time: "dec 2021,2019",
 		image: "/images/single.jpg",
-		description:
-			" hami yestai ta ho ni bro Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		description: "  bro Lorem ipsum dolor sit amet consectetur dolor sit amet.",
 		quote: "no body nobody does it better",
 		img: "/images/single.jpg",
 		author: "huhu",
@@ -18,8 +17,7 @@ const news = [
 		title: "hajaldna",
 		name: "hajmola",
 		image: "/images/home.jpg",
-		description:
-			"gedai jasto jindgi Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		description: "bro Lorem ipsum dolor sit amet consectetur dolor sit amet.",
 		quote: "hahahahaha",
 		img: "/images/ho.jpeg",
 		author: "huhu",
@@ -28,11 +26,10 @@ const news = [
 	},
 	{
 		id: "3",
-		title: "nabhana mero maya lagaxa bhane",
+		title: "dolor sit amet",
 		name: "torilaure",
 		image: "/images/home.jpg",
-		description:
-			"namuna banai diyo Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		description: "bro Lorem ipsum dolor sit amet consectetur dolor sit amet.",
 		quote: "terimaa",
 		img: "/images/raj.jpg",
 		author: "huhu",
@@ -41,11 +38,10 @@ const news = [
 	},
 	{
 		id: "4",
-		title: "timrai maal samayeko xu maile ",
+		title: "dolor sit amet ",
 		name: "gedey",
 		image: "/images/ho.jpeg",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		description: "bro Lorem ipsum dolor sit amet consectetur dolor sit amet.",
 		quote: "hahahahaha",
 		img: "/images/haason.jpg",
 		author: "huhu",
@@ -57,8 +53,7 @@ const news = [
 		title: "huhuh",
 		name: "chaman",
 		image: "/images/single.jpg",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		description: "bro Lorem ipsum dolor sit amet consectetur dolor sit amet.",
 		quote: "hahahahaha",
 		img: "/images/single.jpg",
 		author: "huhu",

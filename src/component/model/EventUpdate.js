@@ -1,45 +1,73 @@
-import React, { useState } from "react";
-import Modelwrapper from "./modelwrapper";
 import axios from "axios";
-import { useCreateEventMutation } from "../../services/event";
+import React, { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+import Modelwrapper from "../model/modelwrapper";
+import { useUpdateEventMutation } from "../../services/event";
+// import axios from "axios";
 
-const Even = ({ title, closeModal, isOpen }) => {
-	// const url = "http://192.108.1.106:8000/api/registeradmin";
-	const [name, setName] = useState("");
+const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
+	const [updateEvent, responseInfo] = useUpdateEventMutation();
+	const [name, setName] = useState();
 	const [agenda, setAgenda] = useState();
 	const [loc, setLoc] = useState();
 	const [date, setDate] = useState();
 	const [time, setTime] = useState();
 	const [link, setLink] = useState();
-	const [createEvent, responseInfo] = useCreateEventMutation();
-	const { isSuccess } = responseInfo;
-	console.log("responseInfo", responseInfo);
+	const [des, setDes] = useState();
 	const userId = localStorage.getItem("userId");
+
+	// function refreshPage() {
+	// 	window.location.reload(false);
+	// }
+
+	useEffect(() => {
+		if (eventDetail) {
+			setName(eventDetail.title);
+			setAgenda(eventDetail.description);
+			setLoc(eventDetail.location);
+			setDate(eventDetail.date);
+			setTime(eventDetail.time);
+			setLink(eventDetail.link);
+			setLink(eventDetail.link);
+			setDes(eventDetail.agenda);
+		}
+	}, [eventDetail]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		createEvent({
+		updateEvent({
+			id: eventDetail.id,
 			title: name,
-			agenda,
+			description: agenda,
 			location: loc,
 			date,
 			time,
 			link,
+			agenda: des,
 			organized_by: userId,
 		});
 		console.log(name, agenda, loc, date, time, link);
 		// let config = {
 		// 	headers: {
 		// 		"Content-Type": "application/json",
+		// 		// type: "formData",
 		// 	},
 		// };
-		// await axios.post(
-		// 	"http://politician.tk/event/",
-		// 	{ title: name, agenda, location: loc, date, time, link, organized_by: 8 }
-		// 	// config
+		// const res = await axios.put(
+		// 	`http://politician.tk/event/${eventDetail.id}/`,
+		// 	{
+		// 		title: name,
+		// 		description: agenda,
+		// 		location: loc,
+		// 		date,
+		// 		time,
+		// 		link,
+		// 		agenda: des,
+		// 		organized_by: 2,
+		// 	},
+		// 	config
 		// );
-
-		// console.log({ name, agenda, loc, date, time, link });
+		// console.log("res", res);
 	};
 	return (
 		<>
@@ -50,7 +78,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setName(e.target.value)}
 							id="name"
-							value={name}
+							defaultValue={name}
 							placeholder="Set Name"
 							type="text"
 						/>
@@ -61,7 +89,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAgenda(e.target.value)}
 							id="name"
-							value={agenda}
+							defaultValue={agenda}
 							placeholder="Agenda"
 						/>
 					</div>
@@ -70,7 +98,16 @@ const Even = ({ title, closeModal, isOpen }) => {
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setLoc(e.target.value)}
 							id="location"
-							value={loc}
+							defaultValue={loc}
+							placeholder="Location"
+						/>
+					</div>
+					<div className="mt-4">
+						<input
+							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							onChange={(e) => setDes(e.target.value)}
+							id="location"
+							defaultValue={des}
 							placeholder="Location"
 						/>
 					</div>
@@ -80,7 +117,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							onChange={(e) => setDate(e.target.value)}
 							type="date"
 							id="date"
-							value={date}
+							defaultValue={date}
 							placeholder="date"
 						/>
 					</div>
@@ -90,7 +127,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							onChange={(e) => setTime(e.target.value)}
 							id="time"
 							type="time"
-							value={time}
+							defaultValue={time}
 							placeholder="time"
 						/>
 					</div>
@@ -99,18 +136,18 @@ const Even = ({ title, closeModal, isOpen }) => {
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setLink(e.target.value)}
 							id="link"
-							value={link}
+							defaultValue={link}
 							placeholder="Links"
 						/>
 					</div>
 					<br />
 					<button
 						type="submit"
-						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"
 						className="inline-flex justify-center px-4 py-2 mt-3 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
 						onClose={closeModal}
+						// onClick={refreshPage}
 					>
-						submit
+						Update
 					</button>
 				</form>
 			</Modelwrapper>
@@ -118,4 +155,4 @@ const Even = ({ title, closeModal, isOpen }) => {
 	);
 };
 
-export default Even;
+export default EventUpdate;
