@@ -8,11 +8,12 @@ const Gal = ({ title, closeModal, isOpen }) => {
 
 	const [pic, setPic] = useState();
 	const [pid, setPid] = useState();
+	const userId = localStorage.getItem("userId");
 
 	let formData = new FormData();
 	formData.append("image", pic);
 	formData.append("description", des);
-	formData.append("owner", pid);
+	formData.append("owner", userId);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -51,19 +52,7 @@ const Gal = ({ title, closeModal, isOpen }) => {
 						type="file"
 						multiple
 					/>
-					<br />
-					<div className="mt-4">
-						<label> owoner:</label>
-						<input
-							onChange={(e) => setPid(e.target.value)}
-							id="img"
-							className="px-1"
-							value={pid}
-							placeholder="name"
-							multiple
-						/>
-						<br />
-					</div>
+
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"

@@ -20,11 +20,9 @@ const Contribution = ({ title, closeModal, isOpen }) => {
 		// 	},
 		// };
 		await axios.post(
-			`http://politician.tk/profile/`,
+			`http://politician.tk/contribution/`,
 			{
-				achievements: "empty",
-				awards: "empty",
-				contribution: cont,
+				contributions: cont,
 				politician: userId,
 			}
 			// config
@@ -37,7 +35,7 @@ const Contribution = ({ title, closeModal, isOpen }) => {
 					<div className="mt-4">
 						Contribution
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setCont(e.target.value)}
 							id="location"
 							value={cont}

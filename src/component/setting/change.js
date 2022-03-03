@@ -37,7 +37,7 @@ const Change = () => {
 									<input
 										type="password"
 										className={`w-150 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-										id="username"
+										id="oldpwd"
 										placeholder="eg:na@121"
 										onChange={(e) => setOldPass(e.target.value)}
 										value={oldpass}
@@ -50,7 +50,7 @@ const Change = () => {
 									<input
 										type="password"
 										className={`w-150 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-										id="username"
+										id="newpwd"
 										placeholder="password new"
 										onChange={(e) => setNewpwd(e.target.value)}
 										value={newpwd}
@@ -62,7 +62,7 @@ const Change = () => {
 									<input
 										type="password"
 										className={`w-150 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-										id="password"
+										id="conformpwd"
 										placeholder="confirm password"
 										onChange={(e) => setConPass(e.target.value)}
 										value={conpass}

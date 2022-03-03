@@ -16,6 +16,7 @@ import Dashplan from "./component/Dashboard/Dashplan";
 import DashPost from "./component/Dashboard/Dashpost";
 import Dashprofile from "./component/Dashboard/DashProfile";
 import Change from "./component/setting/change";
+import PoliticChange from "./component/setting/PoliticChange";
 import Reset from "./component/setting/reset";
 import Dashboard from "./dashboard";
 import Login from "./login";
@@ -46,6 +47,7 @@ const App = () => {
 					<Route exact path="/dashplan" element={<Dashplan />} />
 					<Route exact path="/personal" element={<Personal />} />
 					<Route exact path="/dashpost" element={<DashPost />} />
+					<Route exact path="/changepassword" element={<PoliticChange />} />
 				</Routes>
 			</BrowserRouter>
 		</>

@@ -51,7 +51,7 @@ export default function Example() {
                 )}
               </Menu.Item>
               </Link>
-              <Link to="/reset">
+              {/* <Link to="/reset">
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -74,7 +74,7 @@ export default function Example() {
                   </button>
                 )}
               </Menu.Item>
-              </Link>
+              </Link> */}
             </div>
             <div className="px-1 py-1">
               <Link to="/">

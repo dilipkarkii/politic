@@ -2,31 +2,24 @@ import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
-const AwardUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
-	const [achiv, setAchiv] = useState();
-
+const AwardUpdate = ({ title, closeModal, isOpen, awardDetail }) => {
 	const [award, setAward] = useState();
-	const [cont, setCont] = useState();
 	const [politician, setPolitician] = useState();
 	const userId = localStorage.getItem("userId");
 
 	useEffect(() => {
-		if (profileDetail) {
-			setAchiv(profileDetail.achievements);
-			setAward(profileDetail.awards);
-			setCont(profileDetail.contribution);
-			setPolitician(profileDetail.politician);
+		if (awardDetail) {
+			setAward(awardDetail.awards);
+			setPolitician(awardDetail.politician);
 		}
-	}, [profileDetail]);
+	}, [awardDetail]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(achiv, award, cont);
+		console.log(award);
 
-		await axios.put(`http://politician.tk/profile/${profileDetail.id}/`, {
-			achievements: "empty",
+		await axios.put(`http://politician.tk/award/${awardDetail.id}/`, {
 			awards: award,
-			contribution: "empty",
 			politician: userId,
 		});
 	};
@@ -37,7 +30,7 @@ const AwardUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 					<div className="mt-4">
 						Awards
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAward(e.target.value)}
 							id="name"
 							defaultValue={award}

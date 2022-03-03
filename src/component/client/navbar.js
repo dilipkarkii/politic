@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Setting from "./Setting";
 
 const Navbartop = () => {
 	return (
@@ -54,14 +55,11 @@ const Navbartop = () => {
 										Personal Profile
 									</p>
 								</Link>
-								<p className="px-3 py-5 text-gray-700 hover:text-gray-900">
-									FeedBack
-								</p>
 							</div>
 						</div>
 						{/* <!-- secondary nav --> */}
 						<div className="items-center hidden space-x-1 md:flex">
-							<Link to="/">
+							{/* <Link to="/">
 
 							<p
 							
@@ -69,7 +67,8 @@ const Navbartop = () => {
 							>
 								Login 
 							</p>
-								</Link>
+								</Link> */}
+							<Setting />
 						</div>
 						{/* <!-- mobile button goes here --> */}
 						<div className="flex items-center md:hidden">

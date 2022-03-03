@@ -1,16 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import Navbar from "./component/Dashboard/navbar";
 import Create from "./component/setting/create";
-// import Table from "./component/setting/table";
-
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./sidebar";
 
 const Dashboard = () => {
 	let [isOpen, setIsOpen] = useState(false);
 	const [tabledata, setTabledata] = useState();
+	const navigate = useNavigate();
 
 	function closeModal() {
 		setIsOpen(false);
@@ -28,6 +26,14 @@ const Dashboard = () => {
 		};
 		fetchData();
 	}, []);
+
+	const handleFormSubmit = async (id) => {
+		localStorage.setItem("userId", id);
+		console.log(id);
+			navigate("/home");
+
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -69,14 +75,12 @@ const Dashboard = () => {
 										<td className="mt-10">{data.email}</td>
 										<td className="mt-10">{data.phone}</td>
 										<td>
-											<Link to="/dashpersonal">
-												<div
-													className="text-blue-600 dark:text-blue-500
-													hover:underline"
-												>
-													Edit
-												</div>
-											</Link>
+											<button
+												onClick={()=>handleFormSubmit(data.id)}
+												className="inline-flex justify-center px-4 py-2 mt-3 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+											>
+												Edit
+											</button>
 										</td>
 									</tr>
 								))}

@@ -23,10 +23,8 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 		e.preventDefault();
 		console.log(achiv, award, cont);
 
-		await axios.put(`http://politician.tk/profile/${profileDetail.id}/`, {
+		await axios.put(`http://politician.tk/achievement/${profileDetail.id}/`, {
 			achievements: achiv,
-			awards: "empty",
-			contribution: "empty",
 			politician: userId,
 		});
 	};
@@ -37,7 +35,7 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 					<div className="mt-2 ">
 						Achivements
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAchiv(e.target.value)}
 							id="name"
 							defaultValue={achiv}

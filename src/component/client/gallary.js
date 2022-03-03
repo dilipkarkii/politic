@@ -11,7 +11,9 @@ const Gallary = () => {
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [gallaryDetail, setGallaryDetail] = useState([]);
 	let [gallaryData, setGallaryData] = useState([]);
-	console.log("gallaryDetail", gallaryDetail);
+	// console.log("gallaryDetail", gallaryData[0].image.split("8000/")[1]);
+
+	const userId = localStorage.getItem("userId");
 
 	console.log(gallaryData);
 
@@ -76,7 +78,9 @@ const Gallary = () => {
 							<div className="" key={images.id}>
 								<div className="relative max-w-xs bg-no-repeat bg-cover">
 									<img
-										src="../../img.png"
+										src={`http://politician.tk/${
+											images.image.split("8000/")[1]
+										}`}
 										alt="Louvre"
 										className="block object-cover object-center w-full h-full rounded-lg"
 									/>

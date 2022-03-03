@@ -7,6 +7,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 
 	const [pic, setPic] = useState();
 	console.log("gallaryDetail", gallaryDetail);
+	const userId = localStorage.getItem("userId");
 	useEffect(() => {
 		if (gallaryDetail) {
 			setDes(gallaryDetail.description);
@@ -29,7 +30,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 		const formData = new FormData();
 		formData.append("description", des);
 		formData.append("image", pic);
-		formData.append("owner", 8);
+		formData.append("owner", userId);
 		const res = await axios.put(
 			`http://politician.tk/gallery/${gallaryDetail.id}/`,
 			formData,

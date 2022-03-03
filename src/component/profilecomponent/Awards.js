@@ -4,15 +4,13 @@ import axios from "axios";
 import Modelwrapper from "../model/modelwrapper";
 
 const Award = ({ title, closeModal, isOpen }) => {
-	const [achiv, setAchiv] = useState("");
 
 	const [award, setAward] = useState();
-	const [cont, setCont] = useState();
 	const userId = localStorage.getItem("userId");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(achiv, award, cont);
+		console.log( award, );
 		// let config = {
 		// 	headers: {
 		// 		"Content-Type": "application/json",
@@ -21,11 +19,9 @@ const Award = ({ title, closeModal, isOpen }) => {
 		// 	},
 		// };
 		await axios.post(
-			`http://politician.tk/profile/`,
+			`http://politician.tk/award/`,
 			{
-				achievements: "empty",
 				awards: award,
-				contribution: "empty",
 				politician: userId,
 			}
 			// config
@@ -38,7 +34,7 @@ const Award = ({ title, closeModal, isOpen }) => {
 					<div className="mt-4">
 						Awards
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAward(e.target.value)}
 							id="name"
 							value={award}

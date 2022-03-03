@@ -2,31 +2,24 @@ import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
-const ContriUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
-	const [achiv, setAchiv] = useState();
-
-	const [award, setAward] = useState();
+const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 	const [cont, setCont] = useState();
-	// const [politician, setPolitician] = useState();
+	const [politician, setPolitician] = useState();
 	const userId = localStorage.getItem("userId");
 
 	useEffect(() => {
-		if (profileDetail) {
-			setAchiv(profileDetail.achievements);
-			setAward(profileDetail.awards);
-			setCont(profileDetail.contribution);
-			// setPolitician(profileDetail.politician);
+		if (contriDetail) {
+			setCont(contriDetail.contribution);
+			setPolitician(contriDetail.politician);
 		}
-	}, [profileDetail]);
+	}, [contriDetail]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(achiv, award, cont);
+		console.log(cont);
 
-		await axios.put(`http://politician.tk/profile/${profileDetail.id}/`, {
-			achievements: "empty",
-			awards: "empty",
-			contribution: cont,
+		await axios.put(`http://politician.tk/contribution/${contriDetail.id}/`, {
+			contributions: cont,
 			politician: userId,
 		});
 	};
@@ -37,7 +30,7 @@ const ContriUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 					<div className="mt-4">
 						contribution
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setCont(e.target.value)}
 							id="contribution"
 							defaultValue={cont}

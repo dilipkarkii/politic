@@ -3,21 +3,27 @@ import React, { useEffect, useState } from "react";
 import Personal from "../model/personal";
 import Award from "../profilecomponent/Awards";
 import AwardUpdate from "../profilecomponent/AwardUpdate";
-import ContriUpdate from "../profilecomponent/Contribution";
-import Contribution from "../profilecomponent/ContriUpdate.js";
+import ContriUpdate from "../profilecomponent/ContributionUpdate";
+import Contribution from "../profilecomponent/Contributions.js";
 import ProfileUpdate from "../update/ProfileUpdate";
 import Navbartop from "./navbar";
 
 const Profile = () => {
 	let [isOpen, setIsOpen] = useState(false);
+	let [isOpenAward, setIsOpenAward] = useState(false);
+	let [isOpenContri, setIsOpenContri] = useState(false);
 
 	let [openUpdate, setOpenUpdate] = useState(false);
-	let [openaward, setOpenAward] = useState(false);
-	let [opencontri, setOpenContri] = useState(false);
 	let [openAwardUpdate, setOpenAwardUpdate] = useState(false);
 	let [openContriUpdate, setOpenContriUpdate] = useState(false);
+
 	let [profileDetail, setProfileDetail] = useState();
+	let [awardDetail, setAwardDetail] = useState();
+	let [contriDetail, setContriDetail] = useState();
+
 	let [profileData, setProfileData] = useState([]);
+	let [awardData, setAwardData] = useState([]);
+	let [contriData, setContriData] = useState([]);
 	console.log(profileDetail);
 	const userId = localStorage.getItem("userId");
 
@@ -26,35 +32,36 @@ const Profile = () => {
 	function closeModal() {
 		setIsOpen(false);
 	}
-	function closeAward() {
-		setOpenAward(false);
+	function closeAwardModal() {
+		setIsOpenAward(false);
 	}
-	function closeContribution() {
-		setOpenContri(false);
+	function closeContriModal() {
+		setIsOpenContri(false);
 	}
+
 	// close model
 
 	// open model
 	function openModal() {
 		setIsOpen(true);
 	}
-	function openAwardModal1() {
-		setOpenAward(true);
+	function openAwardModal() {
+		setIsOpenAward(true);
 	}
-	function openContribution() {
-		setOpenContri(true);
+	function openContriModal() {
+		setIsOpenContri(true);
 	}
 	// open model
 
 	// update open
-	const openAwardModal = () => {
-		setOpenAwardUpdate(true);
-	};
-	const openContriModal = () => {
-		setOpenContriUpdate(true);
-	};
 	const openUpdateModal = () => {
 		setOpenUpdate(true);
+	};
+	const openAwardUpdateModal = () => {
+		setOpenAwardUpdate(true);
+	};
+	const openContriUpdateModal = () => {
+		setOpenContriUpdate(true);
 	};
 	// update open
 
@@ -62,26 +69,60 @@ const Profile = () => {
 	const closeUpdateModal = () => {
 		setOpenUpdate(false);
 	};
-	const closeUpdateAward = () => {
+	const closeAwardUpdateModal = () => {
 		setOpenAwardUpdate(false);
 	};
-	const closeUpdateContri = () => {
+	const closeContriUpdateModal = () => {
 		setOpenContriUpdate(false);
 	};
 	// update close
 
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		// const res = await axios.get("http://politician.tk/profile/");
+	// 		const { data } = await axios.get(
+	// 			`http://politician.tk/politician/${userId}/`
+	// 		);
+	// 		console.log("resUser", data.politicianpersonalprofile_set);
+	// 		setProfileData(data.politicianpersonalprofile_set);
+	// 	};
+	// 	fetchData();
+	// }, []);
+
+	// api call
 	useEffect(() => {
 		const fetchData = async () => {
-			// const res = await axios.get("http://politician.tk/profile/");
 			const { data } = await axios.get(
 				`http://politician.tk/politician/${userId}/`
 			);
-			console.log("resUser", data.politicianpersonalprofile_set);
-			setProfileData(data.politicianpersonalprofile_set);
+			console.log("data", data.politicianachievements_set);
+			setProfileData(data.politicianachievements_set);
 		};
 		fetchData();
 	}, []);
 
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get(
+				`http://politician.tk/politician/${userId}/`
+			);
+			console.log("data", data.politicianawards_set);
+			setAwardData(data.politicianawards_set);
+		};
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get(
+				`http://politician.tk/politician/${userId}/`
+			);
+			console.log("data", data.politiciancontributions_set);
+			setContriData(data.politiciancontributions_set);
+		};
+		fetchData();
+	}, []);
+	// api call end
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -94,14 +135,14 @@ const Profile = () => {
 						isOpen={isOpen}
 					/>
 					<Award
-						title="Add Achivements"
-						closeModal={closeAward}
-						isOpen={openaward}
+						title="Add Awards"
+						closeModal={closeAwardModal}
+						isOpen={isOpenAward}
 					/>
 					<Contribution
-						title="Add Achivements"
-						closeModal={closeContribution}
-						isOpen={openContribution}
+						title="Add Contribution"
+						closeModal={closeContriModal}
+						isOpen={isOpenContri}
 					/>
 
 					{/* end open model */}
@@ -128,11 +169,12 @@ const Profile = () => {
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
+											key={value.id}
 										>
 											<dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
 											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ml-10 text-justify">
 												{value.achievements}
 											</dd>
 											<button
@@ -160,7 +202,7 @@ const Profile = () => {
 							<div className="inset-0 flex items-center justify-end ">
 								<button
 									type="button"
-									onClick={openAwardModal1}
+									onClick={openAwardModal}
 									className="px-4 py-2 ml-4 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
 								>
 									Create Awards
@@ -169,22 +211,23 @@ const Profile = () => {
 						</div>
 						<div className="border-t border-gray-200">
 							<dl>
-								{profileData &&
-									profileData.map((value, i) => (
+								{awardData &&
+									awardData.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
+											key={value.id}
 										>
 											<dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
 											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ml-10 text-justify">
 												{value.awards}
 											</dd>
 											<button
 												onClick={() => (
 													// eslint-disable-next-line no-sequences
-													openAwardModal(), setProfileDetail(value)
+													openAwardUpdateModal(), setAwardDetail(value)
 												)}
 												className="px-4 py-2 ml-4 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
 											>
@@ -206,7 +249,7 @@ const Profile = () => {
 							<div className="inset-0 flex items-center justify-end ">
 								<button
 									type="button"
-									onClick={openContribution}
+									onClick={openContriModal}
 									className="px-4 py-2 ml-4 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
 								>
 									Create Contribution
@@ -215,22 +258,23 @@ const Profile = () => {
 						</div>
 						<div className="border-t border-gray-200">
 							<dl>
-								{profileData &&
-									profileData.map((value, i) => (
+								{contriData &&
+									contriData.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
+											key={value.id}
 										>
 											<dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
 											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{value.contribution}
+											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ml-10 text-justify">
+												{value.contributions}
 											</dd>
 											<button
 												onClick={() => (
 													// eslint-disable-next-line no-sequences
-													openContriModal(), setProfileDetail(value)
+													openContriUpdateModal(), setContriDetail(value)
 												)}
 												className="px-4 py-2 ml-4 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
 											>
@@ -253,18 +297,19 @@ const Profile = () => {
 				isOpen={openUpdate}
 				profileDetail={profileDetail}
 			/>
-			{/* <AwardUpdate
-				title="Update awards"
-				closeModal={closeUpdateAward}
+			<AwardUpdate
+				title="Update achivements"
+				closeModal={closeAwardUpdateModal}
 				isOpen={openAwardUpdate}
-				profileDetail={profileDetail}
+				awardDetail={awardDetail}
 			/>
 			<ContriUpdate
-				title="Update contribution"
-				closeModal={closeUpdateContri}
+				title="Update achivements"
+				closeModal={closeContriUpdateModal}
 				isOpen={openContriUpdate}
-				profileDetail={profileDetail}
-			/> */}
+				contriDetail={contriDetail}
+			/>
+
 			{/* update open models end */}
 		</>
 	);
