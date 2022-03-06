@@ -3,7 +3,7 @@ import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
 const Create = ({ title, closeModal, isOpen }) => {
-	const url = "http://politician.tk/politician/";
+	const url = "http://44.199.61.81/politician/";
 
 	const [fname, setFname] = useState();
 	const [upass, setUpass] = useState("");
@@ -53,7 +53,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 		formData.append("slogan", slogan);
 		formData.append("profilePhoto", photo);
 
-		await axios.post(
+		const { data } = await axios.post(
 			url,
 			formData
 			// {
@@ -76,6 +76,9 @@ const Create = ({ title, closeModal, isOpen }) => {
 			// }
 			// config
 		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>

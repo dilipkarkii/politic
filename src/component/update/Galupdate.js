@@ -31,12 +31,14 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 		formData.append("description", des);
 		formData.append("image", pic);
 		formData.append("owner", userId);
-		const res = await axios.put(
-			`http://politician.tk/gallery/${gallaryDetail.id}/`,
+		const { data } = await axios.put(
+			`http://44.199.61.81/gallery/${gallaryDetail.id}/`,
 			formData,
 			config
 		);
-		console.log("res", res);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>

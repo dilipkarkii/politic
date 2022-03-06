@@ -18,14 +18,17 @@ const Award = ({ title, closeModal, isOpen }) => {
 		// 		// type: "formData",
 		// 	},
 		// };
-		await axios.post(
-			`http://politician.tk/award/`,
-			{
-				awards: award,
-				politician: userId,
-			}
-			// config
+	const { data } = await axios.post(
+		`http://44.199.61.81/award/`,
+		{
+			awards: award,
+			politician: userId,
+		}
+		// config
 		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<>

@@ -11,7 +11,7 @@ export default function Setting() {
 					<Menu.Button className="inline-flex w-full px-4 py-2 text-sm font-medium text-black bg-gray-150 rounded-md justify-left hover:bg-opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
 						Setting
 						<ChevronDownIcon
-							className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
+							className="w-5 h-5 ml-2 -mr-1 text-slate-700 hover:text-black"
 							aria-hidden="true"
 						/>
 					</Menu.Button>

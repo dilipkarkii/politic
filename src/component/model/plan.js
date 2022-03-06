@@ -3,7 +3,7 @@ import Modelwrapper from "./modelwrapper";
 import axios from "axios";
 
 const Planmodel = ({ title, closeModal, isOpen }) => {
-	const url = "http://politician.tk/plan-vision/";
+	const url = "http://44.199.61.81/plan-vision/";
 
 	const [pname, setPname] = useState();
 	const [pdes, setPdes] = useState("");
@@ -19,11 +19,14 @@ const Planmodel = ({ title, closeModal, isOpen }) => {
 				// type: "formData",
 			},
 		};
-		await axios.post(
+		const { data } = await axios.post(
 			url,
 			{ plan: pname, vision: pdes, politician: userId },
 			config
 		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>

@@ -18,10 +18,16 @@ const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 		e.preventDefault();
 		console.log(cont);
 
-		await axios.put(`http://politician.tk/contribution/${contriDetail.id}/`, {
+	const { data } = await axios.put(
+		`http://44.199.61.81/contribution/${contriDetail.id}/`,
+		{
 			contributions: cont,
 			politician: userId,
-		});
+		}
+	);
+			if (data) {
+				window.location.reload(true);
+			}
 	};
 	return (
 		<>

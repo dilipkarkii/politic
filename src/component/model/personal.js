@@ -19,14 +19,17 @@ const Personal = ({ title, closeModal, isOpen }) => {
 		// 		// type: "formData",
 		// 	},
 		// };
-		await axios.post(
-			`http://politician.tk/achievement/`,
+		const { data } = await axios.post(
+			`http://44.199.61.81/achievement/`,
 			{
 				achievements: achiv,
 				politician: userId,
 			}
 			// config
 		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<>

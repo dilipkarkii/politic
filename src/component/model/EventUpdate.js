@@ -1,9 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
 import Modelwrapper from "../model/modelwrapper";
 import { useUpdateEventMutation } from "../../services/event";
-// import axios from "axios";
 
 const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 	const [updateEvent, responseInfo] = useUpdateEventMutation();
@@ -14,6 +11,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 	const [time, setTime] = useState();
 	const [link, setLink] = useState();
 	const [des, setDes] = useState();
+	const { isSuccess } = responseInfo;
 	const userId = localStorage.getItem("userId");
 
 	// function refreshPage() {
@@ -47,33 +45,19 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 			organized_by: userId,
 		});
 		console.log(name, agenda, loc, date, time, link);
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		// type: "formData",
-		// 	},
-		// };
-		// const res = await axios.put(
-		// 	`http://politician.tk/event/${eventDetail.id}/`,
-		// 	{
-		// 		title: name,
-		// 		description: agenda,
-		// 		location: loc,
-		// 		date,
-		// 		time,
-		// 		link,
-		// 		agenda: des,
-		// 		organized_by: 2,
-		// 	},
-		// 	config
-		// );
-		// console.log("res", res);
 	};
+	useEffect(() => {
+		if (isSuccess) {
+			window.location.reload(true);
+		}
+	}, [isSuccess]);
+
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
 					<div className="mt-2 ">
+						<label>campaign Name</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setName(e.target.value)}
@@ -85,6 +69,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 					</div>
 
 					<div className="mt-4">
+						<label>Description</label>
 						<textarea
 							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAgenda(e.target.value)}
@@ -94,6 +79,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>location</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setLoc(e.target.value)}
@@ -103,6 +89,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>agenda</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setDes(e.target.value)}
@@ -112,6 +99,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>Date</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setDate(e.target.value)}
@@ -122,6 +110,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>Time</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setTime(e.target.value)}
@@ -132,12 +121,14 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>link</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setLink(e.target.value)}
 							id="link"
 							defaultValue={link}
 							placeholder="Links"
+							type="url"
 						/>
 					</div>
 					<br />

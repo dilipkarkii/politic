@@ -32,13 +32,18 @@ const Gallary = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const res = await axios.get("http://politician.tk/gallery/");
-			setGallaryData(res.data);
+			const { data } = await axios.get(
+				`http://44.199.61.81/politician/${userId}/`
+			);
+			setGallaryData(data.gallery_set);
 		};
 		fetchData();
 	}, []);
 	const onDelete = async (id) => {
-		await axios.delete(`http://politician.tk/gallery/${id}/`);
+		const { data } = await axios.delete(`http://44.199.61.81/gallery/${id}/`);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 
 	// function openModal() {
@@ -78,7 +83,7 @@ const Gallary = () => {
 							<div className="" key={images.id}>
 								<div className="relative max-w-xs bg-no-repeat bg-cover">
 									<img
-										src={`http://politician.tk/${
+										src={`http://44.199.61.81/${
 											images.image.split("8000/")[1]
 										}`}
 										alt="Louvre"

@@ -3,7 +3,7 @@ import Modelwrapper from "./modelwrapper";
 import axios from "axios";
 
 const Gal = ({ title, closeModal, isOpen }) => {
-	const url = "http://politician.tk/gallery/";
+	const url = "http://44.199.61.81/gallery/";
 	const [des, setDes] = useState("");
 
 	const [pic, setPic] = useState();
@@ -23,7 +23,10 @@ const Gal = ({ title, closeModal, isOpen }) => {
 				"Content-Type": "multipart/form-data",
 			},
 		};
-		await axios.post(url, formData, config);
+		const { data } = await axios.post(url, formData, config);
+			if (data) {
+				window.location.reload(true);
+			}
 	};
 
 	return (

@@ -1,12 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-	const admin = "haha";
-	const user = "admin";
-	const pwd = "hehe";
-	const upwd = "admin";
+const AdminLogin = () => {
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [pass, setPass] = useState("");
@@ -14,33 +10,23 @@ const Login = () => {
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-		//politician.tk/login/politician
 		let config = {
 			headers: {
 				"Content-Type": "application/json",
 			},
 		};
 		const { data } = await axios.post(
-			`http://44.199.61.81/login/politician`,
+			`http://44.199.61.81/login/admin`,
 			{ email: name, password: pass },
 			config
 		);
-		// console.log(data.non_field_errors[0]);
 		console.log(data.ID);
 		if (data) {
-			navigate("/home");
+			navigate("/dashboard");
 		} else if (data.non_field_errors[0]) {
 			alert("invalid id or password");
 		}
 		localStorage.setItem("userId", data.ID);
-
-		// http: if (name === admin && pass === pwd) {
-		// 	navigate("/dashboard");
-		// } else if (name === user && pass === upwd) {
-		// 	navigate("/home");
-		// } else {
-		// 	alert("invalid id or password");
-		// }
 	};
 	return (
 		<div className="flex h-screen bg-slate-500">
@@ -73,17 +59,23 @@ const Login = () => {
 						/>
 					</div>
 
-					<div className="flex items-center justify-center mt-6">
+					<div className="flex items-center justify-center mt-4">
 						<button
-							className={`bg-green py-2 px-4 text-sm text-black rounded border border-green focus:outline-none focus:border-green-dark`}
+							className={`bg-green py-1 px-4 text-sm text-black rounded border border-green focus:outline-none focus:border-green-dark`}
 						>
 							Login
 						</button>
 					</div>
+					<Link to="/reset">
+						<div className="text-center mt-2 italic">
+							Forget your password?
+							<span className="underline"> Reset Here </span>
+						</div>
+					</Link>
 				</form>
 			</div>
 		</div>
 	);
 };
 
-export default Login;
+export default AdminLogin;

@@ -79,9 +79,9 @@ const Profile = () => {
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {
-	// 		// const res = await axios.get("http://politician.tk/profile/");
+	// 		// const res = await axios.get("http://44.199.61.81/profile/");
 	// 		const { data } = await axios.get(
-	// 			`http://politician.tk/politician/${userId}/`
+	// 			`http://44.199.61.81/politician/${userId}/`
 	// 		);
 	// 		console.log("resUser", data.politicianpersonalprofile_set);
 	// 		setProfileData(data.politicianpersonalprofile_set);
@@ -93,7 +93,7 @@ const Profile = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get(
-				`http://politician.tk/politician/${userId}/`
+				`http://44.199.61.81/politician/${userId}/`
 			);
 			console.log("data", data.politicianachievements_set);
 			setProfileData(data.politicianachievements_set);
@@ -104,7 +104,7 @@ const Profile = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get(
-				`http://politician.tk/politician/${userId}/`
+				`http://44.199.61.81/politician/${userId}/`
 			);
 			console.log("data", data.politicianawards_set);
 			setAwardData(data.politicianawards_set);
@@ -115,7 +115,7 @@ const Profile = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get(
-				`http://politician.tk/politician/${userId}/`
+				`http://44.199.61.81/politician/${userId}/`
 			);
 			console.log("data", data.politiciancontributions_set);
 			setContriData(data.politiciancontributions_set);

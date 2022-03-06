@@ -27,9 +27,9 @@ const Plans = () => {
 
 	useEffect(() => {
 		const getFunction = async () => {
-			// const res = await axios.get("http://politician.tk/plan-vision/");
-			const {data} = await axios.get(
-				`http://politician.tk/politician/${userId}/`
+			// const res = await axios.get("http://44.199.61.81/plan-vision/");
+			const { data } = await axios.get(
+				`http://44.199.61.81/politician/${userId}/`
 			);
 			setplanData(data.planandvision_set);
 			// console.log("resdata", resdata);
@@ -39,7 +39,7 @@ const Plans = () => {
 	}, []);
 
 	const getData = () => {
-		axios.get(`http://politician.tk/plan-vision/`).then((getData) => {
+		axios.get(`http://44.199.61.81/plan-vision/`).then((getData) => {
 			setplanData(getData.data);
 		});
 	};
@@ -54,16 +54,23 @@ const Plans = () => {
 			redirect: "follow",
 		};
 
-		fetch(`http://politician.tk/plan-vision/${id}/`, requestOptions)
+		fetch(`http://44.199.61.81/plan-vision/${id}/`, requestOptions)
 			.then((response) => response.text())
-			.then((result) => console.log(result))
+			.then((result) =>
+				// {
+				// 	if (result) {
+				// 		window.location.reload(true);
+				// 	}
+				// }
+				console.log("datsa", result)
+			)
 			.catch((error) => console.log("error", error));
 	};
 	return (
 		<>
 			<div className="bg-slate-300">
 				<Navbartop />
-				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto">
+				<div className="h-full max-w-6xl pb-72 px-4 pt-20 mx-auto">
 					<div className="inset-0 flex items-center justify-end ">
 						<button
 							type="button"
@@ -92,7 +99,7 @@ const Plans = () => {
 							planData.map((plans) => (
 								<div className="border-t border-gray-200 " key={plans.id}>
 									<div className="grid grid-cols-12 px-4 py-5 bg-green-50 ">
-										<div className="col-span-2">Plan {plans.plan} </div>
+										<div className="col-span-2"> {plans.plan} </div>
 										<div className="col-span-8 mr-5 text-justify">
 											{plans.vision}
 										</div>

@@ -18,10 +18,16 @@ const AwardUpdate = ({ title, closeModal, isOpen, awardDetail }) => {
 		e.preventDefault();
 		console.log(award);
 
-		await axios.put(`http://politician.tk/award/${awardDetail.id}/`, {
+	const { data } = await axios.put(
+		`http://44.199.61.81/award/${awardDetail.id}/`,
+		{
 			awards: award,
 			politician: userId,
-		});
+		}
+	);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<>

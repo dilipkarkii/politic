@@ -3,7 +3,7 @@ import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
 const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
-	// const url = "http://politician.tk/posts/";
+	// const url = "http://44.199.61.81/posts/";
 
 	console.log("dsata", personalDetail);
 	const [fname, setFname] = useState();
@@ -56,8 +56,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 				// type: "formData",
 			},
 		};
-		await axios.put(
-			`http://politician.tk/politician/${personalDetail.id}/`,
+		const { data } = await axios.put(
+			`http://44.199.61.81/politician/${personalDetail.id}/`,
 			{
 				firstName: fname,
 				lastName: lname,
@@ -79,6 +79,9 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 			},
 			config
 		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>

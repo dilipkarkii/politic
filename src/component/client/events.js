@@ -22,7 +22,6 @@ const Events = () => {
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [eventDetail, setEventDetail] = useState();
 	console.log(eventDetail);
-
 	console.log(eventsData);
 
 	function closeModal() {
@@ -38,7 +37,7 @@ const Events = () => {
 		const fetchData = async () => {
 			// const res = await axios.get("http://politician.tk/event/");
 			const { data } = await axios.get(
-				`http://politician.tk/politician/${userId}/`
+				`http://44.199.61.81/politician/${userId}/`
 			);
 			// console.log("politicanRes", politicanRes);
 			// const data = res.json();
@@ -51,6 +50,11 @@ const Events = () => {
 		deleteEvent(id);
 		// await axios.delete(`http://politician.tk/event/${id}/	`);
 	};
+	useEffect(() => {
+		if (isSuccess) {
+			window.location.reload(true);
+		}
+	}, [isSuccess]);
 
 	return (
 		<>
@@ -67,7 +71,7 @@ const Events = () => {
 						</button>
 					</div>
 					<Even title="Add Events" closeModal={closeModal} isOpen={isOpen} />
-					{isLoading && <h1>hello</h1>}
+					{isLoading && <h1 className="text-4xl">Loading</h1>}
 					{geteventapidata &&
 						geteventapidata.event_set.map((value) => (
 							<div

@@ -4,7 +4,7 @@ import Modelwrapper from "../model/modelwrapper";
 
 const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 	console.log(planDetail);
-	const url = `http://politician.tk/plan-vision/${planDetail.id}`;
+	const url = `http://44.199.61.81/plan-vision/${planDetail.id}`;
 
 	const [pname, setPname] = useState();
 	const [pdes, setPdes] = useState("");
@@ -19,21 +19,7 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		"Access-Control-Allow-Headers": "*",
-		// 	},
-		// };
-		// await axios.patch(
-		// 	`http://politician.tk/plan-vision/${planDetail.id}/`,
-		// 	{
-		// 		plan: pname,
-		// 		vision: pdes,
-		// 		politician: 5,
-		// 	},
-		// 	config
-		// );
+
 		var myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 
@@ -50,9 +36,13 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 			redirect: "follow",
 		};
 
-		fetch(`http://politician.tk/plan-vision/${planDetail.id}/`, requestOptions)
+		fetch(`http://44.199.61.81/plan-vision/${planDetail.id}/`, requestOptions)
 			.then((response) => response.text())
-			.then((result) => console.log(result))
+			.then((result) => {
+				if (result) {
+					window.location.reload(true);
+				}
+			})
 			.catch((error) => console.log("error", error));
 	};
 	console.log(pname, pdes);

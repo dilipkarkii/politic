@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
-import axios from "axios";
+
 import { useCreateEventMutation } from "../../services/event";
 
 const Even = ({ title, closeModal, isOpen }) => {
 	// const url = "http://192.108.1.106:8000/api/registeradmin";
 	const [name, setName] = useState("");
+	const [des, setdes] = useState("");
 	const [agenda, setAgenda] = useState();
 	const [loc, setLoc] = useState();
 	const [date, setDate] = useState();
@@ -20,6 +21,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 		e.preventDefault();
 		createEvent({
 			title: name,
+			description: des,
 			agenda,
 			location: loc,
 			date,
@@ -41,11 +43,18 @@ const Even = ({ title, closeModal, isOpen }) => {
 
 		// console.log({ name, agenda, loc, date, time, link });
 	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			window.location.reload(true);
+		}
+	}, [isSuccess]);
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
 					<div className="mt-2 ">
+						<label>campaign name</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setName(e.target.value)}
@@ -55,8 +64,19 @@ const Even = ({ title, closeModal, isOpen }) => {
 							type="text"
 						/>
 					</div>
+					<div className="mt-2">
+						<label>Description</label>
+						<textarea
+							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							onChange={(e) => setdes(e.target.value)}
+							id="name"
+							value={des}
+							placeholder="set description"
+						/>
+					</div>
 
-					<div className="mt-4">
+					<div className="mt-2">
+						<label>agenda</label>
 						<textarea
 							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAgenda(e.target.value)}
@@ -65,7 +85,8 @@ const Even = ({ title, closeModal, isOpen }) => {
 							placeholder="Agenda"
 						/>
 					</div>
-					<div className="mt-4">
+					<div className="mt-2">
+						<label>location</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setLoc(e.target.value)}
@@ -74,7 +95,8 @@ const Even = ({ title, closeModal, isOpen }) => {
 							placeholder="Location"
 						/>
 					</div>
-					<div className="mt-4">
+					<div className="mt-2">
+						<label>Date</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setDate(e.target.value)}
@@ -85,6 +107,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>Time</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setTime(e.target.value)}
@@ -95,12 +118,14 @@ const Even = ({ title, closeModal, isOpen }) => {
 						/>
 					</div>
 					<div className="mt-4">
+						<label>link</label>
 						<input
 							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setLink(e.target.value)}
 							id="link"
 							value={link}
 							placeholder="Links"
+							type="url"
 						/>
 					</div>
 					<br />

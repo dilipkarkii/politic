@@ -2,14 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a service using a base URL and expected endpoints
 export const eventApi = createApi({
 	reducerPath: "eventApi",
-	baseQuery: fetchBaseQuery({ baseUrl: "http://politician.tk/" }),
+	baseQuery: fetchBaseQuery({ baseUrl: "http://44.199.61.81/" }),
 	endpoints: (builder) => ({
 		getAllEvent: builder.query({
 			query: (id) => ({
 				url: `politician/${id}`,
-			// 	const { data } = await axios.get(
-			// 	`http://politician.tk/politician/${userId}/`
-			// );
+				// 	const { data } = await axios.get(
+				// 	`http://politician.tk/politician/${userId}/`
+				// );
 				method: "GET",
 			}),
 		}),

@@ -19,7 +19,14 @@ const PostUpdate = ({ title, closeModal, isOpen }) => {
 				type: "formData",
 			},
 		};
-		await axios.post(url, { postTitle, Description, img }, config);
+	const { data } = await axios.post(
+		url,
+		{ postTitle, Description, img },
+		config
+	);
+			if (data) {
+				window.location.reload(true);
+			}
 	};
 	return (
 		<>

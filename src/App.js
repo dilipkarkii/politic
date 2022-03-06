@@ -15,12 +15,15 @@ import DashPersonal from "./component/Dashboard/Dashpersonal";
 import Dashplan from "./component/Dashboard/Dashplan";
 import DashPost from "./component/Dashboard/Dashpost";
 import Dashprofile from "./component/Dashboard/DashProfile";
+import AdminLogin from "./component/setting/adminlogin";
 import Change from "./component/setting/change";
 import PoliticChange from "./component/setting/PoliticChange";
 import Reset from "./component/setting/reset";
 import Dashboard from "./dashboard";
 import Login from "./login";
 import Sidebar from "./sidebar";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const App = () => {
 	return (
@@ -48,6 +51,7 @@ const App = () => {
 					<Route exact path="/personal" element={<Personal />} />
 					<Route exact path="/dashpost" element={<DashPost />} />
 					<Route exact path="/changepassword" element={<PoliticChange />} />
+					<Route exact path="/admin" element={<AdminLogin />} />
 				</Routes>
 			</BrowserRouter>
 		</>

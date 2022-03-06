@@ -23,10 +23,16 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 		e.preventDefault();
 		console.log(achiv, award, cont);
 
-		await axios.put(`http://politician.tk/achievement/${profileDetail.id}/`, {
+	const { data } = await axios.put(
+		`http://44.199.61.81/achievement/${profileDetail.id}/`,
+		{
 			achievements: achiv,
 			politician: userId,
-		});
+		}
+	);
+			if (data) {
+				window.location.reload(true);
+			}
 	};
 	return (
 		<>
