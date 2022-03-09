@@ -11,6 +11,7 @@ const Detail = () => {
 	const [titles, settitle] = useState();
 	let [postData, setPostData] = useState();
 	let [imgData, setImgData] = useState();
+	console.log("details", detail);
 	const userId = localStorage.getItem("userId");
 
 	useEffect(() => {
@@ -30,20 +31,21 @@ const Detail = () => {
 			);
 			console.log("data", data);
 			settitle(data.post_set);
+			console.log("image", data.post_set);
 		};
 		fetchData();
 	}, []);
 
 	console.log(postData);
 
-	// const settings = {
-	// 	dots: true,
-	// 	fade: true,
-	// 	infinite: true,
-	// 	speed: 500,
-	// 	slidesToShow: 1,
-	// 	slidesToScroll: 1,
-	// };
+	const settings = {
+		dots: true,
+		fade: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+	};
 
 	return (
 		<>
@@ -57,36 +59,36 @@ const Detail = () => {
 								{detail && detail.title}
 							</h1>
 							{/* <p className="mr-5 italic text-gray-500">posted on:</p> */}
-
-							<img
+							{/* <img
 								className="w-9/12 mt-5 h-52"
 								src={`http://44.199.61.81/${
 									detail && detail.postimage_set[0].image.split("8000/")[1]
 								}`}
 								alt="pic"
-							/>
+							/> */}
 
+							<div style={{ width: "100%" }}>
+								<Slider {...settings}>
+									{detail &&
+										detail.postimage_set.map((data) => (
+											<img
+												className="w-32 mt-5 h-"
+												src={`http://44.199.61.81/${
+													data && data.image.split("8000/")[1]
+												}`}
+												alt="pic"
+												// style={{ height: "50%", width: "50%" }}
+											/>
+										))}
+								</Slider>
+							</div>
 							<p className="text-justify text-black mt-8 ">
 								{detail && detail.description}
+								{/* <div dangerouslySetInnerHTML={{__html: '<p>First &middot; Second</p>'}}></div> */}
+
 							</p>
 						</div>
 
-						{/* <div>
-							<Slider {...settings}>
-								<div>
-									<img src="http://placekitten.com/g/400/200" alt="" />
-								</div>
-								<div>
-									<img src="https://picsum.photos/200" alt="" />
-								</div>
-								<div>
-									<img src="http://placekitten.com/g/400/200" alt="" />
-								</div>
-								<div>
-									<img src="https://picsum.photos/200" alt="" />
-								</div>
-							</Slider>
-						</div> */}
 						<div className="gap-5">
 							<div className="w-full h-full max-w-xs">
 								<div className="px-8 pt-6 mt-10 bg-white rounded shadow-md">

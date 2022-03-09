@@ -8,6 +8,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 	const [fname, setFname] = useState();
 	const [upass, setUpass] = useState("");
 	const [uname, setUname] = useState("");
+	const [mname, setMname] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [lastname, setLastname] = useState("");
@@ -37,6 +38,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 		let formData = new FormData();
 		formData.append("flag", flag);
 		formData.append("firstName", uname);
+		formData.append("middleName", mname);
 		formData.append("lastName", lastname);
 		formData.append("password", upass);
 		formData.append("age", age);
@@ -90,6 +92,17 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="fname"
 						value={fname}
 						placeholder="firstname"
+						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+					/>
+					<br />
+				</div>
+				<div className="mt-4">
+					<label className="block">Middle Name</label>
+					<input
+						onChange={(e) => setMname(e.target.value)}
+						id="mname"
+						value={mname}
+						placeholder="middlename"
 						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 					/>
 					<br />

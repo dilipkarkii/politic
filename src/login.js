@@ -3,10 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-	const admin = "haha";
-	const user = "admin";
-	const pwd = "hehe";
-	const upwd = "admin";
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [pass, setPass] = useState("");

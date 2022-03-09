@@ -1,14 +1,48 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import Sidebar from "../../sidebar";
 import Navbar from "../Dashboard/navbar";
 
 const Reset = () => {
+	const [email, setEmail] = useState("");
+	const [oldpass, setOldpass] = useState("");
 	const [newpwd, setNewpwd] = useState("");
-	const [conpass, setConPass] = useState("");
+	const navigate = useNavigate();
+
+	// http://44.199.61.81/admin/reset-password
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		var raw = JSON.stringify({
+			email,
+			old_password: oldpass,
+			new_password: newpwd,
+		});
+
+		var requestOptions = {
+			method: "PUT",
+			headers: myHeaders,
+			body: raw,
+			redirect: "follow",
+		};
+
+		fetch("http://44.199.61.81/admin/reset-password", requestOptions)
+			.then((response) => response.text())
+			.then((result) => {
+				console.log(result);
+				if (result) {
+					navigate("/");
+				} else if (result.non_field_errors[0]) {
+					alert("invalid id or password");
+				}
+			})
+			.catch((error) => console.log("error", error));
 	};
+
 	return (
 		<>
 			<Navbar />
@@ -30,28 +64,41 @@ const Reset = () => {
 							{/*body*/}
 							<div className="relative flex-auto p-6">
 								<div>
-									<label>New password:</label>
+									<label>Email:</label>
+									<br />
+
+									<input
+										type="email"
+										className={`w-2/4 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+										id="email"
+										placeholder="Your email-ID"
+										onChange={(e) => setEmail(e.target.value)}
+										value={email}
+									/>
+								</div>
+								<div>
+									<label>Old password:</label>
 									<br />
 
 									<input
 										type="password"
-										className={`w-150 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-										id="username"
-										placeholder="Your username"
+										className={`w-2/4 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+										id="oldpassword"
+										placeholder="old password"
 										onChange={(e) => setNewpwd(e.target.value)}
 										value={newpwd}
 									/>
 								</div>
 								<div>
-									<label>Confirm Password:</label>
+									<label>NEW Password:</label>
 									<br />
 									<input
 										type="password"
-										className={`w-150 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-										id="password"
-										placeholder="Your Password"
-										onChange={(e) => setConPass(e.target.value)}
-										value={conpass}
+										className={`w-2/4 p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+										id="newpassword"
+										placeholder="NEW Password"
+										onChange={(e) => setOldpass(e.target.value)}
+										value={oldpass}
 									/>
 								</div>
 

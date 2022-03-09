@@ -79,19 +79,37 @@ const Personal = () => {
 									<h3 className="text-3xl font-semibold text-gray-500">
 										Personal Profile
 									</h3>
+
+									<div class="w-60 sm:w-4/12 pl-32">
+										<img
+											src={`http://44.199.61.81/${
+												personalData.flag && personalData.flag.split("8000/")[1]
+											}`}
+											alt="party flag"
+											class="shadow rounded-full h-28  align-middle border-none"
+										/>
+									</div>
 								</div>
 
 								<div className="relative flex-auto p-6">
 									<p className="my-4 text-lg leading-relaxed text-blueGray-500">
 										<div className="grid grid-cols-3">
 											<div className="col-span-1 pt-3">
-												<img src="https://picsum.photos/200" alt="" />
+												<img
+													src={`http://44.199.61.81/${
+														personalData.profilePhoto &&
+														personalData.profilePhoto.split("8000/")[1]
+													}`}
+													alt="Louvre"
+													className="block object-cover object-center w-full h-full rounded-lg mr-5"
+													// onClick={() => setShowModal(true)}
+												/>
 											</div>
 											<div className="col-span-2 mx-5">
 												<div className=" flex">
 													<p className="mr-1">Name:{personalData.firstName}</p>
 													<p className="mr-1">{personalData.middleName}</p>
-													<p>{personalData.lastName}</p>
+													<p className="mr-1"> {personalData.lastName}</p>
 												</div>
 												<p>Age: {personalData.age}</p>
 												<p>Address: {personalData.address}</p>

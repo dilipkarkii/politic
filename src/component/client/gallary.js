@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Gal from "../model/gal";
 import GalUpdate from "../update/Galupdate";
 import Navbartop from "./navbar";
-// import image from "../../img.png";
 
 const Gallary = () => {
 	let [isOpen, setIsOpen] = useState(false);
@@ -11,6 +10,10 @@ const Gallary = () => {
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [gallaryDetail, setGallaryDetail] = useState([]);
 	let [gallaryData, setGallaryData] = useState([]);
+
+	const [showModal, setShowModal] = React.useState(false);
+	const [showImage, setShowImage] = React.useState();
+	console.log("showimage", showImage);
 	// console.log("gallaryDetail", gallaryData[0].image.split("8000/")[1]);
 
 	const userId = localStorage.getItem("userId");
@@ -45,23 +48,6 @@ const Gallary = () => {
 			window.location.reload(true);
 		}
 	};
-
-	// function openModal() {
-	// 	setIsOpen(true);
-	// }
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	console.log(des, pic);
-	// 	let config = {
-	// 		headers: {
-	// 			"Content-Type": "multipart/form-data",
-	// 			Accept: "application/json",
-	// 			type: "formData",
-	// 		},
-	// 	};
-	// 	await axios.post(url, { des, pic }, config);
-	// };
-
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -81,13 +67,17 @@ const Gallary = () => {
 					<div className="grid grid-cols-4 gap-4 mt-5">
 						{gallaryData.map((images) => (
 							<div className="" key={images.id}>
-								<div className="relative max-w-xs bg-no-repeat bg-cover">
+								<div
+									className="relative max-w-xs bg-no-repeat bg-cover"
+									style={{ height: "200px", width: "265px" }}
+								>
 									<img
 										src={`http://44.199.61.81/${
 											images.image.split("8000/")[1]
 										}`}
 										alt="Louvre"
-										className="block object-cover object-center w-full h-full rounded-lg"
+										className="block object-cover object-center w-full h-full rounded-lg mr-5"
+										// onClick={() => setShowModal(true)}
 									/>
 									{/* px-5 bottom-0 pt-20 text-center */}
 									<div className="absolute top-0 left-0 right-0 block w-full h-full text-sm font-semibold text-gray-900 transition duration-300 ease-in-out bg-fixed border-solid rounded-lg opacity-0 hover:opacity-100 border-1 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
@@ -112,6 +102,32 @@ const Gallary = () => {
 										</button>
 										<button
 											className="mx-2 my-2 hover:bg-blue-900"
+											// eslint-disable-next-line no-sequences
+											onClick={() => (setShowModal(true), setShowImage(images))}
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+												stroke-width="2"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+												/>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+												/>
+											</svg>
+										</button>
+
+										<button
+											className="mx-2 my-2 hover:bg-blue-900"
 											onClick={() => (
 												// eslint-disable-next-line no-sequences
 												setOpenUpdate(true), setGallaryDetail(images)
@@ -131,6 +147,7 @@ const Gallary = () => {
 												/>
 											</svg>
 										</button>
+
 										<p className="bottom-0 px-5 pt-20 text-center">
 											{images.description}
 										</p>
@@ -147,6 +164,56 @@ const Gallary = () => {
 				isOpen={openUpdate}
 				gallaryDetail={gallaryDetail}
 			/>
+
+			{/* <button
+					className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+					type="button"
+					onClick={() => setShowModal(true)}
+				>
+					Open regular modal
+				</button> */}
+			{showModal ? (
+				<>
+					<div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+						<div className="relative w-auto my-6 mx-auto max-w-3xl">
+							{/*content*/}
+							<div
+								className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+								style={{ width: "900px" }}
+							>
+								{/*header*/}
+								<div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+									<h3 className="text-3xl font-semibold">
+										{showImage.description}
+									</h3>
+									<button
+										className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear  justify-end transition-all duration-150"
+										type="button"
+										onClick={() => setShowModal(false)}
+									>
+										X
+									</button>
+								</div>
+								{/*body*/}
+								<div
+									className="relative p-6 flex-auto "
+									style={{ height: "500px", width: "900px" }}
+								>
+									<img
+										src={`http://44.199.61.81/${
+											showImage.image.split("8000/")[1]
+										}`}
+										alt="Louvre"
+										className="block object-cover object-center w-full h-full rounded-lg"
+										// onClick={() => setShowModal(true)}
+									/>
+								</div>
+								{/*footer*/}
+							</div>
+						</div>
+					</div>
+				</>
+			) : null}
 		</>
 	);
 };

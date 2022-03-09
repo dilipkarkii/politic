@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Posts from "../model/posts";
 import PostUpdate from "../update/PostUpdate";
-import news from "./data";
 import Navbartop from "./navbar";
 
 const Post = () => {
@@ -36,10 +35,23 @@ const Post = () => {
 		};
 		fetchData();
 	}, []);
-	const onDelete = async (id) => {
-		await axios.delete(`http://44.199.61.81/event/${id}`);
-	};
+	// const onDelete = async (id) => {
+	// 	await axios.delete(`http://44.199.61.81/event/${id}`);
+	// };
+	const onDelete = (id) => {
+		var raw = "";
 
+		var requestOptions = {
+			method: "DELETE",
+			body: raw,
+			redirect: "follow",
+		};
+
+		fetch(`http://44.199.61.81/create_post/${id}/`, requestOptions)
+			.then((response) => response.text())
+			.then((result) => console.log(result))
+			.catch((error) => console.log("error", error));
+	};
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -63,21 +75,19 @@ const Post = () => {
 										key={data.id}
 										className="max-w-sm bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
 									>
-										<a href="/#">
-											<img
-												className="w-full h-32 rounded-t-lg"
-												src={`http://44.199.61.81/${
-													data.postimage_set[0].image.split("8000/")[1]
-												}`}
-												alt=""
-											/>
-										</a>
+										<img
+											className="w-full h-32 rounded-t-lg"
+											src={`http://44.199.61.81/${
+												data.postimage_set[0].image.split("8000/")[1]
+											}`}
+											alt=""
+										/>
+
 										<div className="p-5">
-											<a href="/#">
-												<h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-													{data.title}
-												</h5>
-											</a>
+											<h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+												{data.title}
+											</h5>
+
 											<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
 												{data.description.slice(0, 90)}
 											</p>
@@ -100,7 +110,7 @@ const Post = () => {
 													</button>
 												</Link>
 												<button
-													onClick={() => onDelete()}
+													onClick={() => onDelete(data.id)}
 													className="hover:bg-red-900"
 												>
 													<svg

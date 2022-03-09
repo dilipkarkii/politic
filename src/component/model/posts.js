@@ -5,10 +5,12 @@ import axios from "axios";
 const Posts = ({ title, closeModal, isOpen }) => {
 	const [Title, setTitle] = useState("");
 	const [description, setDescription] = useState();
-	const [img, setImg] = useState([]);
+	const [img, setImg] = useState( );
 	const [formPost, setFormPost] = useState();
 	console.log("formPost", formPost);
 	const userId = localStorage.getItem("userId");
+
+	console.log(img);
 
 	const handleSubmission = async (e) => {
 		e.preventDefault();

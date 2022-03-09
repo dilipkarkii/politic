@@ -8,15 +8,15 @@ const Home = () => {
 	const [postData, setPostData] = useState();
 	const userId = localStorage.getItem("userId");
 
-		useEffect(() => {
-			const fetchData = async () => {
-				const { data } = await axios.get(
-					`http://44.199.61.81/politician/${userId}/`
-				);
-				setGallaryData(data.gallery_set);
-			};
-			fetchData();
-		}, []);
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get(
+				`http://44.199.61.81/politician/${userId}/`
+			);
+			setGallaryData(data.gallery_set);
+		};
+		fetchData();
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -38,19 +38,24 @@ const Home = () => {
 					<div className="flex justify-between ">
 						<h1 className="text-bold text-2xl text-teal-700">Gallary</h1>
 
-						<button
-							text="Outline Button"
-							type="button"
-							buttonStyle="outline"
-							className="px-2 py-1 font-semibold  text-teal-700 bg-transparent border border-blue-00 rounded hover:bg-slate-500 hover:text-white hover:border-transparent"
-						>
-							Show More...
-						</button>
+						<Link to="/gallary">
+							<button
+								text="Outline Button"
+								type="button"
+								buttonStyle="outline"
+								className="px-2 py-1 font-semibold  text-teal-700 bg-transparent border border-blue-00 rounded hover:bg-slate-500 hover:text-white hover:border-transparent"
+							>
+								Show More...
+							</button>
+						</Link>
 					</div>
 					<div className="grid grid-cols-4 gap-6 mt-3">
 						{gallarydata.slice(0, 4).map((datas) => (
 							<div className="">
-								<div className="relative max-w-xs bg-no-repeat bg-cover">
+								<div
+									className="relative max-w-xs bg-no-repeat bg-cover"
+									style={{ height: "200px", width: "265px" }}
+								>
 									<img
 										src={`http://44.199.61.81/${datas.image.split("8000/")[1]}`}
 										alt="Louvre"
@@ -69,14 +74,16 @@ const Home = () => {
 
 					<div className="flex justify-between mt-10 ">
 						<h1 className="text-bold text-2xl text-teal-700">Posts</h1>
-						<button
-							text="Outline Button"
-							type="button"
-							buttonStyle="outline"
-							className="px-2 py-1 font-semibold text-teal-700 bg-transparent border border-blue-00 rounded hover:bg-slate-500 hover:text-white hover:border-transparent"
-						>
-							Show More...
-						</button>
+						<Link to="/post">
+							<button
+								text="Outline Button"
+								type="button"
+								buttonStyle="outline"
+								className="px-2 py-1 font-semibold text-teal-700 bg-transparent border border-blue-00 rounded hover:bg-slate-500 hover:text-white hover:border-transparent"
+							>
+								Show More...
+							</button>
+						</Link>
 					</div>
 
 					<div className="grid grid-cols-4 gap-6 mt-3">
@@ -85,8 +92,11 @@ const Home = () => {
 								<div className="max-w-sm border border-gray-100 rounded-lg shadow-md bg-red-50 dark:bg-red-50 dark:border-gray-700">
 									<img
 										className="w-full h-32 rounded-t-lg"
-										src="https://picsum.photos/200"
+										src={`http://44.199.61.81/${
+											data.postimage_set[0].image.split("8000/")[1]
+										}`}
 										alt=""
+										style={{ height: "200px" }}
 									/>
 
 									<div className="p-5">
