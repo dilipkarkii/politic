@@ -3,18 +3,29 @@ import React, { useEffect, useState } from "react";
 import Even from "../model/even";
 import EventUpdate from "../model/EventUpdate";
 import Navbartop from "./navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { listEvent, deleteEvent } from "../../actions/EventAction";
 import {
-	useGetAllEventQuery,
-	useDeleteEventMutation,
-} from "../../services/event";
+	EVENT_DELETE_RESET,
+	EVENT_UPDATE_RESET,
+} from "../../constants/EventConstants";
 
 const Events = () => {
+	const dispatch = useDispatch();
+	const eventList = useSelector((state) => state.eventList);
+	const { loading, success, events } = eventList;
+	const eventAdd = useSelector((state) => state.eventAdd);
+	const { success: successAdd } = eventAdd;
+	const eventDelete = useSelector((state) => state.eventDelete);
+	const { success: successDelete } = eventDelete;
+	const eventUpdate = useSelector((state) => state.eventUpdate);
+	const { success: successUpdate } = eventUpdate;
 	const userId = localStorage.getItem("userId");
-	const geteventapi = useGetAllEventQuery(userId);
-	const { data: geteventapidata, isLoading } = geteventapi;
-	const [deleteEvent, responseInfo] = useDeleteEventMutation();
-	console.log("responseInfo", responseInfo);
-	const { isSuccess } = responseInfo;
+	// const geteventapi = useGetAllEventQuery(userId);
+	// const { data: geteventapidata, isLoading } = geteventapi;
+	// const [deleteEvent, responseInfo] = useDeleteEventMutation();
+	// console.log("responseInfo", responseInfo);
+	// const { isSuccess } = responseInfo;
 
 	// console.log("geteventapidata", geteventapidata.event_set);
 	let [isOpen, setIsOpen] = useState(false);
@@ -33,28 +44,24 @@ const Events = () => {
 	const closeUpdateModal = () => {
 		setOpenUpdate(false);
 	};
+
 	useEffect(() => {
-		const fetchData = async () => {
-			// const res = await axios.get("http://politician.tk/event/");
-			const { data } = await axios.get(
-				`http://44.199.61.81/politician/${userId}/`
-			);
-			// console.log("politicanRes", politicanRes);
-			// const data = res.json();
-			console.log("data", data.event_set);
-			setEventsData(data.event_set);
-		};
-		fetchData();
-	}, []);
-	const onDelete = async (id) => {
-		deleteEvent(id);
-		// await axios.delete(`http://politician.tk/event/${id}/	`);
-	};
-	useEffect(() => {
-		if (isSuccess) {
-			window.location.reload(true);
+		dispatch(listEvent(userId));
+		if (successDelete) {
+			dispatch({ type: EVENT_DELETE_RESET });
 		}
-	}, [isSuccess]);
+		if (successAdd || successUpdate) {
+			setIsOpen(false);
+			setOpenUpdate(false);
+		}
+		if (successUpdate) {
+			dispatch({ type: EVENT_UPDATE_RESET });
+		}
+	}, [dispatch, successDelete, successAdd, successUpdate]);
+
+	const onDelete = async (id) => {
+		dispatch(deleteEvent(id));
+	};
 
 	return (
 		<>
@@ -71,9 +78,12 @@ const Events = () => {
 						</button>
 					</div>
 					<Even title="Add Events" closeModal={closeModal} isOpen={isOpen} />
-					{isLoading && <h1 className="text-4xl">Loading</h1>}
-					{geteventapidata &&
-						geteventapidata.event_set.map((value) => (
+					{/* {loading && <h1 className="text-4xl">Loading</h1>} */}
+					{loading ? (
+						<h1 className="text-4xl">Loading</h1>
+					) : (
+						events &&
+						events.map((value) => (
 							<div
 								className="mx-3 my-4 overflow-hidden bg-white shadow sm:rounded-lg "
 								key={value.id}
@@ -175,7 +185,8 @@ const Events = () => {
 									</dl>
 								</div>
 							</div>
-						))}
+						))
+					)}
 				</div>
 				<EventUpdate
 					title="Update Events"

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
-import { useUpdateEventMutation } from "../../services/event";
+import { useSelector, useDispatch } from "react-redux";
+import { updateEvent } from "../../actions/EventAction";
 
 const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
-	const [updateEvent, responseInfo] = useUpdateEventMutation();
+	const dispatch = useDispatch();
 	const [name, setName] = useState();
 	const [agenda, setAgenda] = useState();
 	const [loc, setLoc] = useState();
@@ -11,12 +12,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 	const [time, setTime] = useState();
 	const [link, setLink] = useState();
 	const [des, setDes] = useState();
-	const { isSuccess } = responseInfo;
 	const userId = localStorage.getItem("userId");
-
-	// function refreshPage() {
-	// 	window.location.reload(false);
-	// }
 
 	useEffect(() => {
 		if (eventDetail) {
@@ -33,24 +29,37 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		updateEvent({
-			id: eventDetail.id,
-			title: name,
-			description: agenda,
-			location: loc,
-			date,
-			time,
-			link,
-			agenda: des,
-			organized_by: userId,
-		});
-		console.log(name, agenda, loc, date, time, link);
+		dispatch(
+			updateEvent(
+				eventDetail.id,
+				name,
+				agenda,
+				des,
+				loc,
+				date,
+				time,
+				link,
+				userId
+			)
+		);
+		// updateEvent({
+		// 	id: eventDetail.id,
+		// 	title: name,
+		// 	description: agenda,
+		// 	location: loc,
+		// 	date,
+		// 	time,
+		// 	link,
+		// 	agenda: des,
+		// 	organized_by: userId,
+		// });
+		// console.log(name, agenda, loc, date, time, link);
 	};
-	useEffect(() => {
-		if (isSuccess) {
-			window.location.reload(true);
-		}
-	}, [isSuccess]);
+	// useEffect(() => {
+	// 	if (isSuccess) {
+	// 		window.location.reload(true);
+	// 	}
+	// }, [isSuccess]);
 
 	return (
 		<>

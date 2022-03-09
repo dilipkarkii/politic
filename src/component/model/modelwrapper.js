@@ -4,19 +4,6 @@ import { Fragment } from "react";
 // import { children } from "react/cjs/react.production.min";
 
 const Modelwrapper = ({ title, children, closeModal, isOpen }) => {
-	// const [des, setDes] = useState("");
-
-	// const [pic, setPic] = useState();
-	// let [isOpen, setIsOpen] = useState(false);
-
-	// function closeModal() {
-	// 	setIsOpen(false);
-	// }
-
-	// function openModal() {
-	// 	setIsOpen(true);
-	// }
-
 	return (
 		<>
 			<Transition appear show={isOpen} as={Fragment}>
@@ -54,46 +41,14 @@ const Modelwrapper = ({ title, children, closeModal, isOpen }) => {
 							leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95"
 						>
-							<div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+							<div className="inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
 								<Dialog.Title
 									as="h3"
-									className="text-lg font-medium leading-6 text-gray-900"
+									className="text-lg font-medium leading-6 px-7 py-3 text-gray-900 bg-neutral-400"
 								>
 									{title}
 								</Dialog.Title>
-								{children}
-								{/* <form>
-									<div className="mt-2 w-fit">
-										<textarea
-											class="resize-y rounded-md border-2 border-slate-900 w-96 h-16"
-											onChange={(e) => setDes(e.target.value)}
-											id="name"
-											value={des}
-											placeholder="Set description"
-											type="text"
-										/>
-									</div>
-
-									<div className="mt-4">
-										<input
-											onChange={(e) => setPic(e.target.value)}
-											id="name"
-											value={pic}
-											placeholder="name"
-											type="file"
-											multiple
-										/>
-										<br />
-										<button
-											type="submit"
-											// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"
-											className="inline-flex justify-center px-4 py-2 mt-3 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-											onClick={closeModal}
-										>
-											submit
-										</button>
-									</div>
-								</form> */}
+								<div className="px-6 py-3">{children}</div>
 							</div>
 						</Transition.Child>
 					</div>
