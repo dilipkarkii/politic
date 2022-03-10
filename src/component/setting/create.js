@@ -86,185 +86,216 @@ const Create = ({ title, closeModal, isOpen }) => {
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
-					<label className="block">firstName</label>
+					<label className="block text-sm font-medium text-gray-700">
+						First Name
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setFname(e.target.value)}
 						id="fname"
 						value={fname}
 						placeholder="firstname"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Middle Name</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Middle Name
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setMname(e.target.value)}
 						id="mname"
 						value={mname}
 						placeholder="middlename"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">lastname</label>
+					<label className="block text-sm font-medium text-gray-700">
+						lastname
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setLastname(e.target.value)}
 						id="lname"
 						value={lastname}
 						placeholder="lastname"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Usename</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Username
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setUname(e.target.value)}
 						id="uname"
 						value={uname}
 						placeholder="username"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block"> phone</label>
+					<label className="block text-sm font-medium text-gray-700">
+						{" "}
+						phone
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setPhone(e.target.value)}
 						id="phone"
 						value={phone}
 						placeholder="phone no"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">email</label>
+					<label className="block text-sm font-medium text-gray-700">
+						email
+					</label>
 					<input
 						onChange={(e) => setEmail(e.target.value)}
 						id="email"
 						value={email}
 						type="email"
 						placeholder="email"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Age</label>
+					<label className="block text-sm font-medium text-gray-700">Age</label>
 					<input
+						type="text"
 						onChange={(e) => setAge(e.target.value)}
 						id="age"
 						value={age}
 						placeholder="Age"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Address</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Address
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setAddress(e.target.value)}
 						id="address"
 						value={address}
 						placeholder="Address"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Political party</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Political party
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setParty(e.target.value)}
 						id="party"
 						value={party}
 						placeholder="party name"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">slogan</label>
+					<label className="block text-sm font-medium text-gray-700">
+						slogan
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setSlogan(e.target.value)}
 						id="slogan"
 						value={slogan}
 						placeholder="slogan"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Education</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Education
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setEdu(e.target.value)}
 						id="education"
 						value={edu}
 						placeholder="education"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Election Area</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Election Area
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setArea(e.target.value)}
 						id="area"
 						value={area}
 						placeholder="Area of election"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Member since</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Member since
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setMember(e.target.value)}
 						id="member"
 						value={member}
 						placeholder="member since"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Position in Party</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Position in Party
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setPos(e.target.value)}
 						id="position"
 						value={pos}
 						placeholder="party position"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Description</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Description
+					</label>
 					<input
+						type="text"
 						onChange={(e) => setDescription(e.target.value)}
 						id="description"
 						value={description}
 						placeholder="About"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">flag </label>
+					<label className="block text-sm font-medium text-gray-700">
+						Flag{" "}
+					</label>
 					<input
 						onChange={(e) => setFlag(e.target.files[0])}
 						id="flag"
 						// value={flag}
 						// placeholder="About"
 						type="file"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">photo</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Photo
+					</label>
 					<input
 						onChange={(e) => setPhoto(e.target.files[0])}
 						accept="image/png, image/jpg, image/jpeg"
@@ -272,20 +303,22 @@ const Create = ({ title, closeModal, isOpen }) => {
 						// value={photo}
 						// placeholder="photo"
 						type="file"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 					/>
-					<br />
 				</div>
 				<div className="mt-5 ">
-					<label className="block">password</label>
+					<label className="block text-sm font-medium text-gray-700">
+						password
+					</label>
 					<input
-						className="resize-y rounded-md border-2 border-slate-900 w-full h-16 px-3 py-1 placeholder:text-black"
+						clasName="resize-y rounded-md border-2 border-slate-900 w-full h-16 px-3 py-1 placeholder:text-black"
 						onChange={(e) => setUpass(e.target.value)}
 						id="password	"
 						value={upass}
 						placeholder="Set password"
 						type="password"
 					/>
+					<br />
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"

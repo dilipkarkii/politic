@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { addPlan } from "../../actions/PlanAction";
+import { PLAN_ADD_RESET } from "../../constants/PlanConstants";
 
 const Planmodel = ({ title, closeModal, isOpen }) => {
-	const url = "http://44.199.61.81/plan-vision/";
+	const dispatch = useDispatch();
+	const planAdd = useSelector((state) => state.planAdd);
+	const { success: successAdd } = planAdd;
 
 	const [pname, setPname] = useState();
 	const [pdes, setPdes] = useState("");
@@ -11,41 +16,48 @@ const Planmodel = ({ title, closeModal, isOpen }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(pname, pdes);
-		let config = {
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-				// type: "formData",
-			},
-		};
-		const { data } = await axios.post(
-			url,
-			{ plan: pname, vision: pdes, politician: userId },
-			config
-		);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(addPlan(pname, pdes, userId));
+
+		// const { data } = await axios.post(
+		// 	url,
+		// 	{ plan: pname, vision: pdes, politician: userId },      
+		// 	config
+		// );
+		// if (data) {
+		// 	window.location.reload(true);
+		// }
 	};
+
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: PLAN_ADD_RESET });
+			setPname("");
+			setPdes("");
+		}
+	}, [successAdd]);
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
-					<label className="block">Plan Title</label>
-					<input
+					<label className="block text-sm font-medium text-gray-700">
+						Plan Title
+					</label>
+					<textarea
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 						onChange={(e) => setPname(e.target.value)}
-						id="name"
+						id="title"
 						value={pname}
-						placeholder="Title"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						placeholder="Set title"
+						type="text"
 					/>
 					<br />
 				</div>
-				<div className="mt-5 ">
-					<label className="block">Plan Description</label>
+				<div className="mt-3">
+					<label className="block text-sm font-medium text-gray-700">
+						Plan Description
+					</label>
 					<textarea
-						class="resize-y rounded-md border-2 border-slate-900 w-full h-16 px-3 py-1 placeholder:text-black"
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 						onChange={(e) => setPdes(e.target.value)}
 						id="name"
 						value={pdes}

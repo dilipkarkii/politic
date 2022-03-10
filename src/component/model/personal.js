@@ -38,7 +38,7 @@ const Personal = ({ title, closeModal, isOpen }) => {
 					<div className="mt-2 ">
 						Achivements
 						<textarea
-							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 mt-3 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAchiv(e.target.value)}
 							id="name"
 							value={achiv}

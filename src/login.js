@@ -6,7 +6,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [pass, setPass] = useState("");
-	const [userId, setUserId] = useState("");
+	// const [userId, setUserId] = useState("");
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
@@ -61,7 +61,7 @@ const Login = () => {
 						<label htmlFor="password">Password</label>
 						<input
 							type="password"
-							className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+							className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
 							id="password"
 							placeholder="Your Password"
 							onChange={(e) => setPass(e.target.value)}

@@ -42,33 +42,18 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 				userId
 			)
 		);
-		// updateEvent({
-		// 	id: eventDetail.id,
-		// 	title: name,
-		// 	description: agenda,
-		// 	location: loc,
-		// 	date,
-		// 	time,
-		// 	link,
-		// 	agenda: des,
-		// 	organized_by: userId,
-		// });
-		// console.log(name, agenda, loc, date, time, link);
 	};
-	// useEffect(() => {
-	// 	if (isSuccess) {
-	// 		window.location.reload(true);
-	// 	}
-	// }, [isSuccess]);
 
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
 					<div className="mt-2 ">
-						<label>campaign Name</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Campaign Name
+						</label>
 						<input
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setName(e.target.value)}
 							id="name"
 							defaultValue={name}
@@ -78,19 +63,25 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 					</div>
 
 					<div className="mt-4">
-						<label>Description</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Description
+						</label>
 						<textarea
-							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
 							onChange={(e) => setAgenda(e.target.value)}
 							id="name"
+							rows={5}
 							defaultValue={agenda}
 							placeholder="Agenda"
 						/>
 					</div>
 					<div className="mt-4">
-						<label>location</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Location
+						</label>
 						<input
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							type="text"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setLoc(e.target.value)}
 							id="location"
 							defaultValue={loc}
@@ -98,9 +89,12 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
-						<label>agenda</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Agenda
+						</label>
 						<input
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							type="text"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setDes(e.target.value)}
 							id="location"
 							defaultValue={des}
@@ -108,9 +102,11 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
-						<label>Date</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Date
+						</label>
 						<input
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setDate(e.target.value)}
 							type="date"
 							id="date"
@@ -119,9 +115,11 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
-						<label>Time</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Time
+						</label>
 						<input
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setTime(e.target.value)}
 							id="time"
 							type="time"
@@ -130,9 +128,11 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 						/>
 					</div>
 					<div className="mt-4">
-						<label>link</label>
+						<label className="block text-sm font-medium text-gray-700">
+							Link
+						</label>
 						<input
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setLink(e.target.value)}
 							id="link"
 							defaultValue={link}
@@ -143,7 +143,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 					<br />
 					<button
 						type="submit"
-						className="inline-flex justify-center px-4 py-2 mt-3 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+						className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						onClose={closeModal}
 						// onClick={refreshPage}
 					>

@@ -87,102 +87,119 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
-					<label className="block">FirstName</label>
+					<label className="block text-sm font-medium text-gray-700">
+						FirstName
+					</label>
 					<input
 						onChange={(e) => setFname(e.target.value)}
 						id="fname"
 						defaultValue={fname}
 						placeholder="FirstName"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">lastName</label>
+					<label className="block text-sm font-medium text-gray-700">
+						lastName
+					</label>
 					<input
 						onChange={(e) => setLname(e.target.value)}
 						id="lname"
 						defaultValue={lname}
 						placeholder="last Name"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						// className="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-black rounded-md"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Age</label>
+					<label className="block text-sm font-medium text-gray-700">Age</label>
 					<input
 						onChange={(e) => setAge(e.target.value)}
 						id="name"
 						type="number"
 						defaultValue={age}
 						placeholder="Age"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Address</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Address
+					</label>
 					<input
 						onChange={(e) => setAddress(e.target.value)}
 						id="name"
 						defaultValue={address}
 						placeholder="Address"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Political party</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Political party
+					</label>
 					<input
 						onChange={(e) => setParty(e.target.value)}
 						id="name"
 						defaultValue={party}
 						placeholder="party name"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Education</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Education
+					</label>
 					<input
 						onChange={(e) => setEdu(e.target.value)}
 						id="name"
 						defaultValue={edu}
 						placeholder="education"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Election Area</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Election Area
+					</label>
 					<input
 						onChange={(e) => setArea(e.target.value)}
 						id="name"
 						defaultValue={area}
 						placeholder="Area of election"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Member since</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Member since
+					</label>
 					<input
 						onChange={(e) => setMember(e.target.value)}
 						id="name"
 						defaultValue={member}
 						placeholder="member since"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>
 				<div className="mt-4">
-					<label className="block">Position in Party</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Position in Party
+					</label>
 					<input
 						onChange={(e) => setPosition(e.target.value)}
 						id="position"
 						defultValue={position}
 						placeholder="party"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
 					/>
 					<br />
 				</div>

@@ -24,18 +24,20 @@ const Gal = ({ title, closeModal, isOpen }) => {
 			},
 		};
 		const { data } = await axios.post(url, formData, config);
-			if (data) {
-				window.location.reload(true);
-			}
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-2 w-fit">
-					<label> Description</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Description
+					</label>
 					<textarea
-						className="h-32 px-3 py-1 mt-3 border-2 rounded-md w-96 border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block  shadow-sm sm:text-sm border-gray-300 rounded-md w-96"
 						onChange={(e) => setDes(e.target.value)}
 						id="des"
 						value={des}
@@ -45,7 +47,9 @@ const Gal = ({ title, closeModal, isOpen }) => {
 				</div>
 
 				<div className="mt-4">
-					<label> Image:</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Image:
+					</label>
 					<input
 						onChange={(e) => setPic(e.target.files[0])}
 						id="img"

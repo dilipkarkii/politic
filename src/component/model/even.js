@@ -4,13 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { addEvent } from "../../actions/EventAction";
 import { EVENT_ADD_RESET } from "../../constants/EventConstants";
 
-// import { useCreateEventMutation } from "../../services/event";
 
 const Even = ({ title, closeModal, isOpen }) => {
 	const dispatch = useDispatch();
 	const eventAdd = useSelector((state) => state.eventAdd);
 	const { success: successAdd } = eventAdd;
-	// const url = "http://192.108.1.106:8000/api/registeradmin";
 	const [name, setName] = useState("");
 	const [des, setdes] = useState("");
 	const [agenda, setAgenda] = useState();
@@ -18,9 +16,6 @@ const Even = ({ title, closeModal, isOpen }) => {
 	const [date, setDate] = useState();
 	const [time, setTime] = useState();
 	const [link, setLink] = useState();
-	// const [createEvent, responseInfo] = useCreateEventMutation();
-	// const { isSuccess } = responseInfo;
-	// console.log("responseInfo", responseInfo);
 	const userId = localStorage.getItem("userId");
 
 	const handleSubmit = (e) => {
@@ -49,7 +44,6 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Campaign Name
 						</label>
 						<input
-							// className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 							onChange={(e) => setName(e.target.value)}
 							id="name"

@@ -50,26 +50,32 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
-					<label className="block">Plan Title</label>
-					<input
+					<label className="block text-sm font-medium text-gray-700">
+						Plan Title
+					</label>
+					<textarea
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 						onChange={(e) => setPname(e.target.value)}
-						id="name"
-						defaultValue={pname}
-						placeholder="Title"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						id="title"
+						value={pname}
+						placeholder="Set title"
+						type="text"
 					/>
 					<br />
 				</div>
-				<div className="mt-5 ">
-					<label className="block">Plan Description</label>
+				<div className="mt-3">
+					<label className="block text-sm font-medium text-gray-700">
+						Plan Description
+					</label>
 					<textarea
-						className="w-full h-16 px-3 py-1 border-2 rounded-md resize-y border-slate-900 placeholder:text-black"
+						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 						onChange={(e) => setPdes(e.target.value)}
-						id="des"
-						defaultValue={pdes}
+						id="name"
+						value={pdes}
 						placeholder="Set description"
 						type="text"
 					/>
+
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"

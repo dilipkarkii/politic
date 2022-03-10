@@ -9,6 +9,7 @@ import {
 	EVENT_DELETE_RESET,
 	EVENT_UPDATE_RESET,
 } from "../../constants/EventConstants";
+import moment from "moment";
 
 const Events = () => {
 	const dispatch = useDispatch();
@@ -90,7 +91,8 @@ const Events = () => {
 							>
 								<div className="grid grid-cols-12 px-4 py-5 sm:px-6 bg-gray-50">
 									<h3 className="flex items-center col-span-4 text-lg font-medium leading-6 text-gray-500 ">
-										Upcomming Events
+										Upcomming Events :{" "}
+										{moment(value.date).format("MMMM Do YYYY")}
 									</h3>
 									<div className="flex items-center justify-end col-span-8 ">
 										<button
@@ -141,7 +143,7 @@ const Events = () => {
 												Date
 											</dt>
 											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{value.date}
+												{moment(value.date).format("MMMM Do YYYY")}
 											</dd>
 										</div>
 										<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

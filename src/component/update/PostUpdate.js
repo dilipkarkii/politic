@@ -19,23 +19,26 @@ const PostUpdate = ({ title, closeModal, isOpen }) => {
 				type: "formData",
 			},
 		};
-	const { data } = await axios.post(
-		url,
-		{ postTitle, Description, img },
-		config
-	);
-			if (data) {
-				window.location.reload(true);
-			}
+		const { data } = await axios.post(
+			url,
+			{ postTitle, Description, img },
+			config
+		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
 					<div className="mt-2 ">
-						Title
+						<label className="block text-sm font-medium text-gray-700">
+							Title
+						</label>
+
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 							onChange={(e) => setpostTitle(e.target.value)}
 							id="name"
 							defaultvalue={postTitle}
@@ -45,13 +48,16 @@ const PostUpdate = ({ title, closeModal, isOpen }) => {
 					</div>
 
 					<div className="mt-4">
-						Description
+						<label className="block text-sm font-medium text-gray-700">
+							Description
+						</label>
 						<textarea
-							className="w-full px-3 py-1 border-2 rounded-md h-72 border-slate-900 placeholder:text-black"
+							className="mt-1 h-72 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 							onChange={(e) => setDescription(e.target.value)}
 							id="name"
 							defaultvalue={Description}
 							placeholder="description"
+							type="text"
 						/>
 					</div>
 					<button
@@ -66,16 +72,17 @@ const PostUpdate = ({ title, closeModal, isOpen }) => {
 
 				<form>
 					<div className="mt-4">
-						Image:
+						<label className="block text-sm font-medium text-gray-700">
+							IMAGE:
+						</label>
 						<input
-							className="px-1"
+							className="mt-2"
 							onChange={(e) => setImg(e.target.value)}
 							type="file"
 							multiple
 						/>
 					</div>
 
-					<br />
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"

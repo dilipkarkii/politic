@@ -8,11 +8,24 @@ import {
 	eventUpdateReducer,
 } from "./reducers/EventReducer";
 
+import {
+	planListReducer,
+	planAddReducer,
+	planDeleteReducer,
+	planUpdateReducer,
+} from "./reducers/PlanReducer";
+
 const reducer = combineReducers({
 	eventList: eventListReducer,
 	eventAdd: eventAddReducer,
 	eventDelete: eventDeleteReducer,
 	eventUpdate: eventUpdateReducer,
+
+	// plans
+	planList: planListReducer,
+	planAdd: planAddReducer,
+	planDelete: planDeleteReducer,
+	planUpdate: planUpdateReducer,
 });
 const initialState = {};
 const middleware = [thunk];

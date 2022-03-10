@@ -23,16 +23,16 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 		e.preventDefault();
 		console.log(achiv, award, cont);
 
-	const { data } = await axios.put(
-		`http://44.199.61.81/achievement/${profileDetail.id}/`,
-		{
-			achievements: achiv,
-			politician: userId,
-		}
-	);
-			if (data) {
-				window.location.reload(true);
+		const { data } = await axios.put(
+			`http://44.199.61.81/achievement/${profileDetail.id}/`,
+			{
+				achievements: achiv,
+				politician: userId,
 			}
+		);
+		if (data) {
+			window.location.reload(true);
+		}
 	};
 	return (
 		<>
@@ -41,7 +41,7 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 					<div className="mt-2 ">
 						Achivements
 						<textarea
-							className="w-full h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full mt-3 h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAchiv(e.target.value)}
 							id="name"
 							defaultValue={achiv}

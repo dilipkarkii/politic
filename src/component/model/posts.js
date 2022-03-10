@@ -5,7 +5,7 @@ import axios from "axios";
 const Posts = ({ title, closeModal, isOpen }) => {
 	const [Title, setTitle] = useState("");
 	const [description, setDescription] = useState();
-	const [img, setImg] = useState( );
+	const [img, setImg] = useState();
 	const [formPost, setFormPost] = useState();
 	console.log("formPost", formPost);
 	const userId = localStorage.getItem("userId");
@@ -61,9 +61,12 @@ const Posts = ({ title, closeModal, isOpen }) => {
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
 					<div className="mt-2 ">
-						Title
+						<label className="block text-sm font-medium text-gray-700">
+							Title
+						</label>
 						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							// className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md  h-10"
 							onChange={(e) => setTitle(e.target.value)}
 							id="name"
 							value={Title}
@@ -73,9 +76,12 @@ const Posts = ({ title, closeModal, isOpen }) => {
 					</div>
 
 					<div className="mt-4">
-						Description
+						<label className="block text-sm font-medium text-gray-700">
+							{" "}
+							Description
+						</label>
 						<textarea
-							className="w-full h-60 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="mt-1 h-72 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
 							onChange={(e) => setDescription(e.target.value)}
 							id="name"
 							value={description}
@@ -98,9 +104,11 @@ const Posts = ({ title, closeModal, isOpen }) => {
 				{/* </form> */}
 				<form onSubmit={handleSubmission}>
 					<div className="mt-4">
-						<label>IMAGE:</label>
+						<label className="block text-sm font-medium text-gray-700">
+							IMAGE:
+						</label>
 						<input
-							className="px-3"
+							className="mt-2"
 							type="file"
 							onChange={(e) => setImg(e.target.files[0])}
 							multiple
