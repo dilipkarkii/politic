@@ -44,7 +44,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Campaign Name
 						</label>
 						<input
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setName(e.target.value)}
 							id="name"
 							value={name}
@@ -57,7 +57,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Description
 						</label>
 						<textarea
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setdes(e.target.value)}
 							id="name"
 							value={des}
@@ -70,7 +70,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Agenda
 						</label>
 						<textarea
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setAgenda(e.target.value)}
 							id="name"
 							value={agenda}
@@ -83,7 +83,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 						</label>
 						<input
 							type="text"
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setLoc(e.target.value)}
 							id="location"
 							value={loc}
@@ -95,7 +95,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Date
 						</label>
 						<input
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setDate(e.target.value)}
 							type="date"
 							id="date"
@@ -108,7 +108,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Time
 						</label>
 						<input
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setTime(e.target.value)}
 							id="time"
 							type="time"
@@ -121,7 +121,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Link
 						</label>
 						<input
-							className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+							className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setLink(e.target.value)}
 							id="link"
 							value={link}
@@ -132,7 +132,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 					<br />
 					<button
 						type="submit"
-						className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						onClose={closeModal}
 					>
 						submit

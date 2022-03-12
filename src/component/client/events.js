@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Even from "../model/even";
 import EventUpdate from "../model/EventUpdate";
@@ -22,13 +21,7 @@ const Events = () => {
 	const eventUpdate = useSelector((state) => state.eventUpdate);
 	const { success: successUpdate } = eventUpdate;
 	const userId = localStorage.getItem("userId");
-	// const geteventapi = useGetAllEventQuery(userId);
-	// const { data: geteventapidata, isLoading } = geteventapi;
-	// const [deleteEvent, responseInfo] = useDeleteEventMutation();
-	// console.log("responseInfo", responseInfo);
-	// const { isSuccess } = responseInfo;
 
-	// console.log("geteventapidata", geteventapidata.event_set);
 	let [isOpen, setIsOpen] = useState(false);
 	let [eventsData, setEventsData] = useState([]);
 	let [openUpdate, setOpenUpdate] = useState(false);

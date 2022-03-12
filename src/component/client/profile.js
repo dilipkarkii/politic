@@ -7,8 +7,81 @@ import ContriUpdate from "../profilecomponent/ContributionUpdate";
 import Contribution from "../profilecomponent/Contributions.js";
 import ProfileUpdate from "../update/ProfileUpdate";
 import Navbartop from "./navbar";
+import { useDispatch, useSelector } from "react-redux";
+
+import { listAchivement } from "../../actions/AchivementAction";
+import { ACHIVEMENT_UPDATE_RESET } from "../../constants/AchivementConstants";
+
+import { listAward } from "../../actions/AwardAction";
+import { AWARD_UPDATE_RESET } from "../../constants/AwardConstants";
+
+import { listContribution } from "../../actions/ContributionAction";
+import { CONTRIBUTION_UPDATE_RESET } from "../../constants/ContributionConstants";
 
 const Profile = () => {
+	const dispatch = useDispatch();
+	// achivement
+	const achivementList = useSelector((state) => state.AchivementList);
+	const { loading, success, achivements } = achivementList;
+	const achivementAdd = useSelector((state) => state.AchivementAdd);
+	const { success: successAdd } = achivementAdd;
+	const achivementUpdate = useSelector((state) => state.AchivementUpdate);
+	const { success: successUpdate } = achivementUpdate;
+	const userId = localStorage.getItem("userId");
+	useEffect(() => {
+		dispatch(listAchivement(userId));
+
+		if (successAdd || successUpdate) {
+			setIsOpen(false);
+			setOpenUpdate(false);
+		}
+		if (successUpdate) {
+			dispatch({ type: ACHIVEMENT_UPDATE_RESET });
+		}
+	}, [dispatch, successAdd, successUpdate]);
+
+	// award
+	const awardList = useSelector((state) => state.awardList);
+	const { loading: awardLoading, success: awardSuccess, awards } = awardList;
+	const awardAdd = useSelector((state) => state.awardAdd);
+	const { success: successAddAward } = awardAdd;
+	const awardUpdate = useSelector((state) => state.awardUpdate);
+	const { success: successUpdateAward } = awardUpdate;
+	useEffect(() => {
+		dispatch(listAward(userId));
+
+		if (successAddAward || successUpdateAward) {
+			setIsOpenAward(false);
+			setOpenAwardUpdate(false);
+		}
+		if (successUpdate) {
+			dispatch({ type: AWARD_UPDATE_RESET });
+		}
+	}, [dispatch, successAddAward, successUpdateAward]);
+
+	// contribution
+	const contributionList = useSelector((state) => state.contributionList);
+	const {
+		loading: contributionLoading,
+		success: contributionSuccess,
+		contributions,
+	} = contributionList;
+	const contributionAdd = useSelector((state) => state.contributionAdd);
+	const { success: successAddcontribution } = contributionAdd;
+	const contributionUpdate = useSelector((state) => state.contributionUpdate);
+	const { success: successUpdatecontribution } = contributionUpdate;
+	useEffect(() => {
+		dispatch(listContribution(userId));
+
+		if (successAddcontribution || successUpdatecontribution) {
+			setIsOpenContri(false);
+			setOpenContriUpdate(false);
+		}
+		if (successUpdate) {
+			dispatch({ type: CONTRIBUTION_UPDATE_RESET });
+		}
+	}, [dispatch, successAddcontribution, successUpdatecontribution]);
+
 	let [isOpen, setIsOpen] = useState(false);
 	let [isOpenAward, setIsOpenAward] = useState(false);
 	let [isOpenContri, setIsOpenContri] = useState(false);
@@ -21,13 +94,11 @@ const Profile = () => {
 	let [awardDetail, setAwardDetail] = useState();
 	let [contriDetail, setContriDetail] = useState();
 
-	let [profileData, setProfileData] = useState([]);
-	let [awardData, setAwardData] = useState([]);
-	let [contriData, setContriData] = useState([]);
+	// let [profileData, setProfileData] = useState([]);
+	// let [awardData, setAwardData] = useState([]);
+	// let [contriData, setContriData] = useState([]);
 	console.log(profileDetail);
-	const userId = localStorage.getItem("userId");
 
-	console.log(profileData);
 	//close model
 	function closeModal() {
 		setIsOpen(false);
@@ -79,49 +150,14 @@ const Profile = () => {
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {
-	// 		// const res = await axios.get("http://44.199.61.81/profile/");
 	// 		const { data } = await axios.get(
 	// 			`http://44.199.61.81/politician/${userId}/`
 	// 		);
-	// 		console.log("resUser", data.politicianpersonalprofile_set);
-	// 		setProfileData(data.politicianpersonalprofile_set);
+	// 		console.log("data", data.politiciancontributions_set);
+	// 		setContriData(data.politiciancontributions_set);
 	// 	};
 	// 	fetchData();
 	// }, []);
-
-	// api call
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await axios.get(
-				`http://44.199.61.81/politician/${userId}/`
-			);
-			console.log("data", data.politicianachievements_set);
-			setProfileData(data.politicianachievements_set);
-		};
-		fetchData();
-	}, []);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await axios.get(
-				`http://44.199.61.81/politician/${userId}/`
-			);
-			console.log("data", data.politicianawards_set);
-			setAwardData(data.politicianawards_set);
-		};
-		fetchData();
-	}, []);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await axios.get(
-				`http://44.199.61.81/politician/${userId}/`
-			);
-			console.log("data", data.politiciancontributions_set);
-			setContriData(data.politiciancontributions_set);
-		};
-		fetchData();
-	}, []);
 	// api call end
 	return (
 		<>
@@ -164,8 +200,11 @@ const Profile = () => {
 						</div>
 						<div className="border-t border-gray-200">
 							<dl>
-								{profileData &&
-									profileData.map((value, i) => (
+								{loading ? (
+									<h1 className="text-4xl">Loading</h1>
+								) : (
+									achivements &&
+									achivements.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
@@ -174,7 +213,7 @@ const Profile = () => {
 											<dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
 											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ml-10 text-justify">
+											<dd className="mt-1 ml-10 text-sm text-justify text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.achievements}
 											</dd>
 											<button
@@ -187,7 +226,8 @@ const Profile = () => {
 												Update
 											</button>
 										</div>
-									))}
+									))
+								)}
 							</dl>
 						</div>
 					</div>
@@ -211,8 +251,11 @@ const Profile = () => {
 						</div>
 						<div className="border-t border-gray-200">
 							<dl>
-								{awardData &&
-									awardData.map((value, i) => (
+								{awardLoading ? (
+									<h1 className="text-4xl">Loading</h1>
+								) : (
+									awards &&
+									awards.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
@@ -221,7 +264,7 @@ const Profile = () => {
 											<dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
 											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ml-10 text-justify">
+											<dd className="mt-1 ml-10 text-sm text-justify text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.awards}
 											</dd>
 											<button
@@ -234,7 +277,8 @@ const Profile = () => {
 												Update
 											</button>
 										</div>
-									))}
+									))
+								)}
 							</dl>
 						</div>
 					</div>
@@ -258,8 +302,11 @@ const Profile = () => {
 						</div>
 						<div className="border-t border-gray-200">
 							<dl>
-								{contriData &&
-									contriData.map((value, i) => (
+								{contributionLoading ? (
+									<h1 className="text-4xl">Loading</h1>
+								) : (
+									contributions &&
+									contributions.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
@@ -268,7 +315,7 @@ const Profile = () => {
 											<dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
 											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ml-10 text-justify">
+											<dd className="mt-1 ml-10 text-sm text-justify text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.contributions}
 											</dd>
 											<button
@@ -281,7 +328,8 @@ const Profile = () => {
 												Update
 											</button>
 										</div>
-									))}
+									))
+								)}
 							</dl>
 						</div>
 					</div>

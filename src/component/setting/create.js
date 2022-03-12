@@ -95,7 +95,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="fname"
 						value={fname}
 						placeholder="firstname"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -108,7 +108,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="mname"
 						value={mname}
 						placeholder="middlename"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -121,7 +121,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="lname"
 						value={lastname}
 						placeholder="lastname"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -134,7 +134,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="uname"
 						value={uname}
 						placeholder="username"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -148,7 +148,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="phone"
 						value={phone}
 						placeholder="phone no"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -161,7 +161,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						value={email}
 						type="email"
 						placeholder="email"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -172,7 +172,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="age"
 						value={age}
 						placeholder="Age"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -185,7 +185,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="address"
 						value={address}
 						placeholder="Address"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -198,7 +198,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="party"
 						value={party}
 						placeholder="party name"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -211,7 +211,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="slogan"
 						value={slogan}
 						placeholder="slogan"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -224,7 +224,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="education"
 						value={edu}
 						placeholder="education"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -237,7 +237,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="area"
 						value={area}
 						placeholder="Area of election"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -250,7 +250,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="member"
 						value={member}
 						placeholder="member since"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -263,7 +263,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="position"
 						value={pos}
 						placeholder="party position"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -276,7 +276,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="description"
 						value={description}
 						placeholder="About"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -289,7 +289,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						// value={flag}
 						// placeholder="About"
 						type="file"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -303,7 +303,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						// value={photo}
 						// placeholder="photo"
 						type="file"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-5 ">

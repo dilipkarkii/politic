@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateContribution } from "../../actions/ContributionAction";
 
 const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 	const [cont, setCont] = useState();
 	const [politician, setPolitician] = useState();
 	const userId = localStorage.getItem("userId");
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (contriDetail) {
@@ -14,21 +17,26 @@ const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 		}
 	}, [contriDetail]);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(cont);
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(cont);
 
-		const { data } = await axios.put(
-			`http://44.199.61.81/contribution/${contriDetail.id}/`,
-			{
-				contributions: cont,
-				politician: userId,
-			}
-		);
-		if (data) {
-			window.location.reload(true);
-		}
-	};
+	// 	const { data } = await axios.put(
+	// 		`http://44.199.61.81/contribution/${contriDetail.id}/`,
+	// 		{
+	// 			contributions: cont,
+	// 			politician: userId,
+	// 		}
+	// 	);
+	// 	if (data) {
+	// 		window.location.reload(true);
+	// 	}
+	// };
+const handleSubmit = async (e) => {
+	e.preventDefault();
+	dispatch(updateContribution(contriDetail.id, cont, userId));
+};
+	
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -36,7 +44,7 @@ const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 					<div className="mt-4">
 						contribution
 						<textarea
-							className="w-full h-40 mt-3 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 mt-3 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setCont(e.target.value)}
 							id="contribution"
 							defaultValue={cont}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Modelwrapper from "../model/modelwrapper";
+import { useSelector, useDispatch } from "react-redux";
+import { updatePlan } from "../../actions/PlanAction";
 
 const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
-	console.log(planDetail);
-	const url = `http://44.199.61.81/plan-vision/${planDetail.id}`;
+	const dispatch = useDispatch();
 
 	const [pname, setPname] = useState();
 	const [pdes, setPdes] = useState("");
@@ -17,34 +17,40 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 		}
 	}, [planDetail]);
 
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+
+	// 	var myHeaders = new Headers();
+	// 	myHeaders.append("Content-Type", "application/json");
+
+	// 	var raw = JSON.stringify({
+	// 		plan: pname,
+	// 		vision: pdes,
+	// 		politician: userId,
+	// 	});
+
+	// 	var requestOptions = {
+	// 		method: "PUT",
+	// 		headers: myHeaders,
+	// 		body: raw,
+	// 		redirect: "follow",
+	// 	};
+
+	// 	fetch(`http://44.199.61.81/plan-vision/${planDetail.id}/`, requestOptions)
+	// 		.then((response) => response.text())
+	// 		.then((result) => {
+	// 			if (result) {
+	// 				window.location.reload(true);
+	// 			}
+	// 		})
+	// 		.catch((error) => console.log("error", error));
+	// };
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		var myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-
-		var raw = JSON.stringify({
-			plan: pname,
-			vision: pdes,
-			politician: userId,
-		});
-
-		var requestOptions = {
-			method: "PUT",
-			headers: myHeaders,
-			body: raw,
-			redirect: "follow",
-		};
-
-		fetch(`http://44.199.61.81/plan-vision/${planDetail.id}/`, requestOptions)
-			.then((response) => response.text())
-			.then((result) => {
-				if (result) {
-					window.location.reload(true);
-				}
-			})
-			.catch((error) => console.log("error", error));
+		dispatch(updatePlan(planDetail.id, pname, pdes, userId));
 	};
+
 	console.log(pname, pdes);
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -54,7 +60,7 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 						Plan Title
 					</label>
 					<textarea
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 						onChange={(e) => setPname(e.target.value)}
 						id="title"
 						value={pname}
@@ -68,7 +74,7 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 						Plan Description
 					</label>
 					<textarea
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 						onChange={(e) => setPdes(e.target.value)}
 						id="name"
 						value={pdes}

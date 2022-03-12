@@ -1,38 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateAchivement } from "../../actions/AchivementAction";
 
 const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 	const [achiv, setAchiv] = useState();
 
-	const [award, setAward] = useState();
-	const [cont, setCont] = useState();
+	// const [award, setAward] = useState();
+	// const [cont, setCont] = useState();
 	const [politician, setPolitician] = useState();
 	const userId = localStorage.getItem("userId");
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (profileDetail) {
 			setAchiv(profileDetail.achievements);
-			setAward(profileDetail.awards);
-			setCont(profileDetail.contribution);
+			// setAward(profileDetail.awards);
+			// setCont(profileDetail.contribution);
 			setPolitician(profileDetail.politician);
 		}
 	}, [profileDetail]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(achiv, award, cont);
-
-		const { data } = await axios.put(
-			`http://44.199.61.81/achievement/${profileDetail.id}/`,
-			{
-				achievements: achiv,
-				politician: userId,
-			}
-		);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(updateAchivement(profileDetail.id, achiv, userId));
 	};
 	return (
 		<>
@@ -41,7 +32,7 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 					<div className="mt-2 ">
 						Achivements
 						<textarea
-							className="w-full mt-3 h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 mt-3 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAchiv(e.target.value)}
 							id="name"
 							defaultValue={achiv}
@@ -49,37 +40,6 @@ const ProfileUpdate = ({ title, closeModal, isOpen, profileDetail }) => {
 							type="text"
 						/>
 					</div>
-
-					{/* <div className="mt-4">
-						Awards
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setAward(e.target.value)}
-							id="name"
-							defaultValue={award}
-							placeholder="awards"
-						/>
-					</div> */}
-					{/* <div className="mt-4">
-						Contribution
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setCont(e.target.value)}
-							id="location"
-							defaultValue={cont}
-							placeholder="contribution"
-						/>
-					</div> */}
-					{/* <div className="mt-4">
-						politician id
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setPolitician(e.target.value)}
-							id="id"
-							defaultValue={politician}
-							placeholder="contribution"
-						/>
-					</div> */}
 
 					<br />
 					<button

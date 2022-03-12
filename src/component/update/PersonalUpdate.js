@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 
+
 const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 	// const url = "http://44.199.61.81/posts/";
 
@@ -95,7 +96,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="fname"
 						defaultValue={fname}
 						placeholder="FirstName"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-3 py-2"
+						className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -108,8 +109,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="lname"
 						defaultValue={lname}
 						placeholder="last Name"
-						// className="mt-1 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-black rounded-md"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						// className="block w-full px-3 py-2 mt-1 border-black rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -121,7 +122,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						type="number"
 						defaultValue={age}
 						placeholder="Age"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -134,7 +135,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="name"
 						defaultValue={address}
 						placeholder="Address"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -147,7 +148,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="name"
 						defaultValue={party}
 						placeholder="party name"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -160,7 +161,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="name"
 						defaultValue={edu}
 						placeholder="education"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -173,7 +174,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="name"
 						defaultValue={area}
 						placeholder="Area of election"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -186,7 +187,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="name"
 						defaultValue={member}
 						placeholder="member since"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>
@@ -199,7 +200,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						id="position"
 						defultValue={position}
 						placeholder="party"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md h-10 px-3 py-2"
+						className="block w-full h-10 px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 					/>
 					<br />
 				</div>

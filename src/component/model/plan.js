@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { addPlan } from "../../actions/PlanAction";
 import { PLAN_ADD_RESET } from "../../constants/PlanConstants";

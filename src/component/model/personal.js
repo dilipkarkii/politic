@@ -1,36 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { addAchivement } from "../../actions/AchivementAction";
+import { ACHIVEMENT_ADD_RESET } from "../../constants/AchivementConstants";
 
 const Personal = ({ title, closeModal, isOpen }) => {
-	const [achiv, setAchiv] = useState("");
+	const dispatch = useDispatch();
+	const achivementAdd = useSelector((state) => state.AchivementAdd);
+	const { success: successAdd } = achivementAdd;
 
-	// const [award, setAward] = useState();
-	// const [cont, setCont] = useState();
+	const [achiv, setAchiv] = useState("");
 	const userId = localStorage.getItem("userId");
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(achiv);
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		Accept: "application/json",
-		// 		// type: "formData",
-		// 	},
-		// };
-		const { data } = await axios.post(
-			`http://44.199.61.81/achievement/`,
-			{
-				achievements: achiv,
-				politician: userId,
-			}
-			// config
-		);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(addAchivement(achiv, userId));
 	};
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: ACHIVEMENT_ADD_RESET });
+			setAchiv("");
+		}
+	}, [successAdd]);
+
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -46,38 +38,6 @@ const Personal = ({ title, closeModal, isOpen }) => {
 							type="text"
 						/>
 					</div>
-
-					{/* <div className="mt-4">
-						Awards
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setAward(e.target.value)}
-							id="name"
-							value={award}
-							placeholder="awards"
-						/>
-					</div> */}
-					{/* <div className="mt-4">
-						Contribution
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setCont(e.target.value)}
-							id="location"
-							value={cont}
-							placeholder="contribution"
-						/>
-					</div> */}
-					{/* <div className="mt-4">
-						politician
-						<textarea
-							className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-							onChange={(e) => setPolitician(e.target.value)}
-							id="politician"
-							value={politician}
-							placeholder="contribution"
-						/>
-					</div> */}
-
 					<br />
 					<button
 						type="submit"

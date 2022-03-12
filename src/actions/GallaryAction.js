@@ -1,43 +1,44 @@
 import {
-	ACHIVEMENT_ADD_REQUEST,
-	ACHIVEMENT_ADD_SUCCESS,
-	ACHIVEMENT_ADD_FAIL,
-	ACHIVEMENT_LIST_REQUEST,
-	ACHIVEMENT_LIST_SUCCESS,
-	ACHIVEMENT_LIST_FAIL,
-	ACHIVEMENT_DELETE_REQUEST,
-	ACHIVEMENT_DELETE_SUCCESS,
-	ACHIVEMENT_DELETE_FAIL,
-	ACHIVEMENT_UPDATE_REQUEST,
-	ACHIVEMENT_UPDATE_SUCCESS,
-	ACHIVEMENT_UPDATE_FAIL,
-} from "../constants/AchivementConstants";
+	GALLARY_ADD_REQUEST,
+	GALLARY_ADD_SUCCESS,
+	GALLARY_ADD_FAIL,
+	GALLARY_LIST_REQUEST,
+	GALLARY_LIST_SUCCESS,
+	GALLARY_LIST_FAIL,
+	GALLARY_DELETE_REQUEST,
+	GALLARY_DELETE_SUCCESS,
+	GALLARY_DELETE_FAIL,
+	GALLARY_UPDATE_REQUEST,
+	GALLARY_UPDATE_SUCCESS,
+	GALLARY_UPDATE_FAIL,
+} from "../constants/GallaryConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
 
-export const addAchivement = (achievements, politician) => async (dispatch) => {
+export const addGallary = (image, description, owner) => async (dispatch) => {
 	try {
-		dispatch({ type: ACHIVEMENT_ADD_REQUEST });
+		dispatch({ type: GALLARY_ADD_REQUEST });
 		const config = {
 			Headers: {
 				"Content-Type": "application/json",
 			},
 		};
 		const { data } = await axios.post(
-			`${baseUrl}achievement/`,
+			`${baseUrl}gallery/`,
 			{
-				achievements,
-				politician,
+				image,
+				description,
+				owner,
 			},
 			config
 		);
 		dispatch({
-			type: ACHIVEMENT_ADD_SUCCESS,
+			type: GALLARY_ADD_SUCCESS,
 			payload: data,
 		});
 	} catch (err) {
 		dispatch({
-			type: ACHIVEMENT_ADD_FAIL,
+			type: GALLARY_ADD_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message
@@ -46,9 +47,9 @@ export const addAchivement = (achievements, politician) => async (dispatch) => {
 	}
 };
 
-export const listAchivement = (id) => async (dispatch) => {
+export const listGallary = (id) => async (dispatch) => {
 	try {
-		dispatch({ type: ACHIVEMENT_LIST_REQUEST });
+		dispatch({ type: GALLARY_LIST_REQUEST });
 		const config = {
 			Headers: {
 				"Content-Type": "application/json",
@@ -57,12 +58,12 @@ export const listAchivement = (id) => async (dispatch) => {
 		const { data } = await axios.get(`${baseUrl}politician/${id}/`, config);
 		console.log("data", data);
 		dispatch({
-			type: ACHIVEMENT_LIST_SUCCESS,
-			payload: data.politicianachievements_set.reverse(),
+			type: GALLARY_LIST_SUCCESS,
+			payload: data.gallery_set.reverse(),
 		});
 	} catch (err) {
 		dispatch({
-			type: ACHIVEMENT_LIST_FAIL,
+			type: GALLARY_LIST_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message
@@ -70,23 +71,23 @@ export const listAchivement = (id) => async (dispatch) => {
 		});
 	}
 };
-export const deleteAchivement = (id) => async (dispatch) => {
+export const deleteGallary = (id) => async (dispatch) => {
 	try {
-		dispatch({ type: ACHIVEMENT_DELETE_REQUEST });
+		dispatch({ type: GALLARY_DELETE_REQUEST });
 		const config = {
 			Headers: {
 				"Content-Type": "application/json",
 			},
 		};
-		const { data } = await axios.delete(`${baseUrl}achievement/${id}/`, config);
+		const { data } = await axios.delete(`${baseUrl}gallary/${id}/`, config);
 		console.log("data", data);
 		dispatch({
-			type: ACHIVEMENT_DELETE_SUCCESS,
+			type: GALLARY_DELETE_SUCCESS,
 			payload: data,
 		});
 	} catch (err) {
 		dispatch({
-			type: ACHIVEMENT_DELETE_FAIL,
+			type: GALLARY_DELETE_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message
@@ -95,30 +96,31 @@ export const deleteAchivement = (id) => async (dispatch) => {
 	}
 };
 
-export const updateAchivement =
-	(id, achievements, politician) => async (dispatch) => {
+export const updateGallary =
+	(id, image, description, owner) => async (dispatch) => {
 		try {
-			dispatch({ type: ACHIVEMENT_UPDATE_REQUEST });
+			dispatch({ type: GALLARY_UPDATE_REQUEST });
 			const config = {
 				Headers: {
 					"Content-Type": "application/json",
 				},
 			};
 			const { data } = await axios.put(
-				`${baseUrl}achievement/${id}/`,
+				`${baseUrl}gallary/${id}/`,
 				{
-					achievements,
-					politician,
+					image,
+					description,
+					owner,
 				},
 				config
 			);
 			dispatch({
-				type: ACHIVEMENT_UPDATE_SUCCESS,
+				type: GALLARY_UPDATE_SUCCESS,
 				payload: data,
 			});
 		} catch (err) {
 			dispatch({
-				type: ACHIVEMENT_UPDATE_FAIL,
+				type: GALLARY_UPDATE_FAIL,
 				paylod:
 					err.response && err.response.data.message
 						? err.response.data.message

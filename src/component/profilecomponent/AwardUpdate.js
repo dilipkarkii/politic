@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateAward } from "../../actions/AwardAction";
 
 const AwardUpdate = ({ title, closeModal, isOpen, awardDetail }) => {
+	const dispatch = useDispatch();
+
 	const [award, setAward] = useState();
 	const [politician, setPolitician] = useState();
 	const userId = localStorage.getItem("userId");
@@ -16,18 +19,7 @@ const AwardUpdate = ({ title, closeModal, isOpen, awardDetail }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(award);
-
-	const { data } = await axios.put(
-		`http://44.199.61.81/award/${awardDetail.id}/`,
-		{
-			awards: award,
-			politician: userId,
-		}
-	);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(updateAward(awardDetail.id, award, userId));
 	};
 	return (
 		<>
@@ -36,7 +28,7 @@ const AwardUpdate = ({ title, closeModal, isOpen, awardDetail }) => {
 					<div className="mt-4">
 						Awards
 						<textarea
-							className="w-full mt-3 h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 mt-3 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAward(e.target.value)}
 							id="name"
 							defaultValue={award}

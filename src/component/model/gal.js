@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
-import axios from "axios";
+// import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { addGallary } from "../../actions/GallaryAction";
+import { GALLARY_ADD_RESET } from "../../constants/GallaryConstants";
 
 const Gal = ({ title, closeModal, isOpen }) => {
-	const url = "http://44.199.61.81/gallery/";
-	const [des, setDes] = useState("");
+	// const url = "http://44.199.61.81/gallery/";
+	const dispatch = useDispatch();
+	const gallaryAdd = useSelector((state) => state.gallaryAdd);
+	const { success: successAdd } = gallaryAdd;
 
+	const [des, setDes] = useState("");
 	const [pic, setPic] = useState();
-	const [pid, setPid] = useState();
+	// const [pid, setPid] = useState();
 	const userId = localStorage.getItem("userId");
 
 	let formData = new FormData();
@@ -15,20 +21,31 @@ const Gal = ({ title, closeModal, isOpen }) => {
 	formData.append("description", des);
 	formData.append("owner", userId);
 
-	const handleSubmit = async (e) => {
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(des, pic);
+	// 	let config = {
+	// 		headers: {
+	// 			"Content-Type": "multipart/form-data",
+	// 		},
+	// 	};
+	// 	const { data } = await axios.post(url, formData, config);
+	// 	if (data) {
+	// 		window.location.reload(true);
+	// 	}
+	// };
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(des, pic);
-		let config = {
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
-		};
-		const { data } = await axios.post(url, formData, config);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(addGallary(formData, userId));
 	};
 
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: GALLARY_ADD_RESET });
+			setDes("");
+			setPic("");
+		}
+	}, [successAdd]);
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
@@ -37,7 +54,7 @@ const Gal = ({ title, closeModal, isOpen }) => {
 						Description
 					</label>
 					<textarea
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block  shadow-sm sm:text-sm border-gray-300 rounded-md w-96"
+						className="block mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm w-96"
 						onChange={(e) => setDes(e.target.value)}
 						id="des"
 						value={des}

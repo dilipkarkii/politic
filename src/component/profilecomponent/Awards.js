@@ -1,35 +1,20 @@
 import React, { useState } from "react";
-// import Modelwrapper from "./modelwrapper";
-import axios from "axios";
 import Modelwrapper from "../model/modelwrapper";
+import { useSelector, useDispatch } from "react-redux";
+import { addAward } from "../../actions/AwardAction";
 
 const Award = ({ title, closeModal, isOpen }) => {
-
 	const [award, setAward] = useState();
 	const userId = localStorage.getItem("userId");
 
-	const handleSubmit = async (e) => {
+	const dispatch = useDispatch();
+	const awardAdd = useSelector((state) => state.awardAdd);
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log( award, );
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		Accept: "application/json",
-		// 		// type: "formData",
-		// 	},
-		// };
-	const { data } = await axios.post(
-		`http://44.199.61.81/award/`,
-		{
-			awards: award,
-			politician: userId,
-		}
-		// config
-		);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(addAward(award, userId));
 	};
+
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -37,7 +22,7 @@ const Award = ({ title, closeModal, isOpen }) => {
 					<div className="mt-4">
 						Awards
 						<textarea
-							className="w-full mt-3 h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 mt-3 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setAward(e.target.value)}
 							id="name"
 							value={award}

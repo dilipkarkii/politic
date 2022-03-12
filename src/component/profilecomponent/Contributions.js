@@ -1,36 +1,35 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Modelwrapper from "../model/modelwrapper";
+import { useSelector, useDispatch } from "react-redux";
+import { addContribution } from "../../actions/ContributionAction";
 
 const Contribution = ({ title, closeModal, isOpen }) => {
-	const [achiv, setAchiv] = useState("");
-
-	const [award, setAward] = useState();
-	const [cont, setCont] = useState();
 	const userId = localStorage.getItem("userId");
+	const [cont, setCont] = useState();
+	const dispatch = useDispatch();
+	const contributionAdd = useSelector((state) => state.contributionAdd);
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(achiv, award, cont);
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		Accept: "application/json",
-		// 		// type: "formData",
-		// 	},
-		// };
-	const { data } = await axios.post(
-		`http://44.199.61.81/contribution/`,
-		{
-			contributions: cont,
-			politician: userId,
-		}
-		// config
-		);
-			if (data) {
-				window.location.reload(true);
-			}
+		dispatch(addContribution(cont, userId));
 	};
+
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(achiv, award, cont);
+	// const { data } = await axios.post(
+	// 	`http://44.199.61.81/contribution/`,
+	// 	{
+	// 		contributions: cont,
+	// 		politician: userId,
+	// 	}
+	// 	// config
+	// 	);
+	// 		if (data) {
+	// 			window.location.reload(true);
+	// 		}
+	// };
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -38,7 +37,7 @@ const Contribution = ({ title, closeModal, isOpen }) => {
 					<div className="mt-4">
 						Contribution
 						<textarea
-							className="w-full mt-3 h-40 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+							className="w-full h-40 px-3 py-1 mt-3 border-2 rounded-md border-slate-900 placeholder:text-black"
 							onChange={(e) => setCont(e.target.value)}
 							id="location"
 							value={cont}
