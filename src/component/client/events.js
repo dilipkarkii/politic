@@ -74,7 +74,24 @@ const Events = () => {
 					<Even title="Add Events" closeModal={closeModal} isOpen={isOpen} />
 					{/* {loading && <h1 className="text-4xl">Loading</h1>} */}
 					{loading ? (
-						<h1 className="text-4xl">Loading</h1>
+						<div className="w-[85px] m-auto">
+							<div className="justify-center animate-spin">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									className="feather feather-refresh-cw"
+								>
+									<polyline points="23 4 23 10 17 10"></polyline>
+									<polyline points="1 20 1 14 7 14"></polyline>
+									<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+								</svg>
+							</div>
+						</div>
 					) : (
 						events &&
 						events.map((value) => (
@@ -107,6 +124,17 @@ const Events = () => {
 								</div>
 								<div className="border-t border-gray-200">
 									<dl>
+										<div className="py-5 bg-white mx-52 sm:grid sm:px-6">
+											<dd className="object-center mt-1 text-sm text-gray-900 sm:mt-0 ">
+												<img
+													src={`http://44.199.61.81/${
+														value.image.split("8000/")[1]
+													}`}
+													alt="Louvre"
+													className="block object-cover object-center w-full h-full mr-5 rounded-lg"
+												/>
+											</dd>
+										</div>
 										<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 											<dt className="text-sm font-medium text-gray-500">
 												Campaign name
@@ -117,7 +145,7 @@ const Events = () => {
 										</div>
 										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 											<dt className="text-sm font-medium text-gray-500">
-												Agenda of event
+												Description of event
 											</dt>
 											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.description}
@@ -162,17 +190,7 @@ const Events = () => {
 												Links
 											</dt>
 											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												<a href="www.facebook.com" target="_blank">
-													{value.link}
-												</a>
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Event images
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												<a href="www.facebook.com" target="_blank">
+												<a href={value.link} target="_blank" rel="noreferrer">
 													{value.link}
 												</a>
 											</dd>

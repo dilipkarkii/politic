@@ -11,7 +11,7 @@ const Navbartop = () => {
 						<div className="flex space-x-4">
 							{/* <!-- logo --> */}
 							<div>
-								<Link to="/">
+								<Link to="/home">
 									<p className="flex items-center px-2 py-5 text-gray-700 hover:text-gray-900">
 										<i className="mb-1 mr-1 text-xl text-blue-400 bx bxl-medium-old"></i>
 										<span className="font-bold">POLITICIAN</span>
@@ -53,6 +53,11 @@ const Navbartop = () => {
 								<Link to="/personal">
 									<p className="px-3 py-5 text-gray-700 hover:text-gray-900">
 										Personal Profile
+									</p>
+								</Link>
+								<Link to="/feedback">
+									<p className="px-3 py-5 text-gray-700 hover:text-gray-900">
+										FeedBack
 									</p>
 								</Link>
 							</div>

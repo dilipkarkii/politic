@@ -11,6 +11,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 	const [date, setDate] = useState();
 	const [time, setTime] = useState();
 	const [link, setLink] = useState();
+	const [image, setImage] = useState();
 	const [des, setDes] = useState();
 	const userId = localStorage.getItem("userId");
 
@@ -22,7 +23,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 			setDate(eventDetail.date);
 			setTime(eventDetail.time);
 			setLink(eventDetail.link);
-			setLink(eventDetail.link);
+			setImage(eventDetail.image);
 			setDes(eventDetail.agenda);
 		}
 	}, [eventDetail]);
@@ -39,6 +40,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 				date,
 				time,
 				link,
+				image,
 				userId
 			)
 		);
@@ -48,6 +50,18 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
+					<div className="mt-4">
+						<label className="block text-sm font-medium text-gray-700">
+							Photo
+						</label>
+						<input
+							onChange={(e) => setImage(e.target.files[0])}
+							accept="image/png, image/jpg, image/jpeg"
+							id="poto"
+							type="file"
+							className="block w-full px-2 py-1 mt-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
+						/>
+					</div>
 					<div className="mt-2 ">
 						<label className="block text-sm font-medium text-gray-700">
 							Campaign Name

@@ -14,10 +14,12 @@ import {
 } from "../constants/PostConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
+import { POSTIMAGE_ADD_SUCCESS } from "../constants/PostImageConstants";
+import { POSTIMAGE_UPDATE_SUCCESS } from "../constants/PostImageConstants";
+import { addPostImage } from "./PostImageAction";
 
 export const addPost =
-	(title, description, agenda, location, date, time, link, organized_by) =>
-	async (dispatch) => {
+	(title, description, posted_by, image) => async (dispatch) => {
 		try {
 			dispatch({ type: POST_ADD_REQUEST });
 			const config = {
@@ -25,17 +27,12 @@ export const addPost =
 					"Content-Type": "application/json",
 				},
 			};
-			const { data } = await axios.post(
+			let { data } = await axios.post(
 				`${baseUrl}create_post/`,
 				{
 					title,
 					description,
-					agenda,
-					location,
-					date,
-					time,
-					link,
-					organized_by,
+					posted_by,
 				},
 				config
 			);
@@ -43,6 +40,28 @@ export const addPost =
 				type: POST_ADD_SUCCESS,
 				payload: data,
 			});
+			if (data.id) {
+				// addPostImage(image, data.id);
+				const config = {
+					Headers: {
+						"Content-Type": "application/json",
+					},
+				};
+				var formdata = new FormData();
+				formdata.append("image", image, image.name);
+				formdata.append("post", data.id);
+
+				const res = await axios.post(
+					`${baseUrl}create_post_image/`,
+					formdata,
+					config
+				);
+				dispatch({
+					type: POSTIMAGE_ADD_SUCCESS,
+					payload: res.data,
+				});
+				console.log("data", data.id);
+			}
 		} catch (err) {
 			dispatch({
 				type: POST_ADD_FAIL,
@@ -86,7 +105,7 @@ export const deletePost = (id) => async (dispatch) => {
 				"Content-Type": "application/json",
 			},
 		};
-		const { data } = await axios.delete(`${baseUrl}create_set/${id}/`, config);
+		const { data } = await axios.delete(`${baseUrl}create_post/${id}/`, config);
 		console.log("data", data);
 		dispatch({
 			type: POST_DELETE_SUCCESS,
@@ -104,8 +123,7 @@ export const deletePost = (id) => async (dispatch) => {
 };
 
 export const updatePost =
-	(id, title, description, agenda, location, date, time, link, organized_by) =>
-	async (dispatch) => {
+	(title, description, image, post_id, posted_by) => async (dispatch) => {
 		try {
 			dispatch({ type: POST_UPDATE_REQUEST });
 			const config = {
@@ -114,16 +132,12 @@ export const updatePost =
 				},
 			};
 			const { data } = await axios.put(
-				`${baseUrl}POST/${id}/`,
+				`${baseUrl}create_post/${post_id}/`,
 				{
 					title,
 					description,
-					agenda,
-					location,
-					date,
-					time,
-					link,
-					organized_by,
+
+					posted_by,
 				},
 				config
 			);
@@ -131,6 +145,29 @@ export const updatePost =
 				type: POST_UPDATE_SUCCESS,
 				payload: data,
 			});
+			if (data.id) {
+				// addPostImage(image, data.id);
+				const config = {
+					Headers: {
+						"Content-Type": "application/json",
+					},
+				};
+
+				var formdata = new FormData();
+				formdata.append("image", image, image.name);
+				formdata.append("post", data.id);
+
+				const res = await axios.put(
+					`${baseUrl}create_post_image/${post_id}/`,
+					formdata,
+					config
+				);
+				dispatch({
+					type: POSTIMAGE_UPDATE_SUCCESS,
+					payload: res.data,
+				});
+				console.log("data", data.id);
+			}
 		} catch (err) {
 			dispatch({
 				type: POST_UPDATE_FAIL,

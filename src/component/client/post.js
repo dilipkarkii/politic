@@ -4,15 +4,33 @@ import { Link } from "react-router-dom";
 import Posts from "../model/posts";
 import PostUpdate from "../update/PostUpdate";
 import Navbartop from "./navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePost, listPost } from "../../actions/PostAction";
+import { POST_UPDATE_RESET } from "../../constants/PostConstants";
+import {
+	POSTIMAGE_ADD_RESET,
+	POSTIMAGE_UPDATE_RESET,
+	POSTIMAGE_DELETE_REQUEST,
+} from "../../constants/PostImageConstants";
 
 const Post = () => {
+	const dispatch = useDispatch();
 	let [isOpen, setIsOpen] = useState(false);
 
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [postDetail, setPostDetail] = useState();
 	let [postData, setPostData] = useState();
-	console.log(postDetail);
+	console.log("postDetail", postDetail);
 	const userId = localStorage.getItem("userId");
+
+	const postImageAdd = useSelector((state) => state.postImageAdd);
+	const { success: successPostImage, loading: loadingPostImage } = postImageAdd;
+	const postList = useSelector((state) => state.postList);
+	const { posts } = postList;
+	const postDelete = useSelector((state) => state.postDelete);
+	const { success: successPostDelete } = postDelete;
+	const postImageUpdate = useSelector((state) => state.postImageUpdate);
+	const { success: successUpdate } = postImageUpdate;
 
 	console.log(postData);
 
@@ -26,37 +44,35 @@ const Post = () => {
 		setOpenUpdate(false);
 	};
 	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await axios.get(
-				`http://44.199.61.81/politician/${userId}/`
-			);
-			console.log("data", data.post_set);
-			setPostData(data.post_set);
-		};
-		fetchData();
-	}, []);
-	// const onDelete = async (id) => {
-	// 	await axios.delete(`http://44.199.61.81/event/${id}`);
-	// };
+		dispatch(listPost(userId));
+		setIsOpen(false);
+		dispatch({ type: POSTIMAGE_DELETE_REQUEST });
+		dispatch({ type: POSTIMAGE_ADD_RESET });
+		dispatch({ type: POSTIMAGE_UPDATE_RESET });
+		if (successUpdate) {
+			setIsOpen(false);
+			setOpenUpdate(false);
+		}
+	}, [successPostImage, successPostDelete, successUpdate]);
+
 	const onDelete = (id) => {
-		var raw = "";
-
-		var requestOptions = {
-			method: "DELETE",
-			body: raw,
-			redirect: "follow",
-		};
-
-		fetch(`http://44.199.61.81/create_post/${id}/`, requestOptions)
-			.then((response) => response.text())
-			.then((result) => console.log(result))
-			.catch((error) => console.log("error", error));
+		dispatch(deletePost(id));
+		// var raw = "";
+		// var requestOptions = {
+		// 	method: "DELETE",
+		// 	body: raw,
+		// 	redirect: "follow",
+		// };
+		// fetch(`http://44.199.61.81/create_post/${id}/`, requestOptions)
+		// 	.then((response) => response.text())
+		// 	.then((result) => console.log(result))
+		// 	.catch((error) => console.log("error", error));
 	};
 	return (
 		<>
 			<div className="bg-slate-300">
 				<Navbartop />
-				<div className="py-20  h-full  p-3 max-w-6xl mx-auto px-4 bg-slate-300">
+				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto bg-slate-300">
 					<div className="inset-0 flex items-center justify-end ">
 						<button
 							type="button"
@@ -67,10 +83,10 @@ const Post = () => {
 						</button>
 					</div>
 					<Posts title="Add Post" closeModal={closeModal} isOpen={isOpen} />
-					<div className="py-10  h-full  p-3 max-w-6xl mx-auto px-4">
+					<div className="h-full max-w-6xl p-3 px-4 py-10 mx-auto">
 						<div className="grid grid-cols-4 gap-4 ">
-							{postData &&
-								postData.map((data) => (
+							{posts &&
+								posts.map((data) => (
 									<div
 										key={data.id}
 										className="max-w-sm bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
@@ -132,12 +148,12 @@ const Post = () => {
 													className="hover:bg-blue-400"
 													onClick={() => (
 														// eslint-disable-next-line no-sequences
-														setOpenUpdate(true), setPostDetail()
+														setOpenUpdate(true), setPostDetail(data)
 													)}
 												>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
-														className="h-5 w-5"
+														className="w-5 h-5"
 														viewBox="0 0 20 20"
 														fill="blue"
 													>

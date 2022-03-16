@@ -23,13 +23,14 @@ export const addGallary = (image, description, owner) => async (dispatch) => {
 				"Content-Type": "application/json",
 			},
 		};
+		let formData = new FormData();
+		formData.append("image", image);
+		formData.append("description", description);
+		formData.append("owner", owner);
 		const { data } = await axios.post(
 			`${baseUrl}gallery/`,
-			{
-				image,
-				description,
-				owner,
-			},
+
+			formData,
 			config
 		);
 		dispatch({
@@ -74,12 +75,12 @@ export const listGallary = (id) => async (dispatch) => {
 export const deleteGallary = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: GALLARY_DELETE_REQUEST });
-		const config = {
-			Headers: {
-				"Content-Type": "application/json",
-			},
-		};
-		const { data } = await axios.delete(`${baseUrl}gallary/${id}/`, config);
+		// const config = {
+		// 	Headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// };
+		const { data } = await axios.delete(`${baseUrl}gallery/${id}/`);
 		console.log("data", data);
 		dispatch({
 			type: GALLARY_DELETE_SUCCESS,
@@ -100,18 +101,18 @@ export const updateGallary =
 	(id, image, description, owner) => async (dispatch) => {
 		try {
 			dispatch({ type: GALLARY_UPDATE_REQUEST });
-			const config = {
-				Headers: {
-					"Content-Type": "application/json",
+			let config = {
+				headers: {
+					"Content-Type": "multipart/form-data",
 				},
 			};
+			const formData = new FormData();
+			formData.append("description", description);
+			formData.append("image", image);
+			formData.append("owner", owner);
 			const { data } = await axios.put(
-				`${baseUrl}gallary/${id}/`,
-				{
-					image,
-					description,
-					owner,
-				},
+				`http://44.199.61.81/gallery/${id}/`,
+				formData,
 				config
 			);
 			dispatch({

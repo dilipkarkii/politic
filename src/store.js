@@ -50,6 +50,41 @@ import {
 	personalUpdateReducer,
 } from "./reducers/PersonalReducer";
 
+import {
+	loginListReducer,
+	loginAddReducer,
+	loginDeleteReducer,
+	loginUpdateReducer,
+} from "./reducers/LoginReducer";
+
+import {
+	adminloginListReducer,
+	adminloginAddReducer,
+	adminloginDeleteReducer,
+	adminloginUpdateReducer,
+} from "./reducers/AdminloginReducer";
+
+// import {
+// 	postListReducer,
+// 	postAddReducer,
+// 	postDeleteReducer,
+// 	postUpdateReducer,
+// } from "./reducers/PostReducer";
+
+import {
+	PostAddReducer,
+	PostDeleteReducer,
+	PostListReducer,
+	PostUpdateReducer,
+} from "./reducers/PostReducer";
+
+import {
+	PostImageListReducer,
+	PostImageAddReducer,
+	PostImageDeleteReducer,
+	PostImageUpdateReducer,
+} from "./reducers/PostImageReducer";
+
 const reducer = combineReducers({
 	eventList: eventListReducer,
 	eventAdd: eventAddReducer,
@@ -86,12 +121,35 @@ const reducer = combineReducers({
 	gallaryDelete: gallaryDeleteReducer,
 	gallaryUpdate: gallaryUpdateReducer,
 
-
 	// personal
 	personalList: personalListReducer,
 	personalAdd: personalAddReducer,
 	personalDelete: personalDeleteReducer,
 	personalUpdate: personalUpdateReducer,
+
+	//login
+	loginList: loginListReducer,
+	loginAdd: loginAddReducer,
+	loginDelete: loginDeleteReducer,
+	loginUpdate: loginUpdateReducer,
+
+	//login
+	adminloginList: adminloginListReducer,
+	adminloginAdd: adminloginAddReducer,
+	adminloginDelete: adminloginDeleteReducer,
+	adminloginUpdate: adminloginUpdateReducer,
+
+	//login
+	postList: PostListReducer,
+	postAdd: PostAddReducer,
+	postDelete: PostDeleteReducer,
+	postUpdate: PostUpdateReducer,
+
+	//login
+	postImageList: PostImageListReducer,
+	postImageAdd: PostImageAddReducer,
+	postImageDelete: PostImageDeleteReducer,
+	postImageUpdate: PostImageUpdateReducer,
 });
 const initialState = {};
 const middleware = [thunk];

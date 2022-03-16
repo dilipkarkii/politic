@@ -1,42 +1,32 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addLogin } from "./actions/LoginAction";
+import { LOGIN_ADD_RESET } from "./constants/LoginConstants";
 
 const Login = () => {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [pass, setPass] = useState("");
 	// const [userId, setUserId] = useState("");
 
+	const loginAdd = useSelector((state) => state.loginAdd);
+	const { success: successAdd } = loginAdd;
+
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: LOGIN_ADD_RESET });
+			setName("");
+			setPass("");
+			navigate("/home");
+		}
+	}, [successAdd]);
+
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-		//politician.tk/login/politician
-		let config = {
-			headers: {
-				"Content-Type": "application/json",
-			},
-		};
-		const { data } = await axios.post(
-			`http://44.199.61.81/login/politician`,
-			{ email: name, password: pass },
-			config
-		);
-		// console.log(data.non_field_errors[0]);
-		console.log(data.ID);
-		if (data) {
-			navigate("/home");
-		} else if (data.non_field_errors[0]) {
-			alert("invalid id or password");
-		}
-		localStorage.setItem("userId", data.ID);
-
-		// http: if (name === admin && pass === pwd) {
-		// 	navigate("/dashboard");
-		// } else if (name === user && pass === upwd) {
-		// 	navigate("/home");
-		// } else {
-		// 	alert("invalid id or password");
-		// }
+		dispatch(addLogin(name, pass));
 	};
 	return (
 		<div className="flex h-screen bg-slate-500">
@@ -61,7 +51,7 @@ const Login = () => {
 						<label htmlFor="password">Password</label>
 						<input
 							type="password"
-							className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
+							className="w-full p-2 mb-4 text-sm transition duration-150 ease-in-out border rounded-md outline-none text-primary"
 							id="password"
 							placeholder="Your Password"
 							onChange={(e) => setPass(e.target.value)}

@@ -14,9 +14,20 @@ import {
 } from "../constants/EventConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
+import { toast } from "react-toastify";
 
 export const addEvent =
-	(title, description, agenda, location, date, time, link, organized_by) =>
+	(
+		title,
+		description,
+		agenda,
+		location,
+		date,
+		time,
+		link,
+		image,
+		organized_by
+	) =>
 	async (dispatch) => {
 		try {
 			dispatch({ type: EVENT_ADD_REQUEST });
@@ -25,25 +36,44 @@ export const addEvent =
 					"Content-Type": "application/json",
 				},
 			};
+			let formData = new FormData();
+			formData.append("title", title);
+			formData.append("description", description);
+			formData.append("agenda", agenda);
+			formData.append("location", location);
+			formData.append("date", date);
+			formData.append("time", time);
+			formData.append("link", link);
+			formData.append("image", image);
+			formData.append("organized_by", organized_by);
+
 			const { data } = await axios.post(
 				`${baseUrl}event/`,
-				{
-					title,
-					description,
-					agenda,
-					location,
-					date,
-					time,
-					link,
-					organized_by,
-				},
+				formData,
+				// {
+				// 	image,
+				// 	title,
+				// 	description,
+				// 	agenda,
+				// 	location,
+				// 	date,
+				// 	time,
+				// 	link,
+				// 	organized_by,
+				// },
 				config
 			);
+			toast.info("Event Added", {
+				autoClose: 1000,
+			});
 			dispatch({
 				type: EVENT_ADD_SUCCESS,
 				payload: data,
 			});
 		} catch (err) {
+			toast.error("Fail To Add Event", {
+				autoClose: 1000,
+			});
 			dispatch({
 				type: EVENT_ADD_FAIL,
 				paylod:
@@ -92,7 +122,13 @@ export const deleteEvent = (id) => async (dispatch) => {
 			type: EVENT_DELETE_SUCCESS,
 			payload: data,
 		});
+		toast.info("Event Deleted", {
+			autoClose: 1000,
+		});
 	} catch (err) {
+		toast.error("Error In Delete", {
+			autoClose: 1000,
+		});
 		dispatch({
 			type: EVENT_DELETE_FAIL,
 			paylod:
@@ -104,7 +140,18 @@ export const deleteEvent = (id) => async (dispatch) => {
 };
 
 export const updateEvent =
-	(id, title, description, agenda, location, date, time, link, organized_by) =>
+	(
+		id,
+		title,
+		description,
+		agenda,
+		location,
+		date,
+		time,
+		link,
+		image,
+		organized_by
+	) =>
 	async (dispatch) => {
 		try {
 			dispatch({ type: EVENT_UPDATE_REQUEST });
@@ -113,25 +160,42 @@ export const updateEvent =
 					"Content-Type": "application/json",
 				},
 			};
+			let formData = new FormData();
+			formData.append("title", title);
+			formData.append("description", description);
+			formData.append("agenda", agenda);
+			formData.append("location", location);
+			formData.append("date", date);
+			formData.append("time", time);
+			formData.append("link", link);
+			formData.append("image", image);
+			formData.append("organized_by", organized_by);
 			const { data } = await axios.put(
 				`${baseUrl}event/${id}/`,
-				{
-					title,
-					description,
-					agenda,
-					location,
-					date,
-					time,
-					link,
-					organized_by,
-				},
+				formData,
+				// {
+				// 	title,
+				// 	description,
+				// 	agenda,
+				// 	location,
+				// 	date,
+				// 	time,
+				// 	link,
+				// 	organized_by,
+				// },
 				config
 			);
 			dispatch({
 				type: EVENT_UPDATE_SUCCESS,
 				payload: data,
 			});
+			toast.info("Event Updated", {
+				autoClose: 1000,
+			});
 		} catch (err) {
+			toast.info("Updated Error", {
+				autoClose: 1000,
+			});
 			dispatch({
 				type: EVENT_UPDATE_FAIL,
 				paylod:

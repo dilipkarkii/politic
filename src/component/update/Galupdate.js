@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { updateGallary } from "../../actions/GallaryAction";
 
 const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 	const [des, setDes] = useState("");
@@ -8,6 +10,40 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 	const [pic, setPic] = useState();
 	console.log("gallaryDetail", gallaryDetail);
 	const userId = localStorage.getItem("userId");
+	// useEffect(() => {
+	// 	if (gallaryDetail) {
+	// 		setDes(gallaryDetail.description);
+	// 		setPic(gallaryDetail.image);
+	// 	}
+	// }, [gallaryDetail]);
+
+	// let formData = new FormData();
+	// formData.append("image", pic);
+	// formData.append("description", des);
+
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(des, pic);
+	// 	let config = {
+	// 		headers: {
+	// 			"Content-Type": "multipart/form-data",
+	// 		},
+	// 	};
+	// 	const formData = new FormData();
+	// 	formData.append("description", des);
+	// 	formData.append("image", pic);
+	// 	formData.append("owner", userId);
+	// 	const { data } = await axios.put(
+	// 		`http://44.199.61.81/gallery/${gallaryDetail.id}/`,
+	// 		formData,
+	// 		config
+	// 	);
+	// 	if (data) {
+	// 		window.location.reload(true);
+	// 	}
+	// };
+
+	const dispatch = useDispatch();
 	useEffect(() => {
 		if (gallaryDetail) {
 			setDes(gallaryDetail.description);
@@ -15,31 +51,11 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 		}
 	}, [gallaryDetail]);
 
-	let formData = new FormData();
-	formData.append("image", pic);
-	formData.append("description", des);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(des, pic);
-		let config = {
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
-		};
-		const formData = new FormData();
-		formData.append("description", des);
-		formData.append("image", pic);
-		formData.append("owner", userId);
-		const { data } = await axios.put(
-			`http://44.199.61.81/gallery/${gallaryDetail.id}/`,
-			formData,
-			config
-		);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(updateGallary(gallaryDetail.id, pic, des, userId));
 	};
+
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>

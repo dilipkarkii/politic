@@ -2,13 +2,19 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Setting() {
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		localStorage.removeItem("userId");
+		navigate("/");
+	};
 	return (
 		<>
 			<Menu as="div" className="relative inline-block bg-gray-100 ">
 				<div>
-					<Menu.Button className="inline-flex w-full px-4 py-2 text-sm font-medium text-black bg-gray-150 rounded-md justify-left hover:bg-opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+					<Menu.Button className="inline-flex w-full px-4 py-2 text-sm font-medium text-black rounded-md bg-gray-150 justify-left hover:bg-opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
 						Setting
 						<ChevronDownIcon
 							className="w-5 h-5 ml-2 -mr-1 text-slate-700 hover:text-black"
@@ -53,30 +59,12 @@ export default function Setting() {
 							</Link>
 						</div>
 						<div className="px-1 py-1">
-							<Link to="/">
-								<Menu.Item>
-									{({ active }) => (
-										<button
-											className={`${
-												active ? "bg-violet-500 text-white" : "text-gray-900"
-											} group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-										>
-											{active ? (
-												<ArchiveActiveIcon
-													className="w-5 h-5 mr-2"
-													aria-hidden="true"
-												/>
-											) : (
-												<ArchiveInactiveIcon
-													className="w-5 h-5 mr-2"
-													aria-hidden="true"
-												/>
-											)}
-											Log Out
-										</button>
-									)}
-								</Menu.Item>
-							</Link>
+							<button
+								className="flex items-center w-full px-2 py-2 text-sm text-white text-gray-900 rounded-md hover:bg-violet-500 group"
+								onClick={handleLogout}
+							>
+								Log Out
+							</button>
 						</div>
 					</Menu.Items>
 				</Transition>

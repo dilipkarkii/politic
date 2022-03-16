@@ -64,7 +64,7 @@ export const personalDeleteReducer = (state = {}, action) => {
 	}
 };
 
-export const personalListReducer = (state = { personals: [] }, action) => {
+export const personalListReducer = (state = {}, action) => {
 	switch (action.type) {
 		case PERSONAL_LIST_REQUEST:
 			return {

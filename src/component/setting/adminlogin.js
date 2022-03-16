@@ -1,33 +1,54 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {  useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addAdminlogin } from "../../actions/AdminloginAction";
+import { ADMINLOGIN_ADD_RESET } from "../../constants/AdminloginConstants";
 
-const AdminLogin = () => {
+const Adminlogin = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [name, setName] = useState("");
 	const [pass, setPass] = useState("");
-	const [userId, setUserId] = useState("");
+	// const [userId, setUserId] = useState("");
+
+	const adminloginAdd = useSelector((state) => state.adminloginAdd);
+	const { success: successAdd } = adminloginAdd;
+
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: ADMINLOGIN_ADD_RESET });
+			setName("");
+			setPass("");
+			navigate("/dashboard");
+		}
+	}, [successAdd]);
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-		let config = {
-			headers: {
-				"Content-Type": "application/json",
-			},
-		};
-		const { data } = await axios.post(
-			`http://44.199.61.81/login/admin`,
-			{ email: name, password: pass },
-			config
-		);
-		console.log(data.ID);
-		if (data) {
-			navigate("/dashboard");
-		} else if (data.non_field_errors[0]) {
-			alert("invalid id or password");
-		}
-		localStorage.setItem("userId", data.ID);
+		dispatch(addAdminlogin(name, pass));
 	};
+
+	// const handleFormSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	let config = {
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 	};
+	// 	const { data } = await axios.post(
+	// 		`http://44.199.61.81/login/admin`,
+	// 		{ email: name, password: pass },
+	// 		config
+	// 	);
+	// 	console.log(data.ID);
+	// 	if (data) {
+	// 		navigate("/dashboard");
+	// 	} else if (data.non_field_errors[0]) {
+	// 		alert("invalid id or password");
+	// 	}
+	// 	localStorage.setItem("userId", data.ID);
+	// };
 	return (
 		<div className="flex h-screen bg-slate-500">
 			<div className="w-full max-w-md px-16 py-10 m-auto bg-white border rounded-lg border-primaryBorder shadow-default">
@@ -66,16 +87,16 @@ const AdminLogin = () => {
 							Login
 						</button>
 					</div>
-					<Link to="/reset">
+					{/* <Link to="/reset">
 						<div className="text-center mt-2 italic">
 							Forget your password?
 							<span className="underline"> Reset Here </span>
 						</div>
-					</Link>
+					</Link> */}
 				</form>
 			</div>
 		</div>
 	);
 };
 
-export default AdminLogin;
+export default Adminlogin;

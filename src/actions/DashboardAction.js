@@ -1,21 +1,21 @@
 import {
-	PERSONAL_ADD_REQUEST,
-	PERSONAL_ADD_SUCCESS,
-	PERSONAL_ADD_FAIL,
-	PERSONAL_LIST_REQUEST,
-	PERSONAL_LIST_SUCCESS,
-	PERSONAL_LIST_FAIL,
-	PERSONAL_DELETE_REQUEST,
-	PERSONAL_DELETE_SUCCESS,
-	PERSONAL_DELETE_FAIL,
-	PERSONAL_UPDATE_REQUEST,
-	PERSONAL_UPDATE_SUCCESS,
-	PERSONAL_UPDATE_FAIL,
-} from "../constants/PersonalConstants";
+	DASHBOARD_ADD_REQUEST,
+	DASHBOARD_ADD_SUCCESS,
+	DASHBOARD_ADD_FAIL,
+	DASHBOARD_LIST_REQUEST,
+	DASHBOARD_LIST_SUCCESS,
+	DASHBOARD_LIST_FAIL,
+	DASHBOARD_DELETE_REQUEST,
+	DASHBOARD_DELETE_SUCCESS,
+	DASHBOARD_DELETE_FAIL,
+	DASHBOARD_UPDATE_REQUEST,
+	DASHBOARD_UPDATE_SUCCESS,
+	DASHBOARD_UPDATE_FAIL,
+} from "../constants/DashboardConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
 
-export const addPersonal =
+export const addDASHBOARD =
 	(
 		firstName,
 		middleName,
@@ -38,7 +38,7 @@ export const addPersonal =
 	) =>
 	async (dispatch) => {
 		try {
-			dispatch({ type: PERSONAL_ADD_REQUEST });
+			dispatch({ type: DASHBOARD_ADD_REQUEST });
 			const config = {
 				Headers: {
 					"Content-Type": "application/json",
@@ -69,12 +69,12 @@ export const addPersonal =
 				config
 			);
 			dispatch({
-				type: PERSONAL_ADD_SUCCESS,
+				type: DASHBOARD_ADD_SUCCESS,
 				payload: data,
 			});
 		} catch (err) {
 			dispatch({
-				type: PERSONAL_ADD_FAIL,
+				type: DASHBOARD_ADD_FAIL,
 				paylod:
 					err.response && err.response.data.message
 						? err.response.data.message
@@ -83,9 +83,9 @@ export const addPersonal =
 		}
 	};
 
-export const listPersonal = (id) => async (dispatch) => {
+export const listDASHBOARD = (id) => async (dispatch) => {
 	try {
-		dispatch({ type: PERSONAL_LIST_REQUEST });
+		dispatch({ type: DASHBOARD_LIST_REQUEST });
 		const config = {
 			Headers: {
 				"Content-Type": "application/json",
@@ -94,12 +94,12 @@ export const listPersonal = (id) => async (dispatch) => {
 		const { data } = await axios.get(`${baseUrl}politician/${id}/`, config);
 		console.log("data", data);
 		dispatch({
-			type: PERSONAL_LIST_SUCCESS,
+			type: DASHBOARD_LIST_SUCCESS,
 			payload: data,
 		});
 	} catch (err) {
 		dispatch({
-			type: PERSONAL_LIST_FAIL,
+			type: DASHBOARD_LIST_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message
@@ -107,9 +107,9 @@ export const listPersonal = (id) => async (dispatch) => {
 		});
 	}
 };
-export const deletePersonal = (id) => async (dispatch) => {
+export const deleteDASHBOARD = (id) => async (dispatch) => {
 	try {
-		dispatch({ type: PERSONAL_DELETE_REQUEST });
+		dispatch({ type: DASHBOARD_DELETE_REQUEST });
 		const config = {
 			Headers: {
 				"Content-Type": "application/json",
@@ -118,12 +118,12 @@ export const deletePersonal = (id) => async (dispatch) => {
 		const { data } = await axios.delete(`${baseUrl}politician/${id}/`, config);
 		console.log("data", data);
 		dispatch({
-			type: PERSONAL_DELETE_SUCCESS,
+			type: DASHBOARD_DELETE_SUCCESS,
 			payload: data,
 		});
 	} catch (err) {
 		dispatch({
-			type: PERSONAL_DELETE_FAIL,
+			type: DASHBOARD_DELETE_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message
@@ -132,8 +132,9 @@ export const deletePersonal = (id) => async (dispatch) => {
 	}
 };
 
-export const updatePersonal =
+export const updateDASHBOARD =
 	(
+		id,
 		firstName,
 		middleName,
 		lastName,
@@ -145,17 +146,17 @@ export const updatePersonal =
 		education,
 		electionArea,
 		position,
+		password,
 		slogan,
 		politicalBackground,
 		description,
 		flag,
 		profilePhoto,
-		memberSince,
-		id
+		memberSince
 	) =>
 	async (dispatch) => {
 		try {
-			dispatch({ type: PERSONAL_UPDATE_REQUEST });
+			dispatch({ type: DASHBOARD_UPDATE_REQUEST });
 			const config = {
 				Headers: {
 					"Content-Type": "application/json",
@@ -173,7 +174,7 @@ export const updatePersonal =
 			formData.append("education", education);
 			formData.append("electionArea", electionArea);
 			formData.append("position", position);
-			// formData.append("password", password);
+			formData.append("password", password);
 			formData.append("slogan", slogan);
 			formData.append("politicalBackground", politicalBackground);
 			formData.append("description", description);
@@ -206,12 +207,12 @@ export const updatePersonal =
 				config
 			);
 			dispatch({
-				type: PERSONAL_UPDATE_SUCCESS,
+				type: DASHBOARD_UPDATE_SUCCESS,
 				payload: data,
 			});
 		} catch (err) {
 			dispatch({
-				type: PERSONAL_UPDATE_FAIL,
+				type: DASHBOARD_UPDATE_FAIL,
 				paylod:
 					err.response && err.response.data.message
 						? err.response.data.message

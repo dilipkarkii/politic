@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
-
+import { useSelector, useDispatch } from "react-redux";
+import { addPersonal } from "../../actions/PersonalAction";
+import { PERSONAL_ADD_RESET } from "../../constants/PersonalConstants";
 const Create = ({ title, closeModal, isOpen }) => {
-	const url = "http://44.199.61.81/politician/";
+	// const url = "http://44.199.61.81/politician/";
+
+		const dispatch = useDispatch();
+		const personalAdd = useSelector((state) => state.personalAdd);
+		const { success: successAdd } = personalAdd;
 
 	const [fname, setFname] = useState();
 	const [upass, setUpass] = useState("");
@@ -23,9 +29,9 @@ const Create = ({ title, closeModal, isOpen }) => {
 	const [flag, setFlag] = useState("");
 	const [photo, setPhoto] = useState("");
 	const [slogan, setSlogan] = useState("");
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	// const userId = localStorage.getItem("userId");
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
 		// console.log(uname, upass, email, phone);
 		// let config = {
 		// 	headers: {
@@ -35,53 +41,102 @@ const Create = ({ title, closeModal, isOpen }) => {
 		// 	},
 		// };
 
-		let formData = new FormData();
-		formData.append("flag", flag);
-		formData.append("firstName", uname);
-		formData.append("middleName", mname);
-		formData.append("lastName", lastname);
-		formData.append("password", upass);
-		formData.append("age", age);
-		formData.append("username", uname);
-		formData.append("email", email);
-		formData.append("phone", phone);
-		formData.append("address", address);
-		formData.append("education", edu);
-		formData.append("description", description);
-		formData.append("politicalBackground", party);
-		formData.append("electionArea", area);
-		formData.append("memberSince", member);
-		formData.append("position", pos);
-		formData.append("slogan", slogan);
-		formData.append("profilePhoto", photo);
+		// let formData = new FormData();
+		// formData.append("flag", flag);
+		// formData.append("firstName", fname);
+		// formData.append("middleName", mname);
+		// formData.append("lastName", lastname);
+		// formData.append("password", upass);
+		// formData.append("age", age);
+		// formData.append("username", uname);
+		// formData.append("email", email);
+		// formData.append("phone", phone);
+		// formData.append("address", address);
+		// formData.append("education", edu);
+		// formData.append("description", description);
+		// formData.append("politicalBackground", party);
+		// formData.append("electionArea", area);
+		// formData.append("memberSince", member);
+		// formData.append("position", pos);
+		// formData.append("slogan", slogan);
+		// formData.append("profilePhoto", photo);
 
-		const { data } = await axios.post(
-			url,
-			formData
-			// {
-			// 	firstName: uname,
-			// 	lastName: lastname,
-			// 	password: upass,
-			// 	age,
-			// 	userName: uname,
-			// 	email,
-			// 	phone,
-			// 	address,
-			// 	education: edu,
-			// 	description,
-			// 	politicalBackground: party,
-			// 	electionArea: area,
-			// 	memberSince: member,
-			// 	position: pos,
-			// 	slogan,
-			// 	formData,
-			// }
-			// config
-		);
-		if (data) {
-			window.location.reload(true);
-		}
-	};
+	// 	const { data } = await axios.post(
+	// 		url,
+	// 		formData
+	// 		// {
+	// 		// 	firstName: uname,
+	// 		// 	lastName: lastname,
+	// 		// 	password: upass,
+	// 		// 	age,
+	// 		// 	userName: uname,
+	// 		// 	email,
+	// 		// 	phone,
+	// 		// 	address,
+	// 		// 	education: edu,
+	// 		// 	description,
+	// 		// 	politicalBackground: party,
+	// 		// 	electionArea: area,
+	// 		// 	memberSince: member,
+	// 		// 	position: pos,
+	// 		// 	slogan,
+	// 		// 	formData,
+	// 		// }
+	// 		// config
+	// 	);
+	// 	if (data) {
+	// 		window.location.reload(true);
+	// 	}
+	// };
+
+		const handleSubmit = (e) => {
+			e.preventDefault();
+			dispatch(
+				addPersonal(
+					fname,
+					mname,
+					lastname,
+					age,
+					uname,
+					email,
+					phone,
+					address,
+					edu,
+					area,
+					pos,
+					upass,
+					slogan,
+					party,
+					description,
+					flag,
+					photo,
+					member
+				)
+			);
+		};
+
+		useEffect(() => {
+			if (successAdd) {
+				dispatch({ type: PERSONAL_ADD_RESET });
+					setFname("");
+					setLastname('');
+					setAge("");
+					setUname("");
+					setEmail("");
+					setPhone("");
+					setAddress("");
+					setEdu("");
+					setParty("");
+					setArea("");
+					setPos("");
+					setMember("");
+					setUpass("");
+					setSlogan("");
+					setDescription("");
+					setFlag('');
+					setPhoto("");
+			}
+		}, [successAdd]);
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>

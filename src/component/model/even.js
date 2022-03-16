@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addEvent } from "../../actions/EventAction";
 import { EVENT_ADD_RESET } from "../../constants/EventConstants";
 
-
 const Even = ({ title, closeModal, isOpen }) => {
 	const dispatch = useDispatch();
 	const eventAdd = useSelector((state) => state.eventAdd);
@@ -16,16 +15,19 @@ const Even = ({ title, closeModal, isOpen }) => {
 	const [date, setDate] = useState();
 	const [time, setTime] = useState();
 	const [link, setLink] = useState();
+	const [image, setImage] = useState("");
 	const userId = localStorage.getItem("userId");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(addEvent(name, des, agenda, loc, date, time, link, userId));
+		dispatch(addEvent(name, des, agenda, loc, date, time, link, image, userId));
 	};
+	console.log(loc)
 
 	useEffect(() => {
 		if (successAdd) {
 			dispatch({ type: EVENT_ADD_RESET });
+			setImage("");
 			setName("");
 			setdes("");
 			setAgenda("");
@@ -39,6 +41,18 @@ const Even = ({ title, closeModal, isOpen }) => {
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>
+					<div className="mt-4">
+						<label className="block text-sm font-medium text-gray-700">
+							Photo
+						</label>
+						<input
+							onChange={(e) => setImage(e.target.files[0])}
+							accept="image/png, image/jpg, image/jpeg"
+							id="poto"
+							type="file"
+							className="block w-full px-2 py-1 mt-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
+						/>
+					</div>
 					<div className="mt-2 ">
 						<label className="block text-sm font-medium text-gray-700">
 							Campaign Name

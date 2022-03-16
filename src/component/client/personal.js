@@ -1,20 +1,38 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PersonalProfile from "../model/profilepersonal";
 import PersonalUpdate from "../update/PersonalUpdate";
 import Navbartop from "./navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { listPersonal } from "../../actions/PersonalAction";
+import { PERSONAL_UPDATE_RESET } from "../../constants/PersonalConstants";
 
 const Personal = () => {
-	let [isOpen, setIsOpen] = useState(false);
+	const dispatch = useDispatch();
+	const personalList = useSelector((state) => state.personalList);
+	const { loading, success, personals } = personalList;
+	const personalUpdate = useSelector((state) => state.personalUpdate);
+	const { success: successUpdate } = personalUpdate;
 
+	useEffect(() => {
+		dispatch(listPersonal(userId));
+		if (successUpdate) {
+			setIsOpen(false);
+			setOpenUpdate(false);
+		}
+		if (successUpdate) {
+			dispatch({ type: PERSONAL_UPDATE_RESET });
+		}
+	}, [dispatch, successUpdate]);
+
+	let [isOpen, setIsOpen] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [personalData, setPersonalData] = useState([]);
 	let [personalDetail, setPersonalDetail] = useState();
-	console.log(personalDetail);
 
 	const userId = localStorage.getItem("userId");
 	console.log("userId", userId);
-
+	console.log("personal", personals);
 	console.log("data", personalDetail);
 
 	function closeModal() {
@@ -26,16 +44,15 @@ const Personal = () => {
 	const closeUpdateModal = () => {
 		setOpenUpdate(false);
 	};
-	console.log("first", personalData);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const res = await axios.get(`http://44.199.61.81/politician/${userId}`);
-			setPersonalData(res.data);
-			console.log("res", res.data);
-		};
-		fetchData();
-	}, []);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const res = await axios.get(`http://44.199.61.81/politician/${userId}`);
+	// 		setPersonalData(res.data);
+	// 		console.log("res", res.data);
+	// 	};
+	// 	fetchData();
+	// }, []);
 
 	return (
 		<>
@@ -44,10 +61,7 @@ const Personal = () => {
 				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto ">
 					{/* {personalData.map((value) => ( */}
 					<>
-						<div
-							className="inset-0 flex items-center justify-end "
-							// key={personalData.id}
-						>
+						<div className="inset-0 flex items-center justify-end ">
 							{/* <button
 								type="button"
 								onClick={openModal}
@@ -58,7 +72,7 @@ const Personal = () => {
 							<button
 								onClick={() => (
 									// eslint-disable-next-line no-sequences
-									setOpenUpdate(true), setPersonalDetail(personalData)
+									setOpenUpdate(true), setPersonalDetail(personals)
 								)}
 								// onClick={() => (setOpenUpdate(true), setEventDetail(personalData))}
 								className="px-4 py-2 ml-4 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
@@ -80,50 +94,84 @@ const Personal = () => {
 										Personal Profile
 									</h3>
 
-									<div class="w-60 sm:w-4/12 pl-32">
+									<div className="pl-32 w-60 sm:w-4/12">
 										<img
 											src={`http://44.199.61.81/${
-												personalData.flag && personalData.flag.split("8000/")[1]
+												personals && personals.flag.split("8000/")[1]
 											}`}
 											alt="party flag"
-											class="shadow rounded-full h-28  align-middle border-none"
+											className="align-middle border-none rounded-full shadow h-28"
 										/>
 									</div>
 								</div>
-
-								<div className="relative flex-auto p-6">
-									<p className="my-4 text-lg leading-relaxed text-blueGray-500">
-										<div className="grid grid-cols-3">
-											<div className="col-span-1 pt-3">
-												<img
-													src={`http://44.199.61.81/${
-														personalData.profilePhoto &&
-														personalData.profilePhoto.split("8000/")[1]
-													}`}
-													alt="Louvre"
-													className="block object-cover object-center w-full h-full rounded-lg mr-5"
-													// onClick={() => setShowModal(true)}
-												/>
-											</div>
-											<div className="col-span-2 mx-5">
-												<div className=" flex">
-													<p className="mr-1">Name:{personalData.firstName}</p>
-													<p className="mr-1">{personalData.middleName}</p>
-													<p className="mr-1"> {personalData.lastName}</p>
-												</div>
-												<p>Age: {personalData.age}</p>
-												<p>Address: {personalData.address}</p>
-												<p>Education: {personalData.education}</p>
-												<p>
-													Political Party: {personalData.politicalBackground}
-												</p>
-												<p>Election Area: {personalData.electionArea}</p>
-												<p>Member Since: {personalData.memberSince}</p>
-												<p>Position in Party: {personalData.position}</p>
-											</div>
+								{loading ? (
+									<div className="w-[85px] m-auto">
+										<div className="justify-center animate-spin">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												className="feather feather-refresh-cw"
+											>
+												<polyline points="23 4 23 10 17 10"></polyline>
+												<polyline points="1 20 1 14 7 14"></polyline>
+												<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+											</svg>
 										</div>
-									</p>
-								</div>
+									</div>
+								) : (
+									<div className="relative flex-auto p-6">
+										<p className="my-4 text-lg leading-relaxed text-blueGray-500">
+											<div className="grid grid-cols-3">
+												<div className="col-span-1 pt-3">
+													<img
+														src={`http://44.199.61.81/${
+															personals &&
+															personals.profilePhoto.split("8000/")[1]
+														}`}
+														alt="Louvre"
+														className="block object-cover object-center w-full h-full mr-5 rounded-lg"
+														// onClick={() => setShowModal(true)}
+													/>
+												</div>
+												<div className="col-span-2 mx-5">
+													<div className="flex ">
+														<p className="mr-1">
+															Name:{personals && personals.firstName}
+														</p>
+														<p className="mr-1">
+															{personals && personals.middleName}
+														</p>
+														<p className="mr-1">
+															{" "}
+															{personals && personals.lastName}
+														</p>
+													</div>
+													<p>Age: {personals && personals.age}</p>
+													<p>Address: {personals && personals.address}</p>
+													<p>Education: {personals && personals.education}</p>
+													<p>
+														Political Party:{" "}
+														{personals && personals.politicalBackground}
+													</p>
+													<p>
+														Election Area: {personals && personals.electionArea}
+													</p>
+													<p>
+														Member Since: {personals && personals.memberSince}
+													</p>
+													<p>
+														Position in Party: {personals && personals.position}
+													</p>
+												</div>
+											</div>
+										</p>
+									</div>
+								)}
 							</div>
 							{/*body*/}
 						</div>

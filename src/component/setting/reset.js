@@ -1,47 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Sidebar from "../../sidebar";
 import Navbar from "../Dashboard/navbar";
+import { ADMINLOGIN_UPDATE_RESET } from "../../constants/AdminloginConstants";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAdminlogin } from "../../actions/AdminloginAction";
 
 const Reset = () => {
 	const [email, setEmail] = useState("");
 	const [oldpass, setOldpass] = useState("");
 	const [newpwd, setNewpwd] = useState("");
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const userId = localStorage.getItem("userId");
+	const adminloginUpdate = useSelector((state) => state.adminloginUpdate);
+	const { success: successUpdate } = adminloginUpdate;
+
+	useEffect(() => {
+		if (successUpdate) {
+			dispatch({ type: ADMINLOGIN_UPDATE_RESET });
+			setEmail("");
+			setOldpass("");
+			setNewpwd("");
+			navigate("/admin");
+		}
+	}, [successUpdate]);
+
+	const handleFormSubmit = async (e) => {
+		e.preventDefault();
+		dispatch(updateAdminlogin(userId, email, oldpass, newpwd));
+	};
 
 	// http://44.199.61.81/admin/reset-password
 
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
+	// const handleFormSubmit = (e) => {
+	// 	e.preventDefault();
 
-		var myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
+	// 	var myHeaders = new Headers();
+	// 	myHeaders.append("Content-Type", "application/json");
 
-		var raw = JSON.stringify({
-			email,
-			old_password: oldpass,
-			new_password: newpwd,
-		});
+	// 	var raw = JSON.stringify({
+	// 		email,
+	// 		old_password: oldpass,
+	// 		new_password: newpwd,
+	// 	});
 
-		var requestOptions = {
-			method: "PUT",
-			headers: myHeaders,
-			body: raw,
-			redirect: "follow",
-		};
+	// 	var requestOptions = {
+	// 		method: "PUT",
+	// 		headers: myHeaders,
+	// 		body: raw,
+	// 		redirect: "follow",
+	// 	};
 
-		fetch("http://44.199.61.81/admin/reset-password", requestOptions)
-			.then((response) => response.text())
-			.then((result) => {
-				console.log(result);
-				if (result) {
-					navigate("/");
-				} else if (result.non_field_errors[0]) {
-					alert("invalid id or password");
-				}
-			})
-			.catch((error) => console.log("error", error));
-	};
+	// 	fetch("http://44.199.61.81/admin/reset-password", requestOptions)
+	// 		.then((response) => response.text())
+	// 		.then((result) => {
+	// 			console.log(result);
+	// 			if (result) {
+	// 				navigate("/");
+	// 			} else if (result.non_field_errors[0]) {
+	// 				alert("invalid id or password");
+	// 			}
+	// 		})
+	// 		.catch((error) => console.log("error", error));
+	// };
 
 	return (
 		<>

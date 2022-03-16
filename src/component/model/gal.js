@@ -11,15 +11,15 @@ const Gal = ({ title, closeModal, isOpen }) => {
 	const gallaryAdd = useSelector((state) => state.gallaryAdd);
 	const { success: successAdd } = gallaryAdd;
 
-	const [des, setDes] = useState("");
 	const [pic, setPic] = useState();
+	const [des, setDes] = useState("");
 	// const [pid, setPid] = useState();
 	const userId = localStorage.getItem("userId");
 
-	let formData = new FormData();
-	formData.append("image", pic);
-	formData.append("description", des);
-	formData.append("owner", userId);
+	// let formData = new FormData();
+	// formData.append("image", pic);
+	// formData.append("description", des);
+	// formData.append("owner", userId);
 
 	// const handleSubmit = async (e) => {
 	// 	e.preventDefault();
@@ -36,7 +36,7 @@ const Gal = ({ title, closeModal, isOpen }) => {
 	// };
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(addGallary(formData, userId));
+		dispatch(addGallary(pic, des, userId));
 	};
 
 	useEffect(() => {

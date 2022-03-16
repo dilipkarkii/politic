@@ -4,23 +4,37 @@ import Gal from "../model/gal";
 import GalUpdate from "../update/Galupdate";
 import Navbartop from "./navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { listGallary } from "../../actions/GallaryAction";
+import { deleteGallary, listGallary } from "../../actions/GallaryAction";
+import {
+	GALLARY_DELETE_RESET,
+	GALLARY_UPDATE_RESET,
+} from "../../constants/GallaryConstants";
+import axios from "axios";
 
 const Gallary = () => {
 	const dispatch = useDispatch();
 	const gallaryList = useSelector((state) => state.gallaryList);
 	const { loading, success, gallarys } = gallaryList;
-	// const gallaryAdd = useSelector((state) => state.gallaryAdd);
-	// const { success: successAdd } = gallaryAdd;
+	const gallaryAdd = useSelector((state) => state.gallaryAdd);
+	const { success: successAdd } = gallaryAdd;
+	const gallaryDelete = useSelector((state) => state.gallaryDelete);
+	const { success: successDelete } = gallaryDelete;
+	const gallaryUpdate = useSelector((state) => state.gallaryUpdate);
+	const { success: successUpdate } = gallaryUpdate;
 
 	useEffect(() => {
 		dispatch(listGallary(userId));
-
-		// if (successAdd) {
-		// 	setIsOpen(false);
-		// 	setOpenUpdate(false);
-		// }
-	}, [dispatch]);
+		if (successDelete) {
+			dispatch({ type: GALLARY_DELETE_RESET });
+		}
+		if (successAdd || successUpdate) {
+			setIsOpen(false);
+			setOpenUpdate(false);
+		}
+		if (successUpdate) {
+			dispatch({ type: GALLARY_UPDATE_RESET });
+		}
+	}, [dispatch, successDelete, successAdd, successUpdate]);
 
 	let [isOpen, setIsOpen] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
@@ -58,12 +72,13 @@ const Gallary = () => {
 	// 	};
 	// 	fetchData();
 	// }, []);
-	// const onDelete = async (id) => {
-	// 	const { data } = await axios.delete(`http://44.199.61.81/gallery/${id}/`);
-	// 	if (data) {
-	// 		window.location.reload(true);
-	// 	}
-	// };
+	const onDelete = async (id) => {
+		// const { data } = await axios.delete(`http://44.199.61.81/gallery/${id}/`);
+		// if (data) {
+		// 	window.location.reload(true);
+		// }
+		dispatch(deleteGallary(id));
+	};
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -80,105 +95,123 @@ const Gallary = () => {
 						</button>
 					</div>
 					<Gal title="Add image" closeModal={closeModal} isOpen={isOpen} />
-					<div className="grid grid-cols-4 gap-4 mt-5">
-						{loading ? (
-							<h1 className="text-4xl">Loading</h1>
-						) : (
-							gallarys &&
-							gallarys.map((images) => (
-								<div className="" key={images.id}>
-									<div
-										className="relative max-w-xs bg-no-repeat bg-cover"
-										style={{ height: "200px", width: "265px" }}
-									>
-										<img
-											src={`http://44.199.61.81/${
-												images.image.split("8000/")[1]
-											}`}
-											alt="Louvre"
-											className="block object-cover object-center w-full h-full mr-5 rounded-lg"
-											// onClick={() => setShowModal(true)}
-										/>
-										{/* px-5 bottom-0 pt-20 text-center */}
-										<div className="absolute top-0 left-0 right-0 block w-full h-full text-sm font-semibold text-gray-900 transition duration-300 ease-in-out bg-fixed border-solid rounded-lg opacity-0 hover:opacity-70 border-1 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-											<button
-												className="hover:bg-red-900"
-												// onClick={() => onDelete(images.id)}
-											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													className="h-6 "
-													fill="none"
-													viewBox="0 0 24 24"
-													stroke="red"
-												>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth={2}
-														d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-													/>
-												</svg>
-											</button>
-											<button
-												className="mx-2 my-2 hover:bg-blue-900"
-												// eslint-disable-next-line no-sequences
-												onClick={() => (
-													setShowModal(true), setShowImage(images)
-												)}
-											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													class="h-6 w-6"
-													fill="none"
-													viewBox="0 0 24 24"
-													stroke="currentColor"
-													stroke-width="2"
-												>
-													<path
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-													/>
-													<path
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-													/>
-												</svg>
-											</button>
 
-											<button
-												className="mx-2 my-2 hover:bg-blue-900"
-												onClick={() => (
+					{loading ? (
+						<div className="w-[85px] m-auto">
+							<div className="justify-center animate-spin">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									className="feather feather-refresh-cw"
+								>
+									<polyline points="23 4 23 10 17 10"></polyline>
+									<polyline points="1 20 1 14 7 14"></polyline>
+									<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+								</svg>
+							</div>
+						</div>
+					) : (
+						<div className="grid grid-cols-4 gap-4 mt-5">
+							{gallarys &&
+								gallarys.map((images) => (
+									<div className="" key={images.id}>
+										<div
+											className="relative max-w-xs bg-no-repeat bg-cover"
+											style={{ height: "200px", width: "265px" }}
+										>
+											<img
+												src={`http://44.199.61.81/${
+													images.image.split("8000/")[1]
+												}`}
+												alt="Louvre"
+												className="block object-cover object-center w-full h-full mr-5 rounded-lg"
+												// onClick={() => setShowModal(true)}
+											/>
+											{/* px-5 bottom-0 pt-20 text-center */}
+											<div className="absolute top-0 left-0 right-0 block w-full h-full text-sm font-semibold text-gray-900 transition duration-300 ease-in-out bg-fixed border-solid rounded-lg opacity-0 hover:opacity-70 border-1 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+												<button
+													className="hover:bg-red-900"
+													onClick={() => onDelete(images.id)}
+												>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														className="h-6 "
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke="red"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth={2}
+															d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+														/>
+													</svg>
+												</button>
+												<button
+													className="mx-2 my-2 hover:bg-blue-900"
 													// eslint-disable-next-line no-sequences
-													setOpenUpdate(true), setGallaryDetail(images)
-												)}
-											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													className="w-5 h-5"
-													viewBox="0 0 20 20"
-													fill="blue"
+													onClick={() => (
+														setShowModal(true), setShowImage(images)
+													)}
 												>
-													<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-													<path
-														fillRule="evenodd"
-														d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-														clipRule="evenodd"
-													/>
-												</svg>
-											</button>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														class="h-6 w-6"
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke="currentColor"
+														stroke-width="2"
+													>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+														/>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+														/>
+													</svg>
+												</button>
 
-											<p className="bottom-0 px-5 pt-20 text-center">
-												{images.description}
-											</p>
+												<button
+													className="mx-2 my-2 hover:bg-blue-900"
+													onClick={() => (
+														// eslint-disable-next-line no-sequences
+														setOpenUpdate(true), setGallaryDetail(images)
+													)}
+												>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														className="w-5 h-5"
+														viewBox="0 0 20 20"
+														fill="blue"
+													>
+														<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+														<path
+															fillRule="evenodd"
+															d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+															clipRule="evenodd"
+														/>
+													</svg>
+												</button>
+
+												<p className="bottom-0 px-5 pt-20 text-center">
+													{images.description}
+												</p>
+											</div>
 										</div>
 									</div>
-								</div>
-							))
-						)}
-					</div>
+								))}
+						</div>
+					)}
 				</div>
 			</div>
 			<GalUpdate

@@ -10,7 +10,7 @@ const Detail = () => {
 	const [detail, setDetail] = useState();
 	const [titles, settitle] = useState();
 	let [postData, setPostData] = useState();
-	let [imgData, setImgData] = useState();
+	// let [imgData, setImgData] = useState();
 	console.log("details", detail);
 	const userId = localStorage.getItem("userId");
 
@@ -72,7 +72,7 @@ const Detail = () => {
 									{detail &&
 										detail.postimage_set.map((data) => (
 											<img
-												className="w-32 mt-5 h-"
+												className="w-32 mt-5 h-[450px]"
 												src={`http://44.199.61.81/${
 													data && data.image.split("8000/")[1]
 												}`}
@@ -82,11 +82,20 @@ const Detail = () => {
 										))}
 								</Slider>
 							</div>
-							<p className="text-justify text-black mt-8 ">
-								{detail && detail.description}
-								{/* <div dangerouslySetInnerHTML={{__html: '<p>First &middot; Second</p>'}}></div> */}
-
-							</p>
+							<div className="mt-8 text-justify text-black ">
+								{detail &&
+									detail.description
+										.split("\n\n")
+										.map((paragraph) => (
+											<p>
+												{paragraph
+													.split("\n")
+													.reduce((total, line) => [total, <br />, line])}
+											</p>
+										))}
+								{/* {detail && detail.description} */}
+								{/* <div dangerouslySetInnerHTML={detailparagraph()}></div> */}
+							</div>
 						</div>
 
 						<div className="gap-5">
@@ -110,6 +119,12 @@ const Detail = () => {
 								</div>
 							</div>
 						</div>
+					</div>
+					<hr className="mt-5 bg-gray-300" />
+
+					<div className="mt-5">
+						<h1 className="text-2xl font-bold">Discussion</h1>
+						
 					</div>
 				</div>
 			</div>

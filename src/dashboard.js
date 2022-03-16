@@ -4,11 +4,40 @@ import Navbar from "./component/Dashboard/navbar";
 import Create from "./component/setting/create";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { PERSONAL_DELETE_RESET } from "./constants/PersonalConstants";
+import { deletePersonal } from "./actions/PersonalAction";
 
 const Dashboard = () => {
 	let [isOpen, setIsOpen] = useState(false);
 	const [tabledata, setTabledata] = useState();
 	const navigate = useNavigate();
+	const personalAdd = useSelector((state) => state.personalAdd);
+	const { success: successAdd } = personalAdd;
+	const personalDelete = useSelector((state) => state.personalDelete);
+	const { success: successDelete } = personalDelete;
+	const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	dispatch(listGallary(userId));
+	// 	if (successDelete) {
+	// 		dispatch({ type: GALLARY_DELETE_RESET });
+	// 	}
+	// 	if (successAdd || successUpdate) {
+	// 		setIsOpen(false);
+	// 		setOpenUpdate(false);
+	// 	}
+	// 	if (successUpdate) {
+	// 		dispatch({ type: GALLARY_UPDATE_RESET });
+	// 	}
+	// }, [dispatch, successDelete, successAdd, successUpdate]);
+	useEffect(() => {
+		if (successAdd) {
+			setIsOpen(false);
+		}
+		if (successDelete) {
+			dispatch({ type: PERSONAL_DELETE_RESET });
+		}
+	}, [successAdd]);
 
 	function closeModal() {
 		setIsOpen(false);
@@ -25,7 +54,7 @@ const Dashboard = () => {
 			console.log(res);
 		};
 		fetchData();
-	}, []);
+	}, [successAdd, successDelete]);
 
 	const handleFormSubmit = async (id) => {
 		localStorage.setItem("userId", id);
@@ -34,7 +63,8 @@ const Dashboard = () => {
 	};
 
 	const onDelete = async (id) => {
-		await axios.delete(`http://44.199.61.81/politician/${id}/`);
+		dispatch(deletePersonal(id));
+		// await axios.delete(`http://44.199.61.81/politician/${id}/`);
 	};
 
 	return (
@@ -80,12 +110,12 @@ const Dashboard = () => {
 										<td className="mb-10">
 											<button
 												onClick={() => handleFormSubmit(data.id)}
-												className="inline-flex justify-center px-4 py-2  text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+												className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
 											>
 												Edit
 											</button>
 										</td>
-										<td className="mt-30 py-4">
+										<td className="py-4 mt-30">
 											<button
 												onClick={() => onDelete(data.id)}
 												className="hover:bg-red-900"

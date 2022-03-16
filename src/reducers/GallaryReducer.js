@@ -64,7 +64,7 @@ export const gallaryDeleteReducer = (state = {}, action) => {
 	}
 };
 
-export const gallaryListReducer = (state = { gallarys: [] }, action) => {
+export const gallaryListReducer = (state = {  }, action) => {
 	switch (action.type) {
 		case GALLARY_LIST_REQUEST:
 			return {
@@ -74,7 +74,7 @@ export const gallaryListReducer = (state = { gallarys: [] }, action) => {
 			return {
 				loading: false,
 				success: true,
-				gallary: action.payload,
+				gallarys: action.payload,
 			};
 		case GALLARY_LIST_FAIL:
 			return {

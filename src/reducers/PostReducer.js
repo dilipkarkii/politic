@@ -16,7 +16,7 @@ import {
 	POST_UPDATE_SUCCESS,
 } from "../constants/PostConstants";
 
-export const PpstAddReducer = (state = {}, action) => {
+export const PostAddReducer = (state = {}, action) => {
 	switch (action.type) {
 		case POST_ADD_REQUEST:
 			return {

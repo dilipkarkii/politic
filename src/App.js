@@ -24,6 +24,8 @@ import Login from "./login";
 import Sidebar from "./sidebar";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-toastify/dist/ReactToastify.css";
+import Feedback from "./component/client/Feedback";
 
 const App = () => {
 	return (
@@ -52,6 +54,7 @@ const App = () => {
 					<Route exact path="/dashpost" element={<DashPost />} />
 					<Route exact path="/changepassword" element={<PoliticChange />} />
 					<Route exact path="/admin" element={<AdminLogin />} />
+					<Route exact path="/feedback" element={<Feedback />} />
 				</Routes>
 			</BrowserRouter>
 		</>
