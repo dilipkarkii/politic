@@ -6,7 +6,7 @@ import { addGallary } from "../../actions/GallaryAction";
 import { GALLARY_ADD_RESET } from "../../constants/GallaryConstants";
 
 const Gal = ({ title, closeModal, isOpen }) => {
-	// const url = "http://44.199.61.81/gallery/";
+	// const url = "http://44.199.61.81:8080/gallery/";
 	const dispatch = useDispatch();
 	const gallaryAdd = useSelector((state) => state.gallaryAdd);
 	const { success: successAdd } = gallaryAdd;

@@ -39,9 +39,9 @@ const Plans = () => {
 
 	// useEffect(() => {
 	// 	const getFunction = async () => {
-	// 		// const res = await axios.get("http://44.199.61.81/plan-vision/");
+	// 		// const res = await axios.get("http://44.199.61.81:8080/plan-vision/");
 	// 		const { data } = await axios.get(
-	// 			`http://44.199.61.81/politician/${userId}/`
+	// 			`http://44.199.61.81:8080/politician/${userId}/`
 	// 		);
 	// 		setplanData(data.planandvision_set);
 	// 	};
@@ -50,7 +50,7 @@ const Plans = () => {
 	// }, []);
 
 	// const getData = () => {
-	// 	axios.get(`http://44.199.61.81/plan-vision/`).then((getData) => {
+	// 	axios.get(`http://44.199.61.81:8080/plan-vision/`).then((getData) => {
 	// 		setplanData(getData.data);
 	// 	});
 	// };
@@ -65,7 +65,7 @@ const Plans = () => {
 	// 		redirect: "follow",
 	// 	};
 
-	// 	fetch(`http://44.199.61.81/plan-vision/${id}/`, requestOptions)
+	// 	fetch(`http://44.199.61.81:8080/plan-vision/${id}/`, requestOptions)
 	// 		.then((response) => response.text())
 	// 		.then((result) =>
 	// 			// {

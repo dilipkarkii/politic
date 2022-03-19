@@ -31,7 +31,7 @@ const Reset = () => {
 		dispatch(updateAdminlogin(userId, email, oldpass, newpwd));
 	};
 
-	// http://44.199.61.81/admin/reset-password
+	// http://44.199.61.81:8080/admin/reset-password
 
 	// const handleFormSubmit = (e) => {
 	// 	e.preventDefault();
@@ -52,7 +52,7 @@ const Reset = () => {
 	// 		redirect: "follow",
 	// 	};
 
-	// 	fetch("http://44.199.61.81/admin/reset-password", requestOptions)
+	// 	fetch("http://44.199.61.81:8080/admin/reset-password", requestOptions)
 	// 		.then((response) => response.text())
 	// 		.then((result) => {
 	// 			console.log(result);

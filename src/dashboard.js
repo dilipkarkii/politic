@@ -47,7 +47,7 @@ const Dashboard = () => {
 	}
 	useEffect(() => {
 		const fetchData = async () => {
-			const res = await axios.get("http://44.199.61.81/politician/");
+			const res = await axios.get("http://44.199.61.81:8080/politician/");
 			// const data = res.json();
 			// console.log("data", data.data);
 			setTabledata(res.data);
@@ -64,7 +64,7 @@ const Dashboard = () => {
 
 	const onDelete = async (id) => {
 		dispatch(deletePersonal(id));
-		// await axios.delete(`http://44.199.61.81/politician/${id}/`);
+		// await axios.delete(`http://44.199.61.81:8080/politician/${id}/`);
 	};
 
 	return (

@@ -26,6 +26,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import Feedback from "./component/client/Feedback";
+// import { ProtectedRoute } from "./component/ProtectedRoute";
+// import AllRoutes from "./component/AllRoutes";
 
 const App = () => {
 	return (

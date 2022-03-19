@@ -66,14 +66,14 @@ const Gallary = () => {
 	// useEffect(() => {
 	// 	const fetchData = async () => {
 	// 		const { data } = await axios.get(
-	// 			`http://44.199.61.81/politician/${userId}/`
+	// 			`http://44.199.61.81:8080/politician/${userId}/`
 	// 		);
 	// 		setGallaryData(data.gallery_set);
 	// 	};
 	// 	fetchData();
 	// }, []);
 	const onDelete = async (id) => {
-		// const { data } = await axios.delete(`http://44.199.61.81/gallery/${id}/`);
+		// const { data } = await axios.delete(`http://44.199.61.81:8080/gallery/${id}/`);
 		// if (data) {
 		// 	window.location.reload(true);
 		// }
@@ -125,7 +125,7 @@ const Gallary = () => {
 											style={{ height: "200px", width: "265px" }}
 										>
 											<img
-												src={`http://44.199.61.81/${
+												src={`http://44.199.61.81:8080/${
 													images.image.split("8000/")[1]
 												}`}
 												alt="Louvre"
@@ -256,7 +256,7 @@ const Gallary = () => {
 									style={{ height: "500px", width: "900px" }}
 								>
 									<img
-										src={`http://44.199.61.81/${
+										src={`http://44.199.61.81:8080/${
 											showImage.image.split("8000/")[1]
 										}`}
 										alt="Louvre"

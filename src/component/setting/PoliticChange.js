@@ -40,7 +40,7 @@ const PoliticChange = () => {
 	// 		},
 	// 	};
 	// 	const { data } = await axios.put(
-	// 		`http://44.199.61.81/politician/reset-password`,
+	// 		`http://44.199.61.81:8080/politician/reset-password`,
 	// 		{ new_password: newpwd, old_password: oldpass, mobile },
 	// 		config
 	// 	);

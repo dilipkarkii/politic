@@ -111,7 +111,7 @@ export const updateGallary =
 			formData.append("image", image);
 			formData.append("owner", owner);
 			const { data } = await axios.put(
-				`http://44.199.61.81/gallery/${id}/`,
+				`http://44.199.61.81:8080/gallery/${id}/`,
 				formData,
 				config
 			);

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../actions/PostAction";
 import { addPostImage } from "../../actions/PostImageAction";
+import { POST_ADD_RESET } from "../../constants/PostConstants";
 
 const Posts = ({ title, closeModal, isOpen }) => {
 	const dispatch = useDispatch();
@@ -19,6 +20,13 @@ const Posts = ({ title, closeModal, isOpen }) => {
 
 	console.log("posts", posts);
 
+	useEffect(() => {
+		if (successPost) {
+			dispatch({ type: POST_ADD_RESET });
+			setTitle("");
+			setDescription("");
+		}
+	}, [successPost]);
 	const handleSubmission = async (e) => {
 		e.preventDefault();
 		console.log("first");
@@ -36,7 +44,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 		// 	redirect: "follow",
 		// };
 
-		// fetch("http://44.199.61.81/create_post_image/", requestOptions)
+		// fetch("http://44.199.61.81:8080/create_post_image/", requestOptions)
 		// 	.then((response) => response.text())
 		// 	.then((result) => {
 		// 		if (result) {
@@ -56,7 +64,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 		// 		type: "formData",
 		// 	},
 		// };
-		// const { data } = await axios.post("http://44.199.61.81/create_post/", {
+		// const { data } = await axios.post("http://44.199.61.81:8080/create_post/", {
 		// 	title: Title,
 		// 	description,
 		// 	posted_by: userId,

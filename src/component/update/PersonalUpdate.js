@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updatePersonal } from "../../actions/PersonalAction";
 
 const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
-	// const url = "http://44.199.61.81/posts/";
+	// const url = "http://44.199.61.81:8080/posts/";
 	const userId = localStorage.getItem("userId");
 	const [fname, setFname] = useState();
 	// const [upass, setUpass] = useState("");
@@ -112,7 +112,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 	// 		},
 	// 	};
 	// 	const { data } = await axios.put(
-	// 		`http://44.199.61.81/politician/${personalDetail.id}/`,
+	// 		`http://44.199.61.81:8080/politician/${personalDetail.id}/`,
 	// 		{
 	// 			firstName: fname,
 	// 			lastName: lname,

@@ -63,7 +63,7 @@ const Post = () => {
 		// 	body: raw,
 		// 	redirect: "follow",
 		// };
-		// fetch(`http://44.199.61.81/create_post/${id}/`, requestOptions)
+		// fetch(`http://44.199.61.81:8080/create_post/${id}/`, requestOptions)
 		// 	.then((response) => response.text())
 		// 	.then((result) => console.log(result))
 		// 	.catch((error) => console.log("error", error));
@@ -93,7 +93,7 @@ const Post = () => {
 									>
 										<img
 											className="w-full h-32 rounded-t-lg"
-											src={`http://44.199.61.81/${
+											src={`http://44.199.61.81:8080/${
 												data.postimage_set[0].image.split("8000/")[1]
 											}`}
 											alt=""
@@ -101,7 +101,7 @@ const Post = () => {
 
 										<div className="p-5">
 											<h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-												{data.title}
+												{data.title.slice(0, 30)}
 											</h5>
 
 											<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">

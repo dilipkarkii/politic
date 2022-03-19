@@ -22,7 +22,7 @@ const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 	// 	console.log(cont);
 
 	// 	const { data } = await axios.put(
-	// 		`http://44.199.61.81/contribution/${contriDetail.id}/`,
+	// 		`http://44.199.61.81:8080/contribution/${contriDetail.id}/`,
 	// 		{
 	// 			contributions: cont,
 	// 			politician: userId,
@@ -32,11 +32,11 @@ const ContriUpdate = ({ title, closeModal, isOpen, contriDetail }) => {
 	// 		window.location.reload(true);
 	// 	}
 	// };
-const handleSubmit = async (e) => {
-	e.preventDefault();
-	dispatch(updateContribution(contriDetail.id, cont, userId));
-};
-	
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		dispatch(updateContribution(contriDetail.id, cont, userId));
+	};
+
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>

@@ -19,7 +19,7 @@ const Contribution = ({ title, closeModal, isOpen }) => {
 	// 	e.preventDefault();
 	// 	console.log(achiv, award, cont);
 	// const { data } = await axios.post(
-	// 	`http://44.199.61.81/contribution/`,
+	// 	`http://44.199.61.81:8080/contribution/`,
 	// 	{
 	// 		contributions: cont,
 	// 		politician: userId,

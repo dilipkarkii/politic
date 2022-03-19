@@ -47,7 +47,7 @@ const Personal = () => {
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {
-	// 		const res = await axios.get(`http://44.199.61.81/politician/${userId}`);
+	// 		const res = await axios.get(`http://44.199.61.81:8080/politician/${userId}`);
 	// 		setPersonalData(res.data);
 	// 		console.log("res", res.data);
 	// 	};
@@ -96,7 +96,7 @@ const Personal = () => {
 
 									<div className="pl-32 w-60 sm:w-4/12">
 										<img
-											src={`http://44.199.61.81/${
+											src={`http://44.199.61.81:8080/${
 												personals && personals.flag.split("8000/")[1]
 											}`}
 											alt="party flag"
@@ -129,7 +129,7 @@ const Personal = () => {
 											<div className="grid grid-cols-3">
 												<div className="col-span-1 pt-3">
 													<img
-														src={`http://44.199.61.81/${
+														src={`http://44.199.61.81:8080/${
 															personals &&
 															personals.profilePhoto.split("8000/")[1]
 														}`}

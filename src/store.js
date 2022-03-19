@@ -64,12 +64,15 @@ import {
 	adminloginUpdateReducer,
 } from "./reducers/AdminloginReducer";
 
-// import {
-// 	postListReducer,
-// 	postAddReducer,
-// 	postDeleteReducer,
-// 	postUpdateReducer,
-// } from "./reducers/PostReducer";
+import {
+	commentListReducer,
+	commentAddReducer,
+	commentDeleteReducer,
+	commentUpdateReducer,
+	replyListReducer,
+	postcommentListReducer,
+	postreplyListReducer,
+} from "./reducers/CommentReducer";
 
 import {
 	PostAddReducer,
@@ -150,6 +153,17 @@ const reducer = combineReducers({
 	postImageAdd: PostImageAddReducer,
 	postImageDelete: PostImageDeleteReducer,
 	postImageUpdate: PostImageUpdateReducer,
+
+	//login
+	commentList: commentListReducer,
+	commentAdd: commentAddReducer,
+	commentDelete: commentDeleteReducer,
+	commentUpdate: commentUpdateReducer,
+	replyList: replyListReducer,
+
+	postcommentList: postcommentListReducer,
+
+	postreplyList: postreplyListReducer,
 });
 const initialState = {};
 const middleware = [thunk];

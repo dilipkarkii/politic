@@ -127,7 +127,7 @@ const Events = () => {
 										<div className="py-5 bg-white mx-52 sm:grid sm:px-6">
 											<dd className="object-center mt-1 text-sm text-gray-900 sm:mt-0 ">
 												<img
-													src={`http://44.199.61.81/${
+													src={`http://44.199.61.81:8080/${
 														value.image.split("8000/")[1]
 													}`}
 													alt="Louvre"

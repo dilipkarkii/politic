@@ -32,7 +32,7 @@ const Home = () => {
 	// useEffect(() => {
 	// 	const fetchData = async () => {
 	// 		const { data } = await axios.get(
-	// 			`http://44.199.61.81/politician/${userId}/`
+	// 			`http://44.199.61.81:8080/politician/${userId}/`
 	// 		);
 	// 		setGallaryData(data.gallery_set);
 	// 	};
@@ -42,7 +42,7 @@ const Home = () => {
 	// useEffect(() => {
 	// 	const fetchData = async () => {
 	// 		const { data } = await axios.get(
-	// 			`http://44.199.61.81/politician/${userId}/`
+	// 			`http://44.199.61.81:8080/politician/${userId}/`
 	// 		);
 	// 		console.log("data", data.post_set);
 	// 		setPostData(data.post_set);
@@ -100,7 +100,7 @@ const Home = () => {
 											style={{ height: "200px", width: "265px" }}
 										>
 											<img
-												src={`http://44.199.61.81/${
+												src={`http://44.199.61.81:8080/${
 													images.image.split("8000/")[1]
 												}`}
 												alt="Louvre"
@@ -126,7 +126,7 @@ const Home = () => {
 									style={{ height: "200px", width: "265px" }}
 								>
 									<img
-										src={`http://44.199.61.81/${datas.image.split("8000/")[1]}`}
+										src={`http://44.199.61.81:8080/${datas.image.split("8000/")[1]}`}
 										alt="Louvre"
 										className="block object-cover object-center w-full h-full rounded-lg"
 									/>
@@ -180,7 +180,7 @@ const Home = () => {
 									<div className="max-w-sm border border-gray-100 rounded-lg shadow-md bg-red-50 dark:bg-red-50 dark:border-gray-700">
 										<img
 											className="w-full h-32 rounded-t-lg"
-											src={`http://44.199.61.81/${
+											src={`http://44.199.61.81:8080/${
 												data.postimage_set[0].image.split("8000/")[1]
 											}`}
 											alt=""

@@ -34,7 +34,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 	// 	formData.append("image", pic);
 	// 	formData.append("owner", userId);
 	// 	const { data } = await axios.put(
-	// 		`http://44.199.61.81/gallery/${gallaryDetail.id}/`,
+	// 		`http://44.199.61.81:8080/gallery/${gallaryDetail.id}/`,
 	// 		formData,
 	// 		config
 	// 	);

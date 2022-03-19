@@ -36,7 +36,7 @@ const PlanUpdate = ({ title, closeModal, isOpen, planDetail }) => {
 	// 		redirect: "follow",
 	// 	};
 
-	// 	fetch(`http://44.199.61.81/plan-vision/${planDetail.id}/`, requestOptions)
+	// 	fetch(`http://44.199.61.81:8080/plan-vision/${planDetail.id}/`, requestOptions)
 	// 		.then((response) => response.text())
 	// 		.then((result) => {
 	// 			if (result) {

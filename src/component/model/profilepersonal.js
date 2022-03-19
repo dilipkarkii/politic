@@ -3,7 +3,7 @@ import Modelwrapper from "./modelwrapper";
 import axios from "axios";
 
 const PersonalProfile = ({ title, closeModal, isOpen }) => {
-	const url = "http://44.199.61.81/politician/";
+	const url = "http://44.199.61.81:8080/politician/";
 
 	const [pname, setPname] = useState();
 	const [age, setAge] = useState("");
@@ -23,20 +23,20 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 		// 		Accept: "application/json",
 		// 	},
 		// };
-	const { data } = await axios.post(
-		url,
-		{
-			firstname: pname,
-			age,
-			address,
-			education: edu,
-			politicalBackground: party,
-			electionArea: area,
-			memberSince: member,
-			position: pos,
-		}
-		// config
-	);
+		const { data } = await axios.post(
+			url,
+			{
+				firstname: pname,
+				age,
+				address,
+				education: edu,
+				politicalBackground: party,
+				electionArea: area,
+				memberSince: member,
+				position: pos,
+			}
+			// config
+		);
 		if (data) {
 			window.location.reload(true);
 		}
