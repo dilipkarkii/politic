@@ -16,7 +16,8 @@ const Detail = () => {
 	const [comment, setComment] = useState();
 	// let [imgData, setImgData] = useState();
 	console.log("details", detail);
-	const userId = localStorage.getItem("userId");
+ const getuserId = localStorage.getItem("userId");
+ const userId = JSON.parse(getuserId).id;
 	const dispatch = useDispatch();
 
 	const postcommentList = useSelector((state) => state.postcommentList);
