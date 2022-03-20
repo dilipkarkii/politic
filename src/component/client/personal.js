@@ -101,7 +101,7 @@ const Personal = () => {
                         personals && personals.flag.split("8000/")[1]
                       }`}
                       alt="party flag"
-                      className="align-middle border-none rounded-full shadow w-full h-full"
+                      className="w-full h-full align-middle border-none rounded-full shadow"
                     />
                   </div>
                 </div>
@@ -127,7 +127,7 @@ const Personal = () => {
                 ) : (
                   <div className="relative flex-auto p-6">
                     <p className="my-4 text-lg leading-relaxed text-blueGray-500">
-                      <div className="grid md:grid-cols-3 gap-4">
+                      <div className="grid gap-4 md:grid-cols-3">
                         <div className="md:col-span-1">
                           <img
                             src={`http://44.199.61.81:8080/${

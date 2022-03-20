@@ -16,8 +16,8 @@ const Detail = () => {
 	const [comment, setComment] = useState();
 	// let [imgData, setImgData] = useState();
 	console.log("details", detail);
- const getuserId = localStorage.getItem("userId");
- const userId = JSON.parse(getuserId).id;
+	const getuserId = localStorage.getItem("userId");
+	const userId = JSON.parse(getuserId).id;
 	const dispatch = useDispatch();
 
 	const postcommentList = useSelector((state) => state.postcommentList);
@@ -142,11 +142,95 @@ const Detail = () => {
 						{postcomments &&
 							postcomments.map((data) => (
 								<>
-									<div>
-										<h1 className="  bg-[#f1f1f1] px-4 py-3 border-2 mt-3 ">
+									<div className="grid grid-cols-12 mt-3">
+										{/* <div className="flex justify-between"> */}
+										<div className="flex justify-start col-span-2 mt-3 ml-4">
+											<img
+												src={`http://44.199.61.81:8080/${
+													data.user_profile &&
+													data.user_profile.split("8000/")[1]
+												}`}
+												alt="user profile"
+												className="w-12 h-12 align-middle border-none rounded-full shadow"
+											/>
+											<h1 className="mt-3 ml-3 italic text-blue-500">
+												{data.user_firstname === null
+													? `aynonomous`
+													: data.user_firstname}
+												: {">"}
+											</h1>
+										</div>
+										<h1 className=" col-span-9 bg-[#f1f1f1] px-4 py-3 border-2 mt-3 ">
 											{data.comments}
 										</h1>
+										<button className="col-span-1 mt-3 ml-5">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+												stroke-width="2"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+												/>
+											</svg>
+										</button>
 									</div>
+									<>
+										{data.replyoncomments_set &&
+											data.replyoncomments_set.map((value) => (
+												<div className="mt-1">
+													<div
+														className="grid grid-cols-12 "
+														style={{ marginLeft: "40px" }}
+													>
+														{/* <div className="flex justify-between"> */}
+														<div className="flex justify-start col-span-2 mt-3 ml-4 ">
+															<img
+																src={`http://44.199.61.81:8080/${
+																	value.user_profile &&
+																	value.user_profile.split("8000/")[1]
+																}`}
+																alt="user profile"
+																className="w-12 h-12 align-middle border-none rounded-full shadow"
+															/>
+															<h1 className="mt-3 ml-5 italic text-blue-500">
+																{value.user_firstname === null
+																	? `aynonomous`
+																	: value.user_firstname}
+																:--- {">"}
+															</h1>
+														</div>
+														<h1 className=" col-span-9 bg-[#f1f1f1] px-4 py-3 border-2 mt-3 ">
+															{value.reply_text}
+														</h1>
+														<button className="col-span-1 mt-3 ml-5">
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																class="h-6 w-6"
+																fill="none"
+																viewBox="0 0 24 24"
+																stroke="currentColor"
+																stroke-width="2"
+															>
+																<path
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+																/>
+															</svg>
+														</button>
+													</div>
+												</div>
+											))}
+
+										{/* </div> */}
+									</>
+									{/* </div> */}
 								</>
 							))}
 					</div>

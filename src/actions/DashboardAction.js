@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import { baseUrl } from "../constant";
 
-export const addDASHBOARD =
+export const addDashboard =
 	(
 		firstName,
 		middleName,
@@ -83,7 +83,7 @@ export const addDASHBOARD =
 		}
 	};
 
-export const listDASHBOARD = (id) => async (dispatch) => {
+export const listDashboard = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: DASHBOARD_LIST_REQUEST });
 		const config = {
@@ -91,7 +91,7 @@ export const listDASHBOARD = (id) => async (dispatch) => {
 				"Content-Type": "application/json",
 			},
 		};
-		const { data } = await axios.get(`${baseUrl}politician/${id}/`, config);
+		const { data } = await axios.get(`${baseUrl}politician/`, config);
 		console.log("data", data);
 		dispatch({
 			type: DASHBOARD_LIST_SUCCESS,
@@ -107,7 +107,7 @@ export const listDASHBOARD = (id) => async (dispatch) => {
 		});
 	}
 };
-export const deleteDASHBOARD = (id) => async (dispatch) => {
+export const deleteDashboard = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: DASHBOARD_DELETE_REQUEST });
 		const config = {
@@ -132,7 +132,7 @@ export const deleteDASHBOARD = (id) => async (dispatch) => {
 	}
 };
 
-export const updateDASHBOARD =
+export const updateDashboard =
 	(
 		id,
 		firstName,

@@ -82,6 +82,13 @@ import {
 } from "./reducers/PostReducer";
 
 import {
+	dashboardAddReducer,
+	dashboardDeleteReducer,
+	dashboardListReducer,
+	dashboardUpdateReducer,
+} from "./reducers/DashboardReducer";
+
+import {
 	PostImageListReducer,
 	PostImageAddReducer,
 	PostImageDeleteReducer,
@@ -142,17 +149,23 @@ const reducer = combineReducers({
 	adminloginDelete: adminloginDeleteReducer,
 	adminloginUpdate: adminloginUpdateReducer,
 
-	//login
+	//post
 	postList: PostListReducer,
 	postAdd: PostAddReducer,
 	postDelete: PostDeleteReducer,
 	postUpdate: PostUpdateReducer,
 
-	//login
+	//postImage
 	postImageList: PostImageListReducer,
 	postImageAdd: PostImageAddReducer,
 	postImageDelete: PostImageDeleteReducer,
 	postImageUpdate: PostImageUpdateReducer,
+
+	//dashboard
+	dashboardList: dashboardListReducer,
+	dashboardAdd: dashboardAddReducer,
+	dashboardDelete: dashboardDeleteReducer,
+	dashboardUpdate: dashboardUpdateReducer,
 
 	//login
 	commentList: commentListReducer,
