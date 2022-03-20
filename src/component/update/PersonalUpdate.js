@@ -6,7 +6,8 @@ import { updatePersonal } from "../../actions/PersonalAction";
 
 const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 	// const url = "http://44.199.61.81:8080/posts/";
-	const userId = localStorage.getItem("userId");
+	 const getuserId = localStorage.getItem("userId");
+   const userId = JSON.parse(getuserId).id;
 	const [fname, setFname] = useState();
 	// const [upass, setUpass] = useState("");
 	const [uname, setUname] = useState("");
