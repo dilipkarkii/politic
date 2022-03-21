@@ -19,7 +19,7 @@ import { POSTIMAGE_UPDATE_SUCCESS } from "../constants/PostImageConstants";
 import { addPostImage } from "./PostImageAction";
 
 export const addPost =
-	(title, description, posted_by, image) => async (dispatch) => {
+	(title, description, link, posted_by, image) => async (dispatch) => {
 		try {
 			dispatch({ type: POST_ADD_REQUEST });
 			const config = {
@@ -32,6 +32,7 @@ export const addPost =
 				{
 					title,
 					description,
+					link,
 					posted_by,
 				},
 				config
@@ -123,7 +124,7 @@ export const deletePost = (id) => async (dispatch) => {
 };
 
 export const updatePost =
-	(title, description, image, post_id, posted_by) => async (dispatch) => {
+	(title, description, link, image, post_id, posted_by) => async (dispatch) => {
 		try {
 			dispatch({ type: POST_UPDATE_REQUEST });
 			const config = {
@@ -136,7 +137,7 @@ export const updatePost =
 				{
 					title,
 					description,
-
+					link,
 					posted_by,
 				},
 				config

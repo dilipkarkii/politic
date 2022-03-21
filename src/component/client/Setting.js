@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Setting() {
 	const navigate = useNavigate();
 	const handleLogout = () => {
-		localStorage.removeItem("userId");
+		localStorage.removeItem("isAdmin");
 		navigate("/");
 	};
 	return (

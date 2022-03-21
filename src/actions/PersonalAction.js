@@ -148,8 +148,8 @@ export const updatePersonal =
 		slogan,
 		politicalBackground,
 		description,
-		flag,
-		profilePhoto,
+		// flag,
+		// profilePhoto,
 		memberSince,
 		id
 	) =>
@@ -177,8 +177,8 @@ export const updatePersonal =
 			formData.append("slogan", slogan);
 			formData.append("politicalBackground", politicalBackground);
 			formData.append("description", description);
-			formData.append("flag", flag);
-			formData.append("profilePhoto", profilePhoto);
+			// formData.append("flag", flag);
+			// formData.append("profilePhoto", profilePhoto);
 			formData.append("memberSince", memberSince);
 			const { data } = await axios.patch(
 				`${baseUrl}politician/${id}/`,

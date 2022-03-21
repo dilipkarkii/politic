@@ -108,6 +108,10 @@ const Detail = () => {
 													.reduce((total, line) => [total, <br />, line])}
 											</p>
 										))}
+								<h1 className="mt-6 text-blue-500 ">
+									LINK:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									{detail && detail.link}
+								</h1>
 								{/* {detail && detail.description} */}
 								{/* <div dangerouslySetInnerHTML={detailparagraph()}></div> */}
 							</div>
@@ -124,8 +128,11 @@ const Detail = () => {
 												<div className="mt-4">
 													<Link to={`/detail/${data.id}`}>
 														<p className="text-xl underline text-cyan-500 hover:text-blue-900 ">
-															{data.title.slice(0, 50)}
+															{data.title.length > 40
+																? data.title.substring(0, 40) + "..."
+																: data.title}
 														</p>
+
 														<hr className="mt-3 border-black" />
 													</Link>
 												</div>
@@ -146,10 +153,14 @@ const Detail = () => {
 										{/* <div className="flex justify-between"> */}
 										<div className="flex justify-start col-span-2 mt-3 ml-4">
 											<img
-												src={`http://44.199.61.81:8080/${
-													data.user_profile &&
-													data.user_profile.split("8000/")[1]
-												}`}
+												src={
+													data.user_profile === null
+														? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
+														: `http://44.199.61.81:8080/${
+																data.user_profile &&
+																data.user_profile.split("8000/")[1]
+														  }`
+												}
 												alt="user profile"
 												className="w-12 h-12 align-middle border-none rounded-full shadow"
 											/>

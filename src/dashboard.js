@@ -109,17 +109,17 @@ const Dashboard = () => {
 						</thead>
 						<tbody className="border-b border-black">
 							{loading ? (
-								<div class="w-[85px] m-auto">
-									<div class=" animate-spin justify-center  ">
+								<div className="w-[85px] m-auto">
+									<div className="justify-center animate-spin">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											viewBox="0 0 24 24"
 											fill="none"
 											stroke="currentColor"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											class="feather feather-refresh-cw"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											className="feather feather-refresh-cw"
 										>
 											<polyline points="23 4 23 10 17 10"></polyline>
 											<polyline points="1 20 1 14 7 14"></polyline>

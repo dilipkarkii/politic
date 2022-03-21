@@ -69,8 +69,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 				slogan,
 				party,
 				description,
-				flag,
-				photo,
+				// flag,
+				// photo,
 				member,
 				userId
 			)
@@ -336,33 +336,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
-				<div className="mt-4">
-					<label className="block text-sm font-medium text-gray-700">
-						Flag{" "}
-					</label>
-					<input
-						onChange={(e) => setFlag(e.target.files[0])}
-						id="flag"
-						// value={flag}
-						// placeholder="About"
-						type="file"
-						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
-				</div>
-				<div className="mt-4">
-					<label className="block text-sm font-medium text-gray-700">
-						Photo
-					</label>
-					<input
-						onChange={(e) => setPhoto(e.target.files[0])}
-						accept="image/png, image/jpg, image/jpeg"
-						id="poto"
-						// value={photo}
-						// placeholder="photo"
-						type="file"
-						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
-				</div>
+				{/* <div className="mt-4">s */}
 				<div className="mt-5 ">
 					<button
 						type="submit"

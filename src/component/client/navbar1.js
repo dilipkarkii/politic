@@ -64,15 +64,7 @@ const Navbartop = () => {
             </div>
             {/* <!-- secondary nav --> */}
             <div className="items-center hidden space-x-1 md:flex">
-              {/* <Link to="/">
-
-							<p
-							
-							className="px-3 py-2 text-sm text-white transition duration-300 bg-yellow-400 rounded hover:bg-yellow-300 hover:text-yellow-800"
-							>
-								Login 
-							</p>
-								</Link> */}
+              
               <Setting />
             </div>
             {/* <!-- mobile button goes here --> */}

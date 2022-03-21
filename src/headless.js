@@ -2,8 +2,14 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Example() {
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		localStorage.removeItem("userId");
+		navigate("/");
+	};
 	return (
 		<>
 			<Menu as="div" className="relative inline-block bg-teal-500 ">
@@ -77,10 +83,11 @@ export default function Example() {
               </Link> */}
 						</div>
 						<div className="px-1 py-1">
-							<Link to="/">
+							<Link to="/admin">
 								<Menu.Item>
 									{({ active }) => (
 										<button
+											onClick={handleLogout}
 											className={`${
 												active ? "bg-violet-500 text-white" : "text-gray-900"
 											} group flex rounded-md items-center w-full px-2 py-2 text-sm`}

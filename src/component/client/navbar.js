@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
+import Setting from "./Setting";
 // import { useNavigate } from "react-router-dom";
 
 const user = {
@@ -55,7 +56,7 @@ export default function Navbar() {
 										<h1 className="text-xl font-bold">Politican</h1>
 									</div>
 									<div className="hidden md:block">
-										<div className="flex items-baseline ml-10 space-x-4">
+										<div className="flex items-baseline justify-between ml-10 space-x-4">
 											{navigation.map((item) => (
 												<Link
 													key={item.name}
@@ -71,6 +72,9 @@ export default function Navbar() {
 											))}
 										</div>
 									</div>
+								</div>
+								<div className="items-center hidden space-x-1 md:flex">
+									<Setting />
 								</div>
 								{userId && (
 									<div className="hidden md:block">

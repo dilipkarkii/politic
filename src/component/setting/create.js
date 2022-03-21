@@ -168,7 +168,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						lastname
+						Lastname
 					</label>
 					<input
 						type="text"
@@ -208,7 +208,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						email
+						Email
 					</label>
 					<input
 						onChange={(e) => setEmail(e.target.value)}
@@ -258,7 +258,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						slogan
+						Slogan
 					</label>
 					<input
 						type="text"
@@ -331,7 +331,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="description"
 						value={description}
 						placeholder="About"
-						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm h-44 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
@@ -363,10 +363,10 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-5 ">
 					<label className="block text-sm font-medium text-gray-700">
-						password
+						Password
 					</label>
 					<input
-						clasName="resize-y rounded-md border-2 border-slate-900 w-full h-16 px-3 py-1 placeholder:text-black"
+						className="w-full h-16 px-3 py-1 border-2 rounded-md resize-y border-slate-900 placeholder:text-black"
 						onChange={(e) => setUpass(e.target.value)}
 						id="password	"
 						value={upass}
