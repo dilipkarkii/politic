@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Posts from "../model/posts";
@@ -75,7 +74,7 @@ const Post = () => {
         <Navbartop />
         <div className="max-w-6xl p-3 px-4 py-20 mx-auto bg-slate-300">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="font-bold text-2xl">Posts</h1>
+            <h1 className="text-2xl font-bold">Posts</h1>
             <button
               type="button"
               onClick={openModal}
@@ -84,7 +83,7 @@ const Post = () => {
               {"Add posts"}
             </button>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 ">
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 ">
             {posts &&
               posts.map((data) => (
                 <div
@@ -99,7 +98,7 @@ const Post = () => {
                     alt=""
                   />
 
-                  <div className="py-4 px-4">
+                  <div className="px-4 py-4">
                     <h5 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
                       {/* {data.title.slice(0, 30)} */}
                       {data.title.length > 24

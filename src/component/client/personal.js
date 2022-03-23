@@ -148,7 +148,6 @@ const Personal = () => {
 															{personals && personals.middleName}
 														</p>
 														<p className="mr-1">
-															{" "}
 															{personals && personals.lastName}
 														</p>
 													</div>
@@ -156,7 +155,7 @@ const Personal = () => {
 													<p>Address: {personals && personals.address}</p>
 													<p>Education: {personals && personals.education}</p>
 													<p>
-														Political Party:{" "}
+														Political Party:
 														{personals && personals.politicalBackground}
 													</p>
 													<p>

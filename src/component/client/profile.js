@@ -222,15 +222,15 @@ const Profile = () => {
 									</div>
 								) : (
 									achivements &&
-									achivements.map((value, i) => (
+									achivements.slice(0, 3).map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
 											key={value.id}
 										>
-											<dt className="text-sm font-medium text-gray-500 ">
+											{/* <dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
-											</dt>
+											</dt> */}
 											<dd className="mt-1 ml-10 text-sm text-justify text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.achievements}
 											</dd>
@@ -290,15 +290,15 @@ const Profile = () => {
 									</div>
 								) : (
 									awards &&
-									awards.map((value, i) => (
+									awards.slice(0, 3).map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
 											key={value.id}
 										>
-											<dt className="text-sm font-medium text-gray-500 ">
+											{/* <dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
-											</dt>
+											</dt> */}
 											<dd className="mt-1 ml-10 text-sm text-justify text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.awards}
 											</dd>
@@ -358,15 +358,15 @@ const Profile = () => {
 									</div>
 								) : (
 									contributions &&
-									contributions.map((value, i) => (
+									contributions.slice(0, 3).map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
 											key={value.id}
 										>
-											<dt className="text-sm font-medium text-gray-500 ">
+											{/* <dt className="text-sm font-medium text-gray-500 ">
 												{i + 1}
-											</dt>
+											</dt> */}
 											<dd className="mt-1 ml-10 text-sm text-justify text-gray-900 sm:mt-0 sm:col-span-2">
 												{value.contributions}
 											</dd>

@@ -27,215 +27,225 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import Feedback from "./component/client/Feedback";
 import {
-  AdminProtectedRoute,
-  ProtectedRoute,
+	AdminProtectedRoute,
+	ProtectedRoute,
 } from "./component/ProtectedRoute";
+import EventHome from "./component/client/eventHome";
 
 const App = () => {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashboard"
-            element={
-              <AdminProtectedRoute>
-                <Dashboard />
-              </AdminProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/sidebar"
-            element={
-              <ProtectedRoute>
-                <Sidebar />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/change"
-            element={
-              <ProtectedRoute>
-                <Change />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/reset"
-            element={
-              <ProtectedRoute>
-                <Reset />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/createuser"
-            element={
-              <ProtectedRoute>
-                <Createuser />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/gallary"
-            element={
-              <ProtectedRoute>
-                <Gallary />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/event"
-            element={
-              <ProtectedRoute>
-                <Events />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/plans"
-            element={
-              <ProtectedRoute>
-                <Plans />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/post"
-            element={
-              <ProtectedRoute>
-                <Post />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/detail/:id"
-            element={
-              <ProtectedRoute>
-                <Detail />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashpersonal"
-            element={
-              <ProtectedRoute>
-                <Dashgall />
-                <DashPersonal />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashgallary"
-            element={<ProtectedRoute></ProtectedRoute>}
-          />
-          <Route
-            exact
-            path="/dashprofile"
-            element={
-              <ProtectedRoute>
-                <Dashprofile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashevent"
-            element={
-              <ProtectedRoute>
-                <DashEvent />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashplan"
-            element={
-              <ProtectedRoute>
-                <Dashplan />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/personal"
-            element={
-              <ProtectedRoute>
-                <Personal />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/dashpost"
-            element={
-              <ProtectedRoute>
-                <DashPost />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/changepassword"
-            element={
-              <ProtectedRoute>
-                <PoliticChange />
-              </ProtectedRoute>
-            }
-          />
-          <Route exact path="/admin" element={<AdminLogin />} />
-          <Route
-            exact
-            path="/feedback"
-            element={
-              <ProtectedRoute>
-                <Feedback />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+	return (
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route exact path="/" element={<Login />} />
+					<Route
+						path="/home"
+						element={
+							<ProtectedRoute>
+								<Home />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/dashboard"
+						element={
+							<AdminProtectedRoute>
+								<Dashboard />
+							</AdminProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/sidebar"
+						element={
+							<ProtectedRoute>
+								<Sidebar />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/change"
+						element={
+							<ProtectedRoute>
+								<Change />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/reset"
+						element={
+							<ProtectedRoute>
+								<Reset />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/createuser"
+						element={
+							<ProtectedRoute>
+								<Createuser />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/gallary"
+						element={
+							<ProtectedRoute>
+								<Gallary />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/event"
+						element={
+							<ProtectedRoute>
+								<EventHome />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/eventdetail/:id"
+						element={
+							<ProtectedRoute>
+								<Events />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/plans"
+						element={
+							<ProtectedRoute>
+								<Plans />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/profile"
+						element={
+							<ProtectedRoute>
+								<Profile />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/post"
+						element={
+							<ProtectedRoute>
+								<Post />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/detail/:id"
+						element={
+							<ProtectedRoute>
+								<Detail />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/home"
+						element={
+							<ProtectedRoute>
+								<Home />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/dashpersonal"
+						element={
+							<ProtectedRoute>
+								<Dashgall />
+								<DashPersonal />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/dashgallary"
+						element={<ProtectedRoute></ProtectedRoute>}
+					/>
+					<Route
+						exact
+						path="/dashprofile"
+						element={
+							<ProtectedRoute>
+								<Dashprofile />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/dashevent"
+						element={
+							<ProtectedRoute>
+								<DashEvent />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/dashplan"
+						element={
+							<ProtectedRoute>
+								<Dashplan />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/personal"
+						element={
+							<ProtectedRoute>
+								<Personal />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/dashpost"
+						element={
+							<ProtectedRoute>
+								<DashPost />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/changepassword"
+						element={
+							<ProtectedRoute>
+								<PoliticChange />
+							</ProtectedRoute>
+						}
+					/>
+					<Route exact path="/admin" element={<AdminLogin />} />
+					<Route
+						exact
+						path="/feedback"
+						element={
+							<ProtectedRoute>
+								<Feedback />
+							</ProtectedRoute>
+						}
+					/>
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
 };
 
 export default App;

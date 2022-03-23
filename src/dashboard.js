@@ -7,14 +7,15 @@ import Sidebar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { PERSONAL_DELETE_RESET } from "./constants/PersonalConstants";
 import { listDashboard } from "./actions/DashboardAction";
-import { deletePersonal } from "./actions/PersonalAction";
+// import { deletePersonal } from "./actions/PersonalAction";
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	let [isOpen, setIsOpen] = useState(false);
-	const [tabledata, setTabledata] = useState();
+	let [user, setUser] = useState(false);
+	// const [tabledata, setTabledata] = useState();
 	const personalAdd = useSelector((state) => state.personalAdd);
 	const { success: successAdd } = personalAdd;
 	const personalDelete = useSelector((state) => state.personalDelete);
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
 	const dashboardList = useSelector((state) => state.dashboardList);
 	const { loading, success, dashboards } = dashboardList;
+	// console.log(user);
 	// useEffect(() => {
 	// 	dispatch(listGallary(userId));
 	// 	if (successDelete) {
@@ -65,14 +67,32 @@ const Dashboard = () => {
 	const handleFormSubmit = async (id) => {
 		// localStorage.setItem("userId", id);
 		localStorage.setItem("userId", JSON.stringify({ isAdmin: true, id: id }));
-		console.log(id);
+		// console.log(id);
 		navigate("/home");
 	};
 
-	const onDelete = async (id) => {
-		dispatch(deletePersonal(id));
-		// await axios.delete(`http://44.199.61.81:8080/politician/${id}/`);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const { data } = await axios.get(
+	// 			`http://44.199.61.81:8080/user/?politician=${id}`
+	// 		);
+	// 		setUser(data);
+	// 	};
+	// 	fetchData();
+	// }, []);
+
+	const handleUser = async (id) => {
+		const { data } = await axios.get(
+			`http://44.199.61.81:8080/user/?politician=${id}`
+		);
+		console.log("id", data);
+		setUser(data.length);
 	};
+
+	// const onDelete = async (id) => {
+	// 	dispatch(deletePersonal(id));
+	// 	// await axios.delete(`http://44.199.61.81:8080/politician/${id}/`);
+	// };
 
 	return (
 		<>
@@ -100,11 +120,12 @@ const Dashboard = () => {
 						<thead className="border-b border-black ">
 							<tr>
 								<th>S.N</th>
-								<th>name</th>
+								<th>Name</th>
 								<th>I.D</th>
-								<th>email</th>
-								<th>phone</th>
-								<th>goto</th>
+								<th>User</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>GoTo</th>
 							</tr>
 						</thead>
 						<tbody className="border-b border-black">
@@ -134,17 +155,41 @@ const Dashboard = () => {
 										<td className="mt-10">{i + 1}</td>
 										<td className="mt-10">{data.firstName}</td>
 										<td className="mt-10">{data.id}</td>
+										<td className="mt-10">
+											<button onClick={() => handleUser(data.id)}>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="h-6 w-6 ml-7"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+													strokeWidth="2"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+													/>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+													/>
+												</svg>
+											</button>
+											{user}
+										</td>
 										<td className="mt-10">{data.email}</td>
 										<td className="mt-10">{data.phone}</td>
-										<td className="mb-10">
+										<td className="md-10">
 											<button
 												onClick={() => handleFormSubmit(data.id)}
-												className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+												className="inline-flex justify-center px-4 py-2 my-3 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none first-letter:focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
 											>
 												Edit
 											</button>
 										</td>
-										<td className="py-4 mt-30">
+										{/* <td className="py-4 mt-30">
 											<button
 												onClick={() => onDelete(data.id)}
 												className="hover:bg-red-900"
@@ -164,7 +209,7 @@ const Dashboard = () => {
 													/>
 												</svg>
 											</button>
-										</td>
+										</td> */}
 									</tr>
 								))
 							)}

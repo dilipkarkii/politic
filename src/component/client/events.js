@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Even from "../model/even";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import EventUpdate from "../model/EventUpdate";
 import Navbartop from "./navbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +11,12 @@ import {
 	EVENT_UPDATE_RESET,
 } from "../../constants/EventConstants";
 import moment from "moment";
+import axios from "axios";
 
 const Events = () => {
+	let { id } = useParams();
+	console.log(id);
+
 	const dispatch = useDispatch();
 	const eventList = useSelector((state) => state.eventList);
 	const { loading, success, events } = eventList;
@@ -40,6 +46,8 @@ const Events = () => {
 		setOpenUpdate(false);
 	};
 
+	console.log("first", events);
+
 	useEffect(() => {
 		dispatch(listEvent(userId));
 		if (successDelete) {
@@ -52,12 +60,24 @@ const Events = () => {
 		if (successUpdate) {
 			dispatch({ type: EVENT_UPDATE_RESET });
 		}
+		if (successDelete) {
+			navigate("/event");
+		}
 	}, [dispatch, successDelete, successAdd, successUpdate]);
 
+	const navigate = useNavigate();
 	const onDelete = async (id) => {
 		dispatch(deleteEvent(id));
 	};
 
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get(`http://44.199.61.81:8080/event/${id}/`);
+			console.log("data", data);
+			setEventsData(data);
+		};
+		fetchData();
+	}, [id]);
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -95,112 +115,111 @@ const Events = () => {
 							</div>
 						</div>
 					) : (
-						events &&
-						events.map((value) => (
-							<div
-								className="mb-6 overflow-hidden bg-white shadow sm:rounded-lg"
-								key={value.id}
-							>
-								<div className="grid gap-4 px-4 py-5 md:grid-cols-12 sm:px-6 bg-gray-50">
-									<h3 className="flex items-center text-lg font-medium leading-6 text-gray-500 md:col-span-4 ">
-										Upcomming Events :{" "}
-										{moment(value.date).format("MMMM Do YYYY")}
-									</h3>
-									<div className="flex items-center md:justify-end md:col-span-8 ">
-										<button
-											onClick={() => onDelete(value.id)}
-											className="items-center px-3 py-2 mr-2 text-white bg-red-500 rounded"
-										>
-											Delete
-										</button>
-										<button
-											onClick={() => (
-												// eslint-disable-next-line no-sequences
-												setOpenUpdate(true), setEventDetail(value)
-											)}
-											className="items-center px-3 py-2 text-white bg-blue-500 rounded"
-										>
-											Update
-										</button>
-									</div>
-								</div>
-								<div className="border-t border-gray-200">
-									<dl>
-										<div className="">
-											<dd className="w-full h-[250px] md:h-[500px] m-auto">
-												<img
-													src={`http://44.199.61.81:8080/${
-														value.image.split("8000/")[1]
-													}`}
-													alt="Louvre"
-													className="object-cover w-full h-full"
-												/>
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Campaign name
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{value.title}
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Description of event
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{value.description}
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Location
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{value.location}
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Date
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{moment(value.date).format("MMMM Do YYYY")}
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Time
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												{value.time}
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												agenda
-											</dt>
-											<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-												<a href="www.facebook.com" target="_blank">
-													{value.agenda}
-												</a>
-											</dd>
-										</div>
-										<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-											<dt className="text-sm font-medium text-gray-500">
-												Links
-											</dt>
-											<dd className="mt-1 text-sm text-blue-500 underline sm:mt-0 sm:col-span-2 ">
-												<a href={value.link} target="_blank" rel="noreferrer">
-													{value.link}
-												</a>
-											</dd>
-										</div>
-									</dl>
+						// events && events((value) => (
+						<div
+							className="mb-6 overflow-hidden bg-white shadow sm:rounded-lg"
+							// key={value.id}
+						>
+							<div className="grid gap-4 px-4 py-5 md:grid-cols-12 sm:px-6 bg-gray-50">
+								<h3 className="flex items-center text-lg font-medium leading-6 text-gray-500 md:col-span-4 ">
+									Upcomming Events :
+									{moment(eventsData && eventsData.date).format("MMMM Do YYYY")}
+								</h3>
+								<div className="flex items-center md:justify-end md:col-span-8 ">
+									<button
+										onClick={() => onDelete(eventsData.id)}
+										className="items-center px-3 py-2 mr-2 text-white bg-red-500 rounded"
+									>
+										Delete
+									</button>
+									<button
+										onClick={() => (
+											// eslint-disable-next-line no-sequences
+											setOpenUpdate(true), setEventDetail(eventsData)
+										)}
+										className="items-center px-3 py-2 text-white bg-blue-500 rounded"
+									>
+										Update
+									</button>
 								</div>
 							</div>
-						))
+							<div className="border-t border-gray-200">
+								<dl>
+									<div className="">
+										{/* <dd className="w-full h-[250px] md:h-[500px] m-auto">
+											<img
+												src={`http://44.199.61.81:8080/${
+													eventsData && eventsData.image.split("8000/")[1]
+												}`}
+												alt="Louvre"
+												className="object-cover w-full h-full"
+											/>
+										</dd> */}
+									</div>
+									<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">
+											Campaign name
+										</dt>
+										<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											{eventsData && eventsData.title}
+										</dd>
+									</div>
+									<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">
+											Description of event
+										</dt>
+										<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											{eventsData && eventsData.description}
+										</dd>
+									</div>
+									<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">
+											Location
+										</dt>
+										<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											{eventsData && eventsData.location}
+										</dd>
+									</div>
+									<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">Date</dt>
+										<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											{moment(eventsData && eventsData.date).format(
+												"MMMM Do YYYY"
+											)}
+										</dd>
+									</div>
+									<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">Time</dt>
+										<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											{eventsData && eventsData.time}
+										</dd>
+									</div>
+									<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">
+											agenda
+										</dt>
+										<dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+											<a href="www.facebook.com" target="_blank">
+												{eventsData && eventsData.agenda}
+											</a>
+										</dd>
+									</div>
+									<div className="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+										<dt className="text-sm font-medium text-gray-500">Links</dt>
+										<dd className="mt-1 text-sm text-blue-500 underline sm:mt-0 sm:col-span-2 ">
+											<a
+												href={eventsData && eventsData.link}
+												target="_blank"
+												rel="noreferrer"
+											>
+												{eventsData && eventsData.link}
+											</a>
+										</dd>
+									</div>
+								</dl>
+							</div>
+						</div>
+						// ))
 					)}
 				</div>
 				<EventUpdate
