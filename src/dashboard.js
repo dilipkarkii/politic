@@ -81,12 +81,15 @@ const Dashboard = () => {
 	// 	fetchData();
 	// }, []);
 
-	const handleUser = async (id) => {
+	const [index, setIndex] = useState();
+
+	const handleUser = async (id, i) => {
 		const { data } = await axios.get(
 			`http://44.199.61.81:8080/user/?politician=${id}`
 		);
 		console.log("id", data);
 		setUser(data.length);
+		setIndex(i);
 	};
 
 	// const onDelete = async (id) => {
@@ -155,8 +158,8 @@ const Dashboard = () => {
 										<td className="mt-10">{i + 1}</td>
 										<td className="mt-10">{data.firstName}</td>
 										<td className="mt-10">{data.id}</td>
-										<td className="mt-10">
-											<button onClick={() => handleUser(data.id)}>
+										<td className="flex items-center mt-5">
+											<button onClick={() => handleUser(data.id, i)}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													class="h-6 w-6 ml-7"
@@ -177,7 +180,7 @@ const Dashboard = () => {
 													/>
 												</svg>
 											</button>
-											{user}
+											{index === i && user}
 										</td>
 										<td className="mt-10">{data.email}</td>
 										<td className="mt-10">{data.phone}</td>
