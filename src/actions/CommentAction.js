@@ -20,6 +20,9 @@ import {
 	POSTCOMMENT_LIST_REQUEST,
 	POSTCOMMENT_LIST_SUCCESS,
 	POSTCOMMENT_LIST_FAIL,
+	SUGGESTION_LIST_REQUEST,
+	SUGGESTION_LIST_SUCCESS,
+	SUGGESTION_LIST_FAIL,
 } from "../constants/CommentConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
@@ -209,6 +212,31 @@ export const listPostreply = (comment_id) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: POSTCOMMENT_REPLY_LIST_FAIL,
+			paylod:
+				err.response && err.response.data.message
+					? err.response.data.message
+					: err.message,
+		});
+	}
+};
+
+export const listSuggestion = () => async (dispatch) => {
+	try {
+		dispatch({ type: SUGGESTION_LIST_REQUEST });
+		const config = {
+			Headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		const { data } = await axios.get(`${baseUrl}suggestation/`, config);
+		console.log("data", data);
+		dispatch({
+			type: SUGGESTION_LIST_SUCCESS,
+			payload: data.reverse(),
+		});
+	} catch (err) {
+		dispatch({
+			type: SUGGESTION_LIST_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message

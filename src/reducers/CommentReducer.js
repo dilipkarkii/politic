@@ -23,6 +23,9 @@ import {
 	POSTCOMMENT_REPLY_LIST_FAIL,
 	POSTCOMMENT_REPLY_LIST_REQUEST,
 	POSTCOMMENT_REPLY_LIST_SUCCESS,
+	SUGGESTION_LIST_FAIL,
+	SUGGESTION_LIST_REQUEST,
+	SUGGESTION_LIST_SUCCESS,
 } from "../constants/CommentConstants";
 
 export const commentAddReducer = (state = {}, action) => {
@@ -175,6 +178,29 @@ export const postreplyListReducer = (state = {}, action) => {
 				postcomment: action.payload,
 			};
 		case POSTCOMMENT_REPLY_LIST_FAIL:
+			return {
+				loading: true,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+
+export const suggestionListReducer = (state = {}, action) => {
+	switch (action.type) {
+		case SUGGESTION_LIST_REQUEST:
+			return {
+				loading: true,
+			};
+		case SUGGESTION_LIST_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				suggestions: action.payload,
+			};
+		case SUGGESTION_LIST_FAIL:
 			return {
 				loading: true,
 				error: action.payload,

@@ -31,6 +31,7 @@ import {
 	ProtectedRoute,
 } from "./component/ProtectedRoute";
 import EventHome from "./component/client/eventHome";
+import Suggestion from "./component/client/Suggestion";
 
 const App = () => {
 	return (
@@ -115,6 +116,15 @@ const App = () => {
 						element={
 							<ProtectedRoute>
 								<Events />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/suggestion"
+						element={
+							<ProtectedRoute>
+								<Suggestion />
 							</ProtectedRoute>
 						}
 					/>

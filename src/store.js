@@ -72,6 +72,7 @@ import {
 	replyListReducer,
 	postcommentListReducer,
 	postreplyListReducer,
+	suggestionListReducer,
 } from "./reducers/CommentReducer";
 
 import {
@@ -173,10 +174,9 @@ const reducer = combineReducers({
 	commentDelete: commentDeleteReducer,
 	commentUpdate: commentUpdateReducer,
 	replyList: replyListReducer,
-
 	postcommentList: postcommentListReducer,
-
 	postreplyList: postreplyListReducer,
+	suggestionList: suggestionListReducer,
 });
 const initialState = {};
 const middleware = [thunk];

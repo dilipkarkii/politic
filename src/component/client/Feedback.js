@@ -4,6 +4,7 @@ import Navbartop from "./navbar";
 import Feedbackadd from "../model/Feedbackadd";
 import { useDispatch, useSelector } from "react-redux";
 import { listComment, listReply } from "../../actions/CommentAction";
+import { Link } from "react-router-dom";
 // import { data } from "autoprefixer";
 
 const Feedback = () => {
@@ -16,6 +17,8 @@ const Feedback = () => {
 	let [showComment, setShowComment] = useState(false);
 	let [reply, setReply] = useState(false);
 	const [comment, setComment] = useState();
+	const [index, setIndex] = useState();
+
 	function openModal() {
 		setIsOpen(true);
 	}
@@ -39,9 +42,10 @@ const Feedback = () => {
 		// fetchData();
 	}, [dispatch, successCommentAdd]);
 
-	const handleShowComment = (id) => {
-		setShowComment(!showComment);
+	const handleShowComment = (id, i) => {
+		setShowComment(!showComment, i);
 		dispatch(listReply(id));
+		setIndex(i);
 	};
 	return (
 		<>
@@ -53,6 +57,11 @@ const Feedback = () => {
 						<h1 className="text-2xl italic text-center">
 							Discussion and Feedback Form
 						</h1>
+						<Link to="/suggestion">
+							<button className="px-4 py-1 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+								Suggestion
+							</button>
+						</Link>
 						<div className="inset-0 flex items-center justify-end ">
 							<button
 								type="button"
@@ -76,7 +85,7 @@ const Feedback = () => {
 												</h1>
 												<div
 													className="cursor-pointer"
-													onClick={() => handleShowComment(value.id)}
+													onClick={() => handleShowComment(value.id, i)}
 												>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +104,7 @@ const Feedback = () => {
 												</div>
 												{console.log("datas", value.commentsontweetslike_set)}
 											</div>
-											{showComment && (
+											{index === i && showComment && (
 												<>
 													{value.commentsontweetslike_set &&
 														value.commentsontweetslike_set.map((data) => (
@@ -154,6 +163,7 @@ const Feedback = () => {
 														))}
 												</>
 											)}
+
 											{reply && (
 												<form action="" className="flex px-5 py-2 mx-5 my-3">
 													<input
