@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbartop from "./navbar";
 import Slider from "react-slick";
-import { listPostcomment } from "../../actions/CommentAction";
+import { listComment, listPostcomment } from "../../actions/CommentAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const Detail = () => {
@@ -11,10 +11,12 @@ const Detail = () => {
 	console.log(id);
 	const [detail, setDetail] = useState();
 	const [titles, settitle] = useState();
-	let [postData, setPostData] = useState();
-	// let [postimg, setPostimg] = useState();
+
 	const [comment, setComment] = useState();
-	// let [imgData, setImgData] = useState();
+	const [reply, setReply] = useState();
+	const [index, setIndex] = useState();
+	const [replyindex, setReplyIndex] = useState();
+
 	console.log("details", detail);
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
@@ -39,6 +41,7 @@ const Detail = () => {
 		};
 		fetchData();
 	}, [id]);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get(
@@ -51,7 +54,17 @@ const Detail = () => {
 		fetchData();
 	}, []);
 
-	console.log(postData);
+	const replyComment = (id, i) => {
+		setReply(!reply);
+		dispatch(listPostcomment(id));
+		setIndex(i);
+	};
+
+	const handlereply = (id, i) => {
+		setComment(!comment);
+		dispatch(listComment(id));
+		setReplyIndex(i);
+	};
 
 	const settings = {
 		dots: true,
@@ -147,7 +160,7 @@ const Detail = () => {
 					<div className="mt-5">
 						<h1 className="text-2xl font-bold">Discussion</h1>
 						{postcomments &&
-							postcomments.map((data) => (
+							postcomments.map((data, i) => (
 								<>
 									<div className="grid grid-cols-12 mt-3">
 										{/* <div className="flex justify-between"> */}
@@ -174,7 +187,10 @@ const Detail = () => {
 										<h1 className=" col-span-9 bg-[#f1f1f1] px-4 py-3 border-2 mt-3 ">
 											{data.comments}
 										</h1>
-										<button className="col-span-1 mt-3 ml-5">
+										<button
+											className="col-span-1 mt-3 ml-5"
+											onClick={() => handlereply(data.id, i)}
+										>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												class="h-6 w-6"
@@ -191,9 +207,29 @@ const Detail = () => {
 											</svg>
 										</button>
 									</div>
+									{replyindex === i && comment && (
+										<form
+											action=""
+											className="grid grid-cols-12 px-5 py-2 mx-5 my-3 "
+										>
+											<div className="col-span-2"></div>
+											<div className="col-span-9 ">
+												<input
+													type="text"
+													placeholder=" write your reply......"
+													className="w-full px-4 py-3 border-2 "
+												/>
+											</div>
+											<input
+												type="submit"
+												value="Reply"
+												className="bg-[#f1f1f1] px-4 py-3 border-2  ml-4"
+											/>
+										</form>
+									)}
 									<>
 										{data.replyoncomments_set &&
-											data.replyoncomments_set.map((value) => (
+											data.replyoncomments_set.map((value, i) => (
 												<div className="mt-1">
 													<div
 														className="grid grid-cols-12 "
@@ -213,13 +249,16 @@ const Detail = () => {
 																{value.user_firstname === null
 																	? `aynonomous`
 																	: value.user_firstname}
-																:--- {">"}
+																:-
 															</h1>
 														</div>
 														<h1 className=" col-span-9 bg-[#f1f1f1] px-4 py-3 border-2 mt-3 ">
 															{value.reply_text}
 														</h1>
-														<button className="col-span-1 mt-3 ml-5">
+														<button
+															className="col-span-1 mt-3 ml-5"
+															onClick={replyComment}
+														>
 															<svg
 																xmlns="http://www.w3.org/2000/svg"
 																class="h-6 w-6"
@@ -234,11 +273,35 @@ const Detail = () => {
 																	d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
 																/>
 															</svg>
+															<>
+																{index === i && reply && (
+																	<form
+																		action=""
+																		className="flex px-5 py-2 mx-5 my-3"
+																	>
+																		<input
+																			type="text"
+																			placeholder="reply"
+																			className="border"
+																		/>
+																		<input type="submit" value="send" />
+																	</form>
+																)}
+															</>
 														</button>
 													</div>
 												</div>
 											))}
-
+										{/* {index === i && reply && (
+											<form action="" className="flex px-5 py-2 mx-5 my-3">
+												<input
+													type="text"
+													placeholder="reply"
+													className="border"
+												/>
+												<input type="submit" value="send" />
+											</form>
+										)} */}
 										{/* </div> */}
 									</>
 									{/* </div> */}
