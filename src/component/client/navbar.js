@@ -17,7 +17,7 @@ const navigation = [
 	{ name: "Post", href: "/post", current: false },
 	{ name: "Events", href: "/event", current: false },
 	{ name: "Profile", href: "/profile", current: false },
-	{ name: "Gallary", href: "/gallary", current: false },
+	{ name: "Gallery", href: "/gallary", current: false },
 	{ name: "Plans", href: "/plans", current: false },
 	{ name: "Personal Profile", href: "/personal", current: false },
 	{ name: "FeedBack", href: "/feedback", current: false },

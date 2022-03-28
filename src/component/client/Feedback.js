@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import Navbartop from "./navbar";
 import Feedbackadd from "../model/Feedbackadd";
 import { useDispatch, useSelector } from "react-redux";
-import { listComment, listReply } from "../../actions/CommentAction";
-import { Link } from "react-router-dom";
-// import { data } from "autoprefixer";
+import {
+	listComment,
+	listReply,
+	replyFeedbackPost,
+} from "../../actions/CommentAction";
+// import { Link } from "react-router-dom";
 
 const Feedback = () => {
 	const dispatch = useDispatch();
@@ -13,11 +16,17 @@ const Feedback = () => {
 	const { success: successComment, comments } = commentList;
 	const commentAdd = useSelector((state) => state.commentAdd);
 	const { success: successCommentAdd } = commentAdd;
+	const feedbackList = useSelector((state) => state.feedbackList);
+	const { success: successfeedbackList } = feedbackList;
+
 	let [isOpen, setIsOpen] = useState(false);
 	let [showComment, setShowComment] = useState(false);
+	let [comment, setComment] = useState(false);
 	let [reply, setReply] = useState(false);
-	const [comment, setComment] = useState();
+	const [replyText, setReplyText] = useState();
+
 	const [index, setIndex] = useState();
+	const [replyindex, setReplyindex] = useState();
 
 	function openModal() {
 		setIsOpen(true);
@@ -34,19 +43,27 @@ const Feedback = () => {
 		if (successCommentAdd) {
 			setIsOpen(false);
 		}
-		// const fetchData = async () => {
-		// 	const { data } = await axios.get("http://44.199.61.81:8080/comments/");
-		// 	setComment(data);
-		// 	// console.log(res);
-		// };
-		// fetchData();
-	}, [dispatch, successCommentAdd]);
+		setComment(false);
+	}, [dispatch, successCommentAdd, successfeedbackList]);
 
 	const handleShowComment = (id, i) => {
 		setShowComment(!showComment, i);
 		dispatch(listReply(id));
 		setIndex(i);
 	};
+
+	const handlereply = (id, j) => {
+		setComment(!comment);
+		dispatch(listReply(id));
+		setReplyindex(j);
+	};
+
+	const handleReplySubmit = (e, politicianId, commentId) => {
+		e.preventDefault();
+		dispatch(replyFeedbackPost(replyText, userId, politicianId, commentId));
+		console.log(politicianId);
+	};
+
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -57,11 +74,11 @@ const Feedback = () => {
 						<h1 className="text-2xl italic text-center">
 							Discussion and Feedback Form
 						</h1>
-						<Link to="/suggestion">
+						{/* <Link to="/suggestion">
 							<button className="px-4 py-1 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
 								Suggestion
 							</button>
-						</Link>
+						</Link> */}
 						<div className="inset-0 flex items-center justify-end ">
 							<button
 								type="button"
@@ -73,7 +90,7 @@ const Feedback = () => {
 						</div>
 					</div>
 					<div className="flex items-start justify-center mt-6">
-						<div className="border w-[600px] bg-white rounded">
+						<div className="border w-[950px] bg-white rounded">
 							<div className="px-4 py-2">
 								<h1 className="text-xl font-medium">Discussion</h1>
 								{comments &&
@@ -107,97 +124,125 @@ const Feedback = () => {
 											{index === i && showComment && (
 												<>
 													{value.commentsontweetslike_set &&
-														value.commentsontweetslike_set.map((data) => (
+														value.commentsontweetslike_set.map((data, j) => (
 															<>
-																<div className="grid mt-2 grid-col-8">
-																	<div className="justify-start col-span-2 ">
-																		<svg
-																			xmlns="http://www.w3.org/2000/svg"
-																			class="h-4 w-5 "
-																			fill="none"
-																			viewBox="0 0 24 24"
-																			stroke="currentColor"
-																			strokeWidth="2"
-																			// className="col-span-1"
-																		>
-																			<path
-																				strokeLinecap="round"
-																				strokeLinejoin="round"
-																				d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-																			/>
-																		</svg>
-
-																		<h1 className="  bg-[#f1f1f1] px-4 py-3 col-span-6  ">
+																<div className="grid grid-cols-12 mt-2">
+																	<div className="flex justify-start col-span-2 ">
+																		<img
+																			src={
+																				data.user_profile === null
+																					? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
+																					: `http://44.199.61.81:8080/${
+																							data.user_profile &&
+																							data.user_profile.split(
+																								"8000/"
+																							)[1]
+																					  }`
+																			}
+																			alt="user profile"
+																			className="h-10 mt-1 align-middle border-none rounded-full shadow w-11"
+																		/>
+																		<h1 className="mt-3 ml-1 italic text-blue-500">
+																			{data.user_firstname === null
+																				? `aynonomous`
+																				: data.user_firstname}
+																			:-
+																		</h1>
+																	</div>
+																	<div className="col-span-9 ">
+																		<h1 className="  bg-[#f1f1f1] px-4 py-3  ">
 																			{data.comments}
 																		</h1>
 																	</div>
+																	<button
+																		className="mt-3 ml-5 "
+																		onClick={() => handlereply(data.id, j)}
+																	>
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			class="h-6 w-6"
+																			fill="none"
+																			viewBox="0 0 24 24"
+																			stroke="currentColor"
+																			stroke-width="2"
+																		>
+																			<path
+																				stroke-linecap="round"
+																				stroke-linejoin="round"
+																				d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+																			/>
+																		</svg>
+																	</button>
 																</div>
+																{replyindex === j && comment && (
+																	<form
+																		onSubmit={(e) =>
+																			handleReplySubmit(
+																				e,
+																				data.politician,
+																				data.id
+																			)
+																		}
+																		className="grid grid-cols-12 px-5 py-2 my-3 "
+																	>
+																		<div className="col-span-2"></div>
+																		<div className="col-span-9 ">
+																			<input
+																				type="text"
+																				placeholder=" write your reply......"
+																				className="w-full px-4 py-3 border-2"
+																				onChange={(e) =>
+																					setReplyText(e.target.value)
+																				}
+																			/>
+																		</div>
+																		<input
+																			type="submit"
+																			value="Reply"
+																			className="px-2 py-2 mt-2 ml-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
+																		/>
+																	</form>
+																)}
 
 																{data.replyontweetslike_set &&
-																	data.replyontweetslike_set.map((comment) => (
-																		<div className="bg-[#f1f1f1] my-3 px-5 py-2 ml-10 rounded flex justify-start items-center">
-																			<svg
-																				xmlns="http://www.w3.org/2000/svg"
-																				class="h-5 w-5 "
-																				fill="none"
-																				viewBox="0 0 24 24"
-																				stroke="currentColor"
-																				strokeWidth="2"
-																			>
-																				<path
-																					strokeLinecap="round"
-																					strokeLinejoin="round"
-																					d="M17 8l4 4m0 0l-4 4m4-4H3"
-																				/>
-																			</svg>
-																			<h1 className="ml-5">
-																				{comment.reply_text}
-																			</h1>
-																			<div
-																				className="cursor-pointer"
-																				onClick={() => setReply(!reply)}
-																			></div>
-																		</div>
-																	))}
+																	data.replyontweetslike_set
+																		.reverse()
+																		.map((comment) => (
+																			// <div className="bg-[#f1f1f1] my-3 px-5 py-2 ml-10 rounded flex justify-start items-center">
+																			<div className="grid grid-cols-12 mt-2 ml-10">
+																				<div className="flex justify-start col-span-2 ">
+																					<img
+																						src={
+																							comment.user_profile === null
+																								? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
+																								: `http://44.199.61.81:8080/${
+																										comment.user_profile &&
+																										comment.user_profile.split(
+																											"8000/"
+																										)[1]
+																								  }`
+																						}
+																						alt="user profile"
+																						className="h-10 mt-1 align-middle border-none rounded-full shadow w-11"
+																					/>
+																					<h1 className="mt-3 ml-1 italic text-blue-500">
+																						{comment.user_firstname === null
+																							? `aynonomous`
+																							: comment.user_firstname}
+																						:-
+																					</h1>
+																				</div>
+																				<div className="col-span-10 ">
+																					<h1 className="  bg-[#f1f1f1] px-4 py-3  ">
+																						{comment.reply_text}
+																					</h1>
+																				</div>
+																			</div>
+																		))}
 															</>
 														))}
 												</>
 											)}
-
-											{reply && (
-												<form action="" className="flex px-5 py-2 mx-5 my-3">
-													<input
-														type="text"
-														placeholder="reply"
-														className="border"
-													/>
-													<input type="submit" value="send" />
-												</form>
-											)}
-											{/* <div className="grid grid-cols-12 mt-4 ">
-
-												<div className="col-span-9 px-4 py-2 ml-8 border-2 border-grey-700">
-													{i + 1}. {value.title}
-												</div>
-
-												<div className="col-span-1 ml-10 text-black cursor-pointer hover:text-blue-300">
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														className="w-6 h-6"
-														fill="none"
-														viewBox="0 0 24 24"
-														stroke="currentColor"
-														strokeWidth="2"
-													>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-														/>
-													</svg>
-													Reply
-												</div>
-											</div> */}
 										</>
 									))}
 							</div>
@@ -211,15 +256,6 @@ const Feedback = () => {
 							isOpen={isOpen}
 						/>
 					</div>
-					{/* <div className="accordion">
-						<div className="accordion-item">
-							<div className="accordion-title">
-								<div>{title}</div>
-								<div>+</div>
-							</div>
-							<div className="accordion-content">{content}</div>
-						</div>
-					</div> */}
 				</div>
 			</div>
 		</>

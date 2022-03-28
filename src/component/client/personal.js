@@ -27,7 +27,8 @@ const Personal = () => {
 
 	let [isOpen, setIsOpen] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
-	let [personalData, setPersonalData] = useState([]);
+	let [openmanifesto, setOpenmanifesto] = useState(false);
+	// let [personalData, setPersonalData] = useState([]);
 	let [personalDetail, setPersonalDetail] = useState();
 
 	const getuserId = localStorage.getItem("userId");
@@ -46,15 +47,6 @@ const Personal = () => {
 		setOpenUpdate(false);
 	};
 
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const res = await axios.get(`http://44.199.61.81:8080/politician/${userId}`);
-	// 		setPersonalData(res.data);
-	// 		console.log("res", res.data);
-	// 	};
-	// 	fetchData();
-	// }, []);
-
 	return (
 		<>
 			<Navbartop />
@@ -62,14 +54,14 @@ const Personal = () => {
 				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto ">
 					{/* {personalData.map((value) => ( */}
 					<>
-						<div className="flex items-center justify-end mb-4">
-							{/* <button
+						<div className="flex items-start justify-between mb-4">
+							<button
 								type="button"
 								onClick={openModal}
 								className="px-4 py-2 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
 							>
-								{"Add profile"}
-							</button> */}
+								{"Upload Manifesto"}
+							</button>
 							<button
 								onClick={() => (
 									// eslint-disable-next-line no-sequences
@@ -82,7 +74,7 @@ const Personal = () => {
 							</button>
 						</div>
 						<PersonalProfile
-							title="Add profile"
+							title="Add FILE"
 							closeModal={closeModal}
 							isOpen={isOpen}
 						/>
@@ -145,7 +137,9 @@ const Personal = () => {
 															Name:{personals && personals.firstName}
 														</p>
 														<p className="mr-1">
-															{personals && personals.middleName}
+															{personals && personals.middleName === null
+																? ""
+																: personals && personals.middleName === null}
 														</p>
 														<p className="mr-1">
 															{personals && personals.lastName}

@@ -17,6 +17,9 @@ import {
   POSTCOMMENT_REPLY_REQUEST,
   POSTCOMMENT_REPLY_SUCCESS,
   POSTCOMMENT_REPLY_FAIL,
+  FEEDBACKCOMMENT_REPLY_REQUEST,
+  FEEDBACKCOMMENT_REPLY_SUCCESS,
+  FEEDBACKCOMMENT_REPLY_FAIL,
   POSTCOMMENT_LIST_REQUEST,
   POSTCOMMENT_LIST_SUCCESS,
   POSTCOMMENT_LIST_FAIL,
@@ -246,3 +249,33 @@ export const listSuggestion = () => async (dispatch) => {
     });
   }
 };
+
+export const replyFeedbackPost =
+	(reply_text, user, politician, comment) => async (dispatch) => {
+		try {
+			dispatch({ type: FEEDBACKCOMMENT_REPLY_REQUEST });
+			const config = {
+				Headers: {
+					"Content-Type": "application/json",
+				},
+			};
+			const { data } = await axios.post(
+				`${baseUrl}tweets/reply/`,
+				{ reply_text, user, politician, comment },
+				config
+			);
+			console.log("data", data);
+			dispatch({
+				type: FEEDBACKCOMMENT_REPLY_SUCCESS,
+				payload: data,
+			});
+		} catch (err) {
+			dispatch({
+				type: FEEDBACKCOMMENT_REPLY_FAIL,
+				paylod:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};

@@ -3,37 +3,21 @@ import Modelwrapper from "./modelwrapper";
 import axios from "axios";
 
 const PersonalProfile = ({ title, closeModal, isOpen }) => {
-	const url = "http://44.199.61.81:8080/politician/";
+	const url = "http://44.199.61.81:8080/manifesto/";
 
-	const [pname, setPname] = useState();
-	const [age, setAge] = useState("");
-	const [address, setAddress] = useState("");
-	const [edu, setEdu] = useState("");
-	const [party, setParty] = useState("");
-	const [area, setArea] = useState("");
-	const [member, setMember] = useState("");
-	const [pos, setPos] = useState("");
+	const [file, setFile] = useState();
+	const getuserId = localStorage.getItem("userId");
+	const userId = JSON.parse(getuserId).id;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(pname, age);
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "multipart/form-data",
-		// 		Accept: "application/json",
-		// 	},
-		// };
+		console.log(file);
+
 		const { data } = await axios.post(
 			url,
 			{
-				firstname: pname,
-				age,
-				address,
-				education: edu,
-				politicalBackground: party,
-				electionArea: area,
-				memberSince: member,
-				position: pos,
+				manifesto: file,
+				politician: userId,
 			}
 			// config
 		);
@@ -45,92 +29,17 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
-					<label className="block">Name</label>
+					<label className="block text-sm font-medium text-gray-700">
+						upload your Manifesto
+					</label>
 					<input
-						onChange={(e) => setPname(e.target.value)}
-						id="name"
-						value={pname}
-						placeholder="Name"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
+						onChange={(e) => setFile(e.target.files[0])}
+						accept="application/pdf"
+						id="file"
+						type="file"
+						required
+						className="block w-full mt-4 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Age</label>
-					<input
-						onChange={(e) => setAge(e.target.value)}
-						id="name"
-						value={age}
-						placeholder="Age"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Address</label>
-					<input
-						onChange={(e) => setAddress(e.target.value)}
-						id="name"
-						value={address}
-						placeholder="Address"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Political party</label>
-					<input
-						onChange={(e) => setParty(e.target.value)}
-						id="name"
-						value={party}
-						placeholder="party name"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Education</label>
-					<input
-						onChange={(e) => setEdu(e.target.value)}
-						id="name"
-						value={edu}
-						placeholder="party name"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Election Area</label>
-					<input
-						onChange={(e) => setArea(e.target.value)}
-						id="name"
-						value={area}
-						placeholder="Area of election"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Member since</label>
-					<input
-						onChange={(e) => setMember(e.target.value)}
-						id="name"
-						value={member}
-						placeholder="member since"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
-				</div>
-				<div className="mt-4">
-					<label className="block">Position in Party</label>
-					<input
-						onChange={(e) => setPos(e.target.value)}
-						id="name"
-						value={pos}
-						placeholder="party"
-						className="w-full h-10 px-3 py-1 border-2 rounded-md border-slate-900 placeholder:text-black"
-					/>
-					<br />
 				</div>
 				<div className="mt-5 ">
 					<button

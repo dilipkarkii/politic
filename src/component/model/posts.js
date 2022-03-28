@@ -95,6 +95,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 							id="name"
 							placeholder="Enter Title"
 							type="text"
+							required
 						/>
 					</div>
 
@@ -110,6 +111,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 							value={description}
 							placeholder="Enter Description"
 							type="text"
+							required
 						/>
 					</div>
 					<div className="mt-4">

@@ -146,15 +146,17 @@ const Events = () => {
 							<div className="border-t border-gray-200">
 								<dl>
 									<div className="">
-										{/* <dd className="w-full h-[250px] md:h-[500px] m-auto">
+										<dd className="w-full h-[250px] md:h-[500px] m-auto">
 											<img
 												src={`http://44.199.61.81:8080/${
-													eventsData && eventsData.image.split("8000/")[1]
+													eventsData &&
+													eventsData.image &&
+													eventsData.image.split("8000/")[1]
 												}`}
 												alt="Louvre"
 												className="object-cover w-full h-full"
 											/>
-										</dd> */}
+										</dd>
 									</div>
 									<div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 										<dt className="text-sm font-medium text-gray-500">

@@ -32,6 +32,7 @@ import {
 } from "./component/ProtectedRoute";
 import EventHome from "./component/client/eventHome";
 import Suggestion from "./component/client/Suggestion";
+import Policy from "./component/client/policy";
 
 const App = () => {
 	return (
@@ -194,6 +195,15 @@ const App = () => {
 						element={
 							<ProtectedRoute>
 								<Dashprofile />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/policy"
+						element={
+							<ProtectedRoute>
+								<Policy />
 							</ProtectedRoute>
 						}
 					/>

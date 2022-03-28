@@ -5,8 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addPersonal } from "../../actions/PersonalAction";
 import { PERSONAL_ADD_RESET } from "../../constants/PersonalConstants";
 const Create = ({ title, closeModal, isOpen }) => {
-	// const url = "http://44.199.61.81:8080/politician/";
-
 	const dispatch = useDispatch();
 	const personalAdd = useSelector((state) => state.personalAdd);
 	const { success: successAdd } = personalAdd;
@@ -29,65 +27,6 @@ const Create = ({ title, closeModal, isOpen }) => {
 	const [flag, setFlag] = useState("");
 	const [photo, setPhoto] = useState("");
 	const [slogan, setSlogan] = useState("");
-	// const userId = localStorage.getItem("userId");
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// console.log(uname, upass, email, phone);
-	// let config = {
-	// 	headers: {
-	// 		"Content-Type": "multipart/form-data",
-	// 		Accept: "application/json",
-	// 		// type: "formData",
-	// 	},
-	// };
-
-	// let formData = new FormData();
-	// formData.append("flag", flag);
-	// formData.append("firstName", fname);
-	// formData.append("middleName", mname);
-	// formData.append("lastName", lastname);
-	// formData.append("password", upass);
-	// formData.append("age", age);
-	// formData.append("username", uname);
-	// formData.append("email", email);
-	// formData.append("phone", phone);
-	// formData.append("address", address);
-	// formData.append("education", edu);
-	// formData.append("description", description);
-	// formData.append("politicalBackground", party);
-	// formData.append("electionArea", area);
-	// formData.append("memberSince", member);
-	// formData.append("position", pos);
-	// formData.append("slogan", slogan);
-	// formData.append("profilePhoto", photo);
-
-	// 	const { data } = await axios.post(
-	// 		url,
-	// 		formData
-	// 		// {
-	// 		// 	firstName: uname,
-	// 		// 	lastName: lastname,
-	// 		// 	password: upass,
-	// 		// 	age,
-	// 		// 	userName: uname,
-	// 		// 	email,
-	// 		// 	phone,
-	// 		// 	address,
-	// 		// 	education: edu,
-	// 		// 	description,
-	// 		// 	politicalBackground: party,
-	// 		// 	electionArea: area,
-	// 		// 	memberSince: member,
-	// 		// 	position: pos,
-	// 		// 	slogan,
-	// 		// 	formData,
-	// 		// }
-	// 		// config
-	// 	);
-	// 	if (data) {
-	// 		window.location.reload(true);
-	// 	}
-	// };
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -137,6 +76,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 			setPhoto("");
 		}
 	}, [successAdd]);
+
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
@@ -150,6 +90,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="fname"
 						value={fname}
 						placeholder="firstname"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -175,6 +116,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						onChange={(e) => setLastname(e.target.value)}
 						id="lname"
 						value={lastname}
+						required
 						placeholder="lastname"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
@@ -189,20 +131,22 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="uname"
 						value={uname}
 						placeholder="username"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						{" "}
 						phone
 					</label>
 					<input
-						type="text"
 						onChange={(e) => setPhone(e.target.value)}
+						type="tel"
 						id="phone"
-						value={phone}
-						placeholder="phone no"
+						name="phone"
+						pattern="[0-9]{10}"
+						required
+						placeholder="Format: 1234578905"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -216,17 +160,19 @@ const Create = ({ title, closeModal, isOpen }) => {
 						value={email}
 						type="email"
 						placeholder="email"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">Age</label>
 					<input
-						type="text"
+						type="number"
 						onChange={(e) => setAge(e.target.value)}
 						id="age"
 						value={age}
 						placeholder="Age"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -240,6 +186,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="address"
 						value={address}
 						placeholder="Address"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -252,6 +199,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						onChange={(e) => setParty(e.target.value)}
 						id="party"
 						value={party}
+						required
 						placeholder="party name"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
@@ -266,6 +214,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="slogan"
 						value={slogan}
 						placeholder="slogan"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -279,6 +228,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="education"
 						value={edu}
 						placeholder="education"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -292,6 +242,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="area"
 						value={area}
 						placeholder="Area of election"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -300,11 +251,12 @@ const Create = ({ title, closeModal, isOpen }) => {
 						Member since
 					</label>
 					<input
-						type="text"
+						type="date"
 						onChange={(e) => setMember(e.target.value)}
 						id="member"
 						value={member}
 						placeholder="member since"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -318,6 +270,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="position"
 						value={pos}
 						placeholder="party position"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -331,12 +284,13 @@ const Create = ({ title, closeModal, isOpen }) => {
 						id="description"
 						value={description}
 						placeholder="About"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm h-44 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Flag{" "}
+						Flag
 					</label>
 					<input
 						onChange={(e) => setFlag(e.target.files[0])}
@@ -344,6 +298,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						// value={flag}
 						// placeholder="About"
 						type="file"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -358,6 +313,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						// value={photo}
 						// placeholder="photo"
 						type="file"
+						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
@@ -370,6 +326,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						onChange={(e) => setUpass(e.target.value)}
 						id="password	"
 						value={upass}
+						required
 						placeholder="Set password"
 						type="password"
 					/>
@@ -389,3 +346,63 @@ const Create = ({ title, closeModal, isOpen }) => {
 };
 
 export default Create;
+
+// const userId = localStorage.getItem("userId");
+// const handleSubmit = async (e) => {
+// 	e.preventDefault();
+// console.log(uname, upass, email, phone);
+// let config = {
+// 	headers: {
+// 		"Content-Type": "multipart/form-data",
+// 		Accept: "application/json",
+// 		// type: "formData",
+// 	},
+// };
+
+// let formData = new FormData();
+// formData.append("flag", flag);
+// formData.append("firstName", fname);
+// formData.append("middleName", mname);
+// formData.append("lastName", lastname);
+// formData.append("password", upass);
+// formData.append("age", age);
+// formData.append("username", uname);
+// formData.append("email", email);
+// formData.append("phone", phone);
+// formData.append("address", address);
+// formData.append("education", edu);
+// formData.append("description", description);
+// formData.append("politicalBackground", party);
+// formData.append("electionArea", area);
+// formData.append("memberSince", member);
+// formData.append("position", pos);
+// formData.append("slogan", slogan);
+// formData.append("profilePhoto", photo);
+
+// 	const { data } = await axios.post(
+// 		url,
+// 		formData
+// 		// {
+// 		// 	firstName: uname,
+// 		// 	lastName: lastname,
+// 		// 	password: upass,
+// 		// 	age,
+// 		// 	userName: uname,
+// 		// 	email,
+// 		// 	phone,
+// 		// 	address,
+// 		// 	education: edu,
+// 		// 	description,
+// 		// 	politicalBackground: party,
+// 		// 	electionArea: area,
+// 		// 	memberSince: member,
+// 		// 	position: pos,
+// 		// 	slogan,
+// 		// 	formData,
+// 		// }
+// 		// config
+// 	);
+// 	if (data) {
+// 		window.location.reload(true);
+// 	}
+// };
