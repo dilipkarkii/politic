@@ -27,7 +27,6 @@ const Personal = () => {
 
 	let [isOpen, setIsOpen] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
-	let [openmanifesto, setOpenmanifesto] = useState(false);
 	// let [personalData, setPersonalData] = useState([]);
 	let [personalDetail, setPersonalDetail] = useState();
 
@@ -134,12 +133,12 @@ const Personal = () => {
 												<div className="md:col-span-2">
 													<div className="flex ">
 														<p className="mr-1">
-															Name:{personals && personals.firstName}
+															Name: {personals && personals.firstName}
 														</p>
 														<p className="mr-1">
-															{personals && personals.middleName === null
+															{personals && personals.middleName === "null"
 																? ""
-																: personals && personals.middleName === null}
+																: personals && personals.middleName}
 														</p>
 														<p className="mr-1">
 															{personals && personals.lastName}

@@ -3,6 +3,10 @@ import {
 	PERSONAL_ADD_REQUEST,
 	PERSONAL_ADD_RESET,
 	PERSONAL_ADD_SUCCESS,
+	MANIFESTO_ADD_FAIL,
+	MANIFESTO_ADD_REQUEST,
+	MANIFESTO_ADD_RESET,
+	MANIFESTO_ADD_SUCCESS,
 	PERSONAL_DELETE_FAIL,
 	PERSONAL_DELETE_REQUEST,
 	PERSONAL_DELETE_RESET,
@@ -34,6 +38,29 @@ export const personalAddReducer = (state = {}, action) => {
 				error: action.payload,
 			};
 		case PERSONAL_ADD_RESET:
+			return {};
+		default:
+			return state;
+	}
+};
+export const manifestoAddReducer = (state = {}, action) => {
+	switch (action.type) {
+		case MANIFESTO_ADD_REQUEST:
+			return {
+				loading: true,
+			};
+		case MANIFESTO_ADD_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				manifestos: action.payload,
+			};
+		case MANIFESTO_ADD_FAIL:
+			return {
+				loading: true,
+				error: action.payload,
+			};
+		case MANIFESTO_ADD_RESET:
 			return {};
 		default:
 			return state;

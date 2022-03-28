@@ -104,7 +104,9 @@ const Home = () => {
 														Name: {personals && personals.firstName}
 													</p>
 													<p className="mr-1">
-														{personals && personals.middleName}
+														{personals && personals.middleName === "null"
+															? ""
+															: personals && personals.middleName}
 													</p>
 													<p className="mr-1">
 														{personals && personals.lastName}

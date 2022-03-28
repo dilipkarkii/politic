@@ -158,7 +158,7 @@ const Dashboard = () => {
 										<td className="mt-10">{i + 1}</td>
 										<td className="mt-10">{data.firstName}</td>
 										<td className="mt-10">{data.id}</td>
-										<td className="flex items-center mt-5">
+										<td className="flex items-center mt-5 ml-7">
 											<button onClick={() => handleUser(data.id, i)}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"

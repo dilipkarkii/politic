@@ -20,7 +20,7 @@ const navigation = [
 	{ name: "Gallery", href: "/gallary", current: false },
 	{ name: "Plans", href: "/plans", current: false },
 	{ name: "Personal Profile", href: "/personal", current: false },
-	{ name: "FeedBack", href: "/feedback", current: false },
+	// { name: "FeedBack", href: "/feedback", current: false },
 ];
 const userNavigation = [
 	{ name: "Dashboard", href: "/dashboard" },

@@ -46,6 +46,7 @@ import {
 import {
 	personalListReducer,
 	personalAddReducer,
+	manifestoAddReducer,
 	personalDeleteReducer,
 	personalUpdateReducer,
 } from "./reducers/PersonalReducer";
@@ -138,6 +139,7 @@ const reducer = combineReducers({
 	personalAdd: personalAddReducer,
 	personalDelete: personalDeleteReducer,
 	personalUpdate: personalUpdateReducer,
+	manifestoAdd: manifestoAddReducer,
 
 	//login
 	loginList: loginListReducer,

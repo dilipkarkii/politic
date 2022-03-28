@@ -2,6 +2,9 @@ import {
 	PERSONAL_ADD_REQUEST,
 	PERSONAL_ADD_SUCCESS,
 	PERSONAL_ADD_FAIL,
+	MANIFESTO_ADD_REQUEST,
+	MANIFESTO_ADD_SUCCESS,
+	MANIFESTO_ADD_FAIL,
 	PERSONAL_LIST_REQUEST,
 	PERSONAL_LIST_SUCCESS,
 	PERSONAL_LIST_FAIL,
@@ -219,3 +222,35 @@ export const updatePersonal =
 			});
 		}
 	};
+
+export const addManifesto = (manifesto, politician) => async (dispatch) => {
+	try {
+		dispatch({ type: MANIFESTO_ADD_REQUEST });
+		const config = {
+			Headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		let formData = new FormData();
+		formData.append("manifesto", manifesto);
+		formData.append("politician", politician);
+		const { data } = await axios.post(
+			`${baseUrl}manifesto/`,
+
+			formData,
+			config
+		);
+		dispatch({
+			type: MANIFESTO_ADD_SUCCESS,
+			payload: data,
+		});
+	} catch (err) {
+		dispatch({
+			type: MANIFESTO_ADD_FAIL,
+			paylod:
+				err.response && err.response.data.message
+					? err.response.data.message
+					: err.message,
+		});
+	}
+};

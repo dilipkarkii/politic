@@ -1,30 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modelwrapper from "./modelwrapper";
-import axios from "axios";
+// import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { addManifesto } from "../../actions/PersonalAction";
+import { MANIFESTO_ADD_RESET } from "../../constants/PersonalConstants";
 
 const PersonalProfile = ({ title, closeModal, isOpen }) => {
-	const url = "http://44.199.61.81:8080/manifesto/";
+	// const url = "http://44.199.61.81:8080/manifesto/";
+
+	const dispatch = useDispatch();
+	const manifestoAdd = useSelector((state) => state.manifestoAdd);
+	const { success: successAdd } = manifestoAdd;
 
 	const [file, setFile] = useState();
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(file);
-
-		const { data } = await axios.post(
-			url,
-			{
-				manifesto: file,
-				politician: userId,
-			}
-			// config
-		);
-		if (data) {
-			window.location.reload(true);
-		}
+		dispatch(addManifesto(file, userId));
 	};
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: MANIFESTO_ADD_RESET });
+		}
+	}, [successAdd]);
+
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(file);
+
+	// 	const { data } = await axios.post(
+	// 		url,
+	// 		{
+	// 			manifesto: file,
+	// 			politician: userId,
+	// 		}
+	// 		// config
+	// 	);
+	// 	if (data) {
+	// 		window.location.reload(true);
+	// 	}
+	// };
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
