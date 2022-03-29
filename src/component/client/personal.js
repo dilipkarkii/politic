@@ -10,38 +10,40 @@ import {
 } from "../../actions/PersonalAction";
 import {
 	PERSONAL_UPDATE_RESET,
+	PROFILEPHOTO_UPDATE_RESET,
 	MANIFESTO_DELETE_RESET,
 } from "../../constants/PersonalConstants";
 import axios from "axios";
+import Profilephoto from "../update/Profilepicture";
 
 const Personal = () => {
 	const dispatch = useDispatch();
-	// const manifestoList = useSelector((state) => state.manifestoList);
-	// const {
-	// 	loading: manifestoloading,
-	// 	success: successmanifesto,
-	// 	manifestos,
-	// } = manifestoList;
+
 	const personalList = useSelector((state) => state.personalList);
 	const { loading, success, personals } = personalList;
 	const personalUpdate = useSelector((state) => state.personalUpdate);
 	const { success: successUpdate } = personalUpdate;
+	const profilephotoUpdate = useSelector((state) => state.profilephotoUpdate);
+	const { success: successphotoUpdate } = profilephotoUpdate;
 	const manifestoDelete = useSelector((state) => state.manifestoDelete);
 	const { success: successDelete } = manifestoDelete;
 	const manifestoAdd = useSelector((state) => state.manifestoAdd);
 	const { success: successAddManifesto, iserror } = manifestoAdd;
 
 	let [isOpen, setIsOpen] = useState(false);
+	let [isOpenphoto, setIsOpenphoto] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [personalDetail, setPersonalDetail] = useState();
 	let [manifesto, setManifesto] = useState([]);
-	console.log("gallaryData", manifesto);
 
 	useEffect(() => {
 		dispatch(listPersonal(userId));
 		if (successUpdate) {
 			setIsOpen(false);
 			setOpenUpdate(false);
+		}
+		if (successphotoUpdate) {
+			setIsOpenphoto(false);
 		}
 		if (successDelete) {
 			dispatch({ type: MANIFESTO_DELETE_RESET });
@@ -58,7 +60,14 @@ const Personal = () => {
 		if (successAddManifesto) {
 			setIsOpen(false);
 		}
-	}, [dispatch, successUpdate, successDelete, successAddManifesto, iserror]);
+	}, [
+		dispatch,
+		successUpdate,
+		successDelete,
+		successAddManifesto,
+		iserror,
+		successphotoUpdate,
+	]);
 
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
@@ -69,8 +78,14 @@ const Personal = () => {
 	function openModal() {
 		setIsOpen(true);
 	}
+	function openphotoModal() {
+		setIsOpenphoto(true);
+	}
 	const closeUpdateModal = () => {
 		setOpenUpdate(false);
+	};
+	const closephotoModal = () => {
+		setIsOpenphoto(false);
 	};
 
 	const onDelete = async (id) => {
@@ -92,8 +107,6 @@ const Personal = () => {
 		fetchData();
 	}, []);
 
-	console.log("datairst", manifestodata);
-	// console.log("first", result[0]);
 	return (
 		<>
 			<Navbartop />
@@ -132,6 +145,13 @@ const Personal = () => {
 								</button>
 							</div>
 							<button
+								type="button"
+								onClick={openphotoModal}
+								className="px-2 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 "
+							>
+								{"Upload Profile picture"}
+							</button>
+							<button
 								onClick={() => (
 									// eslint-disable-next-line no-sequences
 									setOpenUpdate(true), setPersonalDetail(personals)
@@ -146,6 +166,11 @@ const Personal = () => {
 							title="Add FILE"
 							closeModal={closeModal}
 							isOpen={isOpen}
+						/>
+						<Profilephoto
+							title="update Profile Photo"
+							closeModal={closephotoModal}
+							isOpen={isOpenphoto}
 						/>
 						<div className="relative w-auto max-w-3xl mx-auto ">
 							{/*content*/}

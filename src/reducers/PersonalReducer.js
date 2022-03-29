@@ -25,6 +25,10 @@ import {
 	PERSONAL_UPDATE_REQUEST,
 	PERSONAL_UPDATE_RESET,
 	PERSONAL_UPDATE_SUCCESS,
+	PROFILEPHOTO_UPDATE_FAIL,
+	PROFILEPHOTO_UPDATE_REQUEST,
+	PROFILEPHOTO_UPDATE_RESET,
+	PROFILEPHOTO_UPDATE_SUCCESS,
 } from "../constants/PersonalConstants";
 
 export const personalAddReducer = (state = {}, action) => {
@@ -187,6 +191,31 @@ export const manifestoListReducer = (state = {}, action) => {
 				loading: true,
 				error: action.payload,
 			};
+		default:
+			return state;
+	}
+};
+
+
+export const profilephotoUpdateReducer = (state = {}, action) => {
+	switch (action.type) {
+		case PROFILEPHOTO_UPDATE_REQUEST:
+			return {
+				loading: true,
+			};
+		case PROFILEPHOTO_UPDATE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				profilephoto: action.payload,
+			};
+		case PROFILEPHOTO_UPDATE_FAIL:
+			return {
+				loading: true,
+				error: action.payload,
+			};
+		case PROFILEPHOTO_UPDATE_RESET:
+			return {};
 		default:
 			return state;
 	}

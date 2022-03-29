@@ -77,7 +77,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 					<input
 						onChange={(e) => setPic(e.target.files[0])}
 						id="name"
-						className="px-1 block w-full border mt-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+						className="block w-full px-1 mt-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 						type="file"
 						multiple
 					/>
