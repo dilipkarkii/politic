@@ -28,6 +28,8 @@ const Personal = () => {
 	const { success: successUpdate } = personalUpdate;
 	const manifestoDelete = useSelector((state) => state.manifestoDelete);
 	const { success: successDelete } = manifestoDelete;
+	const manifestoAdd = useSelector((state) => state.manifestoAdd);
+	const { success: successAddManifesto, iserror } = manifestoAdd;
 
 	let [isOpen, setIsOpen] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
@@ -47,14 +49,19 @@ const Personal = () => {
 		if (successUpdate) {
 			dispatch({ type: PERSONAL_UPDATE_RESET });
 		}
-	}, [dispatch, successUpdate, successDelete]);
+		if (successAddManifesto) {
+			setIsOpen(false);
+		}
+		if (iserror) {
+			setIsOpen(false);
+		}
+		if (successAddManifesto) {
+			setIsOpen(false);
+		}
+	}, [dispatch, successUpdate, successDelete, successAddManifesto, iserror]);
 
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
-
-	// useEffect(() => {
-	// 	dispatch(listManifesto(userId));
-	// }, [dispatch]);
 
 	function closeModal() {
 		setIsOpen(false);
@@ -94,8 +101,8 @@ const Personal = () => {
 				<div className="h-full max-w-6xl p-3 px-4 py-20 mx-auto ">
 					{/* {personalData.map((value) => ( */}
 					<>
-						<div className="flex items-start justify-between mb-4">
-							<div>
+						<div className="flex items-start justify-between ">
+							<div className="flex justify-center">
 								<button
 									type="button"
 									onClick={openModal}
@@ -104,7 +111,10 @@ const Personal = () => {
 									{"Upload Manifesto"}
 								</button>
 
-								<button className="" onClick={() => onDelete(manifestodata.id)}>
+								<button
+									className="ml-3"
+									onClick={() => onDelete(manifestodata.id)}
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-6 "
@@ -139,7 +149,7 @@ const Personal = () => {
 						/>
 						<div className="relative w-auto max-w-3xl mx-auto ">
 							{/*content*/}
-							<div className="relative flex flex-col w-full border-0 rounded-lg shadow-lg outline-none bg-[#fff] focus:outline-none">
+							<div className="relative flex flex-col w-full border-0 rounded-lg shadow-lg mt-5 outline-none bg-[#fff] focus:outline-none">
 								{/*header*/}
 								<div className="flex items-center justify-between p-5 border-b border-solid rounded-t border-blueGray-200">
 									<h3 className="text-3xl font-semibold text-gray-500">

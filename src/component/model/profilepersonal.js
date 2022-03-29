@@ -6,11 +6,9 @@ import { addManifesto } from "../../actions/PersonalAction";
 import { MANIFESTO_ADD_RESET } from "../../constants/PersonalConstants";
 
 const PersonalProfile = ({ title, closeModal, isOpen }) => {
-	
-
 	const dispatch = useDispatch();
 	const manifestoAdd = useSelector((state) => state.manifestoAdd);
-	const { success: successAdd, iserror } = manifestoAdd;
+	const { success: successAdd,iserror } = manifestoAdd;
 
 	const [file, setFile] = useState();
 	const getuserId = localStorage.getItem("userId");
@@ -27,7 +25,7 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 		if (iserror) {
 			dispatch({ type: MANIFESTO_ADD_RESET });
 		}
-	}, [successAdd, iserror]);
+	}, [successAdd,iserror]);
 
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
