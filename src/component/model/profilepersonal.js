@@ -6,11 +6,11 @@ import { addManifesto } from "../../actions/PersonalAction";
 import { MANIFESTO_ADD_RESET } from "../../constants/PersonalConstants";
 
 const PersonalProfile = ({ title, closeModal, isOpen }) => {
-	// const url = "http://44.199.61.81:8080/manifesto/";
+	
 
 	const dispatch = useDispatch();
 	const manifestoAdd = useSelector((state) => state.manifestoAdd);
-	const { success: successAdd } = manifestoAdd;
+	const { success: successAdd, iserror } = manifestoAdd;
 
 	const [file, setFile] = useState();
 	const getuserId = localStorage.getItem("userId");
@@ -24,24 +24,11 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 		if (successAdd) {
 			dispatch({ type: MANIFESTO_ADD_RESET });
 		}
-	}, [successAdd]);
+		if (iserror) {
+			dispatch({ type: MANIFESTO_ADD_RESET });
+		}
+	}, [successAdd, iserror]);
 
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	console.log(file);
-
-	// 	const { data } = await axios.post(
-	// 		url,
-	// 		{
-	// 			manifesto: file,
-	// 			politician: userId,
-	// 		}
-	// 		// config
-	// 	);
-	// 	if (data) {
-	// 		window.location.reload(true);
-	// 	}
-	// };
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>

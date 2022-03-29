@@ -5,6 +5,12 @@ import {
 	MANIFESTO_ADD_REQUEST,
 	MANIFESTO_ADD_SUCCESS,
 	MANIFESTO_ADD_FAIL,
+	MANIFESTO_DELETE_REQUEST,
+	MANIFESTO_DELETE_SUCCESS,
+	MANIFESTO_DELETE_FAIL,
+	MANIFESTO_LIST_REQUEST,
+	MANIFESTO_LIST_SUCCESS,
+	MANIFESTO_LIST_FAIL,
 	PERSONAL_LIST_REQUEST,
 	PERSONAL_LIST_SUCCESS,
 	PERSONAL_LIST_FAIL,
@@ -17,6 +23,7 @@ import {
 } from "../constants/PersonalConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
+import { toast } from "react-toastify";
 
 export const addPersonal =
 	(
@@ -240,13 +247,64 @@ export const addManifesto = (manifesto, politician) => async (dispatch) => {
 			formData,
 			config
 		);
+		toast.info("Manifesto Added", {
+			autoClose: 1000,
+		});
 		dispatch({
 			type: MANIFESTO_ADD_SUCCESS,
 			payload: data,
 		});
 	} catch (err) {
+		toast.error("Manifesto already added please deleted previous one", {
+			autoClose: 1000,
+		});
 		dispatch({
 			type: MANIFESTO_ADD_FAIL,
+			paylod:
+				err.response && err.response.data.message
+					? err.response.data.message
+					: err.message,
+		});
+	}
+};
+
+export const deleteManifesto = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: MANIFESTO_DELETE_REQUEST });
+		const { data } = await axios.delete(`${baseUrl}manifesto/${id}/`);
+		console.log("data", data);
+		dispatch({
+			type: MANIFESTO_DELETE_SUCCESS,
+			payload: data,
+		});
+	} catch (err) {
+		dispatch({
+			type: MANIFESTO_DELETE_FAIL,
+			paylod:
+				err.response && err.response.data.message
+					? err.response.data.message
+					: err.message,
+		});
+	}
+};
+
+export const listManifesto = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: MANIFESTO_LIST_REQUEST });
+		const config = {
+			Headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		const { data } = await axios.get(`${baseUrl}manifesto/`, config);
+		console.log("data", data);
+		dispatch({
+			type: MANIFESTO_LIST_SUCCESS,
+			payload: data,
+		});
+	} catch (err) {
+		dispatch({
+			type: MANIFESTO_LIST_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message

@@ -1,18 +1,39 @@
-// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PersonalProfile from "../model/profilepersonal";
 import PersonalUpdate from "../update/PersonalUpdate";
 import Navbartop from "./navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { listPersonal } from "../../actions/PersonalAction";
-import { PERSONAL_UPDATE_RESET } from "../../constants/PersonalConstants";
+import {
+	listPersonal,
+	deleteManifesto,
+	// listManifesto,
+} from "../../actions/PersonalAction";
+import {
+	PERSONAL_UPDATE_RESET,
+	MANIFESTO_DELETE_RESET,
+} from "../../constants/PersonalConstants";
+import axios from "axios";
 
 const Personal = () => {
 	const dispatch = useDispatch();
+	// const manifestoList = useSelector((state) => state.manifestoList);
+	// const {
+	// 	loading: manifestoloading,
+	// 	success: successmanifesto,
+	// 	manifestos,
+	// } = manifestoList;
 	const personalList = useSelector((state) => state.personalList);
 	const { loading, success, personals } = personalList;
 	const personalUpdate = useSelector((state) => state.personalUpdate);
 	const { success: successUpdate } = personalUpdate;
+	const manifestoDelete = useSelector((state) => state.manifestoDelete);
+	const { success: successDelete } = manifestoDelete;
+
+	let [isOpen, setIsOpen] = useState(false);
+	let [openUpdate, setOpenUpdate] = useState(false);
+	let [personalDetail, setPersonalDetail] = useState();
+	let [manifesto, setManifesto] = useState([]);
+	console.log("gallaryData", manifesto);
 
 	useEffect(() => {
 		dispatch(listPersonal(userId));
@@ -20,21 +41,20 @@ const Personal = () => {
 			setIsOpen(false);
 			setOpenUpdate(false);
 		}
+		if (successDelete) {
+			dispatch({ type: MANIFESTO_DELETE_RESET });
+		}
 		if (successUpdate) {
 			dispatch({ type: PERSONAL_UPDATE_RESET });
 		}
-	}, [dispatch, successUpdate]);
-
-	let [isOpen, setIsOpen] = useState(false);
-	let [openUpdate, setOpenUpdate] = useState(false);
-	// let [personalData, setPersonalData] = useState([]);
-	let [personalDetail, setPersonalDetail] = useState();
+	}, [dispatch, successUpdate, successDelete]);
 
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
-	console.log("userId", userId);
-	console.log("personal", personals);
-	console.log("data", personalDetail);
+
+	// useEffect(() => {
+	// 	dispatch(listManifesto(userId));
+	// }, [dispatch]);
 
 	function closeModal() {
 		setIsOpen(false);
@@ -46,6 +66,25 @@ const Personal = () => {
 		setOpenUpdate(false);
 	};
 
+	const onDelete = async (id) => {
+		dispatch(deleteManifesto(id));
+	};
+
+	const [manifestodata, setManifestodata] = useState();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get(`http://44.199.61.81:8080/manifesto/`);
+			const result = data.filter((value) => value.politician === userId);
+			console.log("data", result);
+			setManifestodata(result[0]);
+			setManifesto(data);
+		};
+		fetchData();
+	}, []);
+
+	console.log("datairst", manifestodata);
+	// console.log("first", result[0]);
 	return (
 		<>
 			<Navbartop />
@@ -54,13 +93,32 @@ const Personal = () => {
 					{/* {personalData.map((value) => ( */}
 					<>
 						<div className="flex items-start justify-between mb-4">
-							<button
-								type="button"
-								onClick={openModal}
-								className="px-4 py-2 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-							>
-								{"Upload Manifesto"}
-							</button>
+							<div>
+								<button
+									type="button"
+									onClick={openModal}
+									className="px-4 py-2 text-sm font-medium text-black rounded-md bg-emerald-400 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+								>
+									{"Upload Manifesto"}
+								</button>
+
+								<button className="" onClick={() => onDelete(manifestodata.id)}>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 "
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="red"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+										/>
+									</svg>
+								</button>
+							</div>
 							<button
 								onClick={() => (
 									// eslint-disable-next-line no-sequences

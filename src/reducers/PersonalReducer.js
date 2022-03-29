@@ -7,6 +7,13 @@ import {
 	MANIFESTO_ADD_REQUEST,
 	MANIFESTO_ADD_RESET,
 	MANIFESTO_ADD_SUCCESS,
+	MANIFESTO_DELETE_FAIL,
+	MANIFESTO_DELETE_REQUEST,
+	MANIFESTO_DELETE_RESET,
+	MANIFESTO_DELETE_SUCCESS,
+	MANIFESTO_LIST_FAIL,
+	MANIFESTO_LIST_REQUEST,
+	MANIFESTO_LIST_SUCCESS,
 	PERSONAL_DELETE_FAIL,
 	PERSONAL_DELETE_REQUEST,
 	PERSONAL_DELETE_RESET,
@@ -58,6 +65,7 @@ export const manifestoAddReducer = (state = {}, action) => {
 		case MANIFESTO_ADD_FAIL:
 			return {
 				loading: true,
+				iserror:true,
 				error: action.payload,
 			};
 		case MANIFESTO_ADD_RESET:
@@ -132,6 +140,53 @@ export const personalUpdateReducer = (state = {}, action) => {
 			};
 		case PERSONAL_UPDATE_RESET:
 			return {};
+		default:
+			return state;
+	}
+};
+
+
+export const manifestoDeleteReducer = (state = {}, action) => {
+	switch (action.type) {
+		case MANIFESTO_DELETE_REQUEST:
+			return {
+				loading: true,
+			};
+		case MANIFESTO_DELETE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				manifesto: action.payload,
+			};
+		case MANIFESTO_DELETE_FAIL:
+			return {
+				loading: true,
+				error: action.payload,
+			};
+		case MANIFESTO_DELETE_RESET:
+			return {};
+		default:
+			return state;
+	}
+};
+
+export const manifestoListReducer = (state = {}, action) => {
+	switch (action.type) {
+		case MANIFESTO_LIST_REQUEST:
+			return {
+				loading: true,
+			};
+		case MANIFESTO_LIST_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				manifestos: action.payload,
+			};
+		case MANIFESTO_LIST_FAIL:
+			return {
+				loading: true,
+				error: action.payload,
+			};
 		default:
 			return state;
 	}
