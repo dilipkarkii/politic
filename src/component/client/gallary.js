@@ -114,7 +114,7 @@ const Gallary = () => {
 											<div className="relative col-span-10">
 												<div className=" bg-no-repeat bg-cover md:w-[100%] md:h-[250px]">
 													<img
-														src={`http://44.199.61.81:8080/${
+														src={`http://backend.publicaffairsnepal.com/${
 															images.image.split("8000/")[1]
 														}`}
 														alt="Louvre"
@@ -247,7 +247,7 @@ const Gallary = () => {
 									style={{ height: "500px", width: "900px" }}
 								>
 									<img
-										src={`http://44.199.61.81:8080/${
+										src={`http://backend.publicaffairsnepal.com/${
 											showImage.image.split("8000/")[1]
 										}`}
 										alt="Louvre"

@@ -37,7 +37,7 @@ const Adminlogin = () => {
 	// 		},
 	// 	};
 	// 	const { data } = await axios.post(
-	// 		`http://44.199.61.81:8080/login/admin`,
+	// 		`http://backend.publicaffairsnepal.com/login/admin`,
 	// 		{ email: name, password: pass },
 	// 		config
 	// 	);

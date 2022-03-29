@@ -41,7 +41,7 @@ const Detail = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get(
-				`http://44.199.61.81:8080/postlisting/${id}/`
+				`http://backend.publicaffairsnepal.com/postlisting/${id}/`
 			);
 			console.log("data", data);
 			setDetail(data);
@@ -52,7 +52,7 @@ const Detail = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get(
-				`http://44.199.61.81:8080/politician/${userId}/`
+				`http://backend.publicaffairsnepal.com/politician/${userId}/`
 			);
 			console.log("data", data);
 			settitle(data.post_set);
@@ -100,7 +100,7 @@ const Detail = () => {
 										detail.postimage_set.map((data) => (
 											<img
 												className="w-32 mt-5 h-[450px]"
-												src={`http://44.199.61.81:8080/${
+												src={`http://backend.publicaffairsnepal.com/${
 													data && data.image.split("8000/")[1]
 												}`}
 												alt="pic"
@@ -166,7 +166,7 @@ const Detail = () => {
 												src={
 													data.user_profile === null
 														? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
-														: `http://44.199.61.81:8080/${
+														: `http://backend.publicaffairsnepal.com/${
 																data.user_profile &&
 																data.user_profile.split("8000/")[1]
 														  }`
@@ -240,7 +240,7 @@ const Detail = () => {
 																src={
 																	value.user_profile === null
 																		? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
-																		: `http://44.199.61.81:8080/${
+																		: `http://backend.publicaffairsnepal.com/${
 																				value.user_profile &&
 																				value.user_profile.split("8000/")[1]
 																		  }`

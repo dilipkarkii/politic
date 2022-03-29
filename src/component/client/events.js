@@ -72,7 +72,9 @@ const Events = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const { data } = await axios.get(`http://44.199.61.81:8080/event/${id}/`);
+			const { data } = await axios.get(
+				`http://backend.publicaffairsnepal.com/event/${id}/`
+			);
 			console.log("data", data);
 			setEventsData(data);
 		};
@@ -148,7 +150,7 @@ const Events = () => {
 									<div className="">
 										<dd className="w-full h-[250px] md:h-[500px] m-auto">
 											<img
-												src={`http://44.199.61.81:8080/${
+												src={`http://backend.publicaffairsnepal.com/${
 													eventsData &&
 													eventsData.image &&
 													eventsData.image.split("8000/")[1]

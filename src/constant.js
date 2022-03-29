@@ -1,1 +1,1 @@
-export const baseUrl = `http://44.199.61.81:8080/`;
+export const baseUrl = `http://backend.publicaffairsnepal.com/`;

@@ -152,7 +152,7 @@ const Profile = () => {
 	// useEffect(() => {
 	// 	const fetchData = async () => {
 	// 		const { data } = await axios.get(
-	// 			`http://44.199.61.81:8080/politician/${userId}/`
+	// 			`http://backend.publicaffairsnepal.com/politician/${userId}/`
 	// 		);
 	// 		console.log("data", data.politiciancontributions_set);
 	// 		setContriData(data.politiciancontributions_set);

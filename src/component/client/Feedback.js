@@ -132,7 +132,7 @@ const Feedback = () => {
 																			src={
 																				data.user_profile === null
 																					? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
-																					: `http://44.199.61.81:8080/${
+																					: `http://backend.publicaffairsnepal.com/${
 																							data.user_profile &&
 																							data.user_profile.split(
 																								"8000/"
@@ -215,7 +215,7 @@ const Feedback = () => {
 																						src={
 																							comment.user_profile === null
 																								? " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT_BjEyf_LEpcvb225JX2qFCJcLz5-0RXLg&usqp=CAU"
-																								: `http://44.199.61.81:8080/${
+																								: `http://backend.publicaffairsnepal.com/${
 																										comment.user_profile &&
 																										comment.user_profile.split(
 																											"8000/"

@@ -58,7 +58,7 @@ const EventHome = () => {
 								>
 									<img
 										className="w-full h-32 rounded-t-lg"
-										src={`http://44.199.61.81:8080/${
+										src={`http://backend.publicaffairsnepal.com/${
 											data.image.split("8000/")[1]
 										}`}
 										alt=""

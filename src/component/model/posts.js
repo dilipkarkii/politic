@@ -47,7 +47,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 		// 	redirect: "follow",
 		// };
 
-		// fetch("http://44.199.61.81:8080/create_post_image/", requestOptions)
+		// fetch("http://backend.publicaffairsnepal.com/create_post_image/", requestOptions)
 		// 	.then((response) => response.text())
 		// 	.then((result) => {
 		// 		if (result) {
@@ -67,7 +67,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 		// 		type: "formData",
 		// 	},
 		// };
-		// const { data } = await axios.post("http://44.199.61.81:8080/create_post/", {
+		// const { data } = await axios.post("http://backend.publicaffairsnepal.com/create_post/", {
 		// 	title: Title,
 		// 	description,
 		// 	posted_by: userId,

@@ -55,7 +55,7 @@ const Dashboard = () => {
 	}
 	// useEffect(() => {
 	// 	const fetchData = async () => {
-	// 		const res = await axios.get("http://44.199.61.81:8080/politician/");
+	// 		const res = await axios.get("http://backend.publicaffairsnepal.com/politician/");
 	// 		// const data = res.json();
 	// 		// console.log("data", data.data);
 	// 		setTabledata(res.data);
@@ -74,7 +74,7 @@ const Dashboard = () => {
 	// useEffect(() => {
 	// 	const fetchData = async () => {
 	// 		const { data } = await axios.get(
-	// 			`http://44.199.61.81:8080/user/?politician=${id}`
+	// 			`http://backend.publicaffairsnepal.com/user/?politician=${id}`
 	// 		);
 	// 		setUser(data);
 	// 	};
@@ -85,7 +85,7 @@ const Dashboard = () => {
 
 	const handleUser = async (id, i) => {
 		const { data } = await axios.get(
-			`http://44.199.61.81:8080/user/?politician=${id}`
+			`http://backend.publicaffairsnepal.com/user/?politician=${id}`
 		);
 		console.log("id", data);
 		setUser(data.length);
@@ -94,7 +94,7 @@ const Dashboard = () => {
 
 	// const onDelete = async (id) => {
 	// 	dispatch(deletePersonal(id));
-	// 	// await axios.delete(`http://44.199.61.81:8080/politician/${id}/`);
+	// 	// await axios.delete(`http://backend.publicaffairsnepal.com/politician/${id}/`);
 	// };
 
 	return (

@@ -74,7 +74,9 @@ const Personal = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const { data } = await axios.get(`http://44.199.61.81:8080/manifesto/`);
+			const { data } = await axios.get(
+				`http://backend.publicaffairsnepal.com/manifesto/`
+			);
 			const result = data.filter((value) => value.politician === userId);
 			console.log("data", result);
 			setManifestodata(result[0]);
@@ -146,7 +148,7 @@ const Personal = () => {
 
 									<div className="w-12 h-12">
 										<img
-											src={`http://44.199.61.81:8080/${
+											src={`http://backend.publicaffairsnepal.com/${
 												personals && personals.flag.split("8000/")[1]
 											}`}
 											alt="party flag"
@@ -179,7 +181,7 @@ const Personal = () => {
 											<div className="grid gap-4 md:grid-cols-3">
 												<div className="md:col-span-1">
 													<img
-														src={`http://44.199.61.81:8080/${
+														src={`http://backend.publicaffairsnepal.com/${
 															personals &&
 															personals.profilePhoto.split("8000/")[1]
 														}`}

@@ -111,7 +111,7 @@ export const updateGallary =
 			formData.append("image", image);
 			formData.append("owner", owner);
 			const { data } = await axios.put(
-				`http://44.199.61.81:8080/gallery/${id}/`,
+				`http://backend.publicaffairsnepal.com/gallery/${id}/`,
 				formData,
 				config
 			);

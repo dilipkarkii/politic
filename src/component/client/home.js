@@ -53,7 +53,7 @@ const Home = () => {
 
 								<div className="w-12 h-12">
 									<img
-										src={`http://44.199.61.81:8080/${
+										src={`http://backend.publicaffairsnepal.com/${
 											personals && personals.flag.split("8000/")[1]
 										}`}
 										alt="party flag"
@@ -89,7 +89,7 @@ const Home = () => {
 												style={{ height: "270px", width: "350px" }}
 											>
 												<img
-													src={`http://44.199.61.81:8080/${
+													src={`http://backend.publicaffairsnepal.com/${
 														personals &&
 														personals.profilePhoto.split("8000/")[1]
 													}`}
@@ -182,7 +182,7 @@ const Home = () => {
 											style={{ height: "200px", width: "265px" }}
 										>
 											<img
-												src={`http://44.199.61.81:8080/${
+												src={`http://backend.publicaffairsnepal.com/${
 													images.image.split("8000/")[1]
 												}`}
 												alt="Louvre"
@@ -245,7 +245,7 @@ const Home = () => {
 									>
 										<img
 											className="w-full h-32 rounded-t-lg"
-											src={`http://44.199.61.81:8080/${
+											src={`http://backend.publicaffairsnepal.com/${
 												data.postimage_set[0].image.split("8000/")[1]
 											}`}
 											alt=""
@@ -335,7 +335,7 @@ const Home = () => {
 									>
 										<img
 											className="w-full h-32 rounded-t-lg"
-											src={`http://44.199.61.81:8080/${
+											src={`http://backend.publicaffairsnepal.com/${
 												data.image.split("8000/")[1]
 											}`}
 											alt=""
@@ -394,7 +394,7 @@ export default Home;
 // 			<div className="max-w-sm border border-gray-100 rounded-lg shadow-md bg-red-50 dark:bg-red-50 dark:border-gray-700">
 // 				<img
 // 					className="w-full h-32 rounded-t-lg"
-// 					src={`http://44.199.61.81:8080/${
+// 					src={`http://backend.publicaffairsnepal.com/${
 // 						data.postimage_set[0].image.split("8000/")[1]
 // 					}`}
 // 					alt=""

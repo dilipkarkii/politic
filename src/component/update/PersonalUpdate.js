@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { updatePersonal } from "../../actions/PersonalAction";
 
 const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
-	// const url = "http://44.199.61.81:8080/posts/";
-	 const getuserId = localStorage.getItem("userId");
-   const userId = JSON.parse(getuserId).id;
+	// const url = "http://backend.publicaffairsnepal.com/posts/";
+	const getuserId = localStorage.getItem("userId");
+	const userId = JSON.parse(getuserId).id;
 	const [fname, setFname] = useState();
 	// const [upass, setUpass] = useState("");
 	const [uname, setUname] = useState("");
@@ -113,7 +113,7 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 	// 		},
 	// 	};
 	// 	const { data } = await axios.put(
-	// 		`http://44.199.61.81:8080/politician/${personalDetail.id}/`,
+	// 		`http://backend.publicaffairsnepal.com/politician/${personalDetail.id}/`,
 	// 		{
 	// 			firstName: fname,
 	// 			lastName: lname,
