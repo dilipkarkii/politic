@@ -8,7 +8,7 @@ import { MANIFESTO_ADD_RESET } from "../../constants/PersonalConstants";
 const PersonalProfile = ({ title, closeModal, isOpen }) => {
 	const dispatch = useDispatch();
 	const manifestoAdd = useSelector((state) => state.manifestoAdd);
-	const { success: successAdd,iserror } = manifestoAdd;
+	const { success: successAdd, iserror } = manifestoAdd;
 
 	const [file, setFile] = useState();
 	const getuserId = localStorage.getItem("userId");
@@ -25,7 +25,7 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 		if (iserror) {
 			dispatch({ type: MANIFESTO_ADD_RESET });
 		}
-	}, [successAdd,iserror]);
+	}, [successAdd, iserror]);
 
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -36,7 +36,7 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 					</label>
 					<input
 						onChange={(e) => setFile(e.target.files[0])}
-						accept="application/pdf"
+						accept="application/pdf,.docx,"
 						id="file"
 						type="file"
 						required

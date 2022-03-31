@@ -276,11 +276,17 @@ export const deleteManifesto = (id) => async (dispatch) => {
 		dispatch({ type: MANIFESTO_DELETE_REQUEST });
 		const { data } = await axios.delete(`${baseUrl}manifesto/${id}/`);
 		console.log("data", data);
+		toast.info("Manifesto Deleted", {
+			autoClose: 1000,
+		});
 		dispatch({
 			type: MANIFESTO_DELETE_SUCCESS,
 			payload: data,
 		});
 	} catch (err) {
+		toast.error("Fail To Delete", {
+			autoClose: 1000,
+		});
 		dispatch({
 			type: MANIFESTO_DELETE_FAIL,
 			paylod:

@@ -11,6 +11,8 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 	console.log("gallaryDetail", gallaryDetail);
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
+		const [message, setMessage] = useState("");
+
 	// useEffect(() => {
 	// 	if (gallaryDetail) {
 	// 		setDes(gallaryDetail.description);
@@ -46,6 +48,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 
 	const dispatch = useDispatch();
 	useEffect(() => {
+			setTimeout(() => setMessage(""), 3000);
 		if (gallaryDetail) {
 			setDes(gallaryDetail.description);
 			setPic(gallaryDetail.image);
@@ -54,8 +57,13 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(updateGallary(gallaryDetail.id, pic, des, userId));
-	};
+		if (des.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		} else {
+			setTimeout(() => setMessage(""), 3000);
+			dispatch(updateGallary(gallaryDetail.id, pic, des, userId));
+		};
+	}
 
 	return (
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -70,6 +78,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 						placeholder="Set Description"
 						type="text"
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 
 				<div className="mt-4">

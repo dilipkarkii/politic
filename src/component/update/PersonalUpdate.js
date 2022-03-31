@@ -26,9 +26,11 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 	const [flag, setFlag] = useState("");
 	const [photo, setPhoto] = useState("");
 	const [slogan, setSlogan] = useState("");
+	const [message, setMessage] = useState("");
 
 	const dispatch = useDispatch();
 	useEffect(() => {
+		setTimeout(() => setMessage(""), 3000);
 		if (personalDetail) {
 			setFname(personalDetail.firstName);
 			setMname(personalDetail.middleName);
@@ -53,28 +55,60 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(
-			updatePersonal(
-				fname,
-				mname,
-				lastname,
-				age,
-				uname,
-				email,
-				phone,
-				address,
-				edu,
-				area,
-				pos,
-				slogan,
-				party,
-				description,
-				// flag,
-				// photo,
-				member,
-				userId
-			)
-		);
+		if (fname.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (mname.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (lastname.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (uname.length > 15) {
+			setMessage("Please Enter less than 15 character");
+		}
+		if (phone.length > 100) {
+			setMessage("Please Enter only 10 character");
+		}
+		if (address.length > 50) {
+			setMessage("Please Enter less than 50 character");
+		}
+		if (edu.length > 255) {
+			setMessage("Please Enter less than 255 character");
+		}
+		if (area.length > 50) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (pos.length > 50) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (party.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		} else {
+			setTimeout(() => setMessage(""), 3000);
+			dispatch(
+				updatePersonal(
+					fname,
+					mname,
+					lastname,
+					age,
+					uname,
+					email,
+					phone,
+					address,
+					edu,
+					area,
+					pos,
+					slogan,
+					party,
+					description,
+					// flag,
+					// photo,
+					member,
+					userId
+				)
+			);
+		}
 	};
 
 	console.log("dsata", personalDetail);
@@ -153,7 +187,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={fname}
 						placeholder="firstname"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -166,7 +201,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={mname}
 						placeholder="middlename"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -179,7 +215,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={lastname}
 						placeholder="lastname"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -192,7 +229,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={uname}
 						placeholder="username"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -206,7 +244,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={phone}
 						placeholder="phone no"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -243,7 +282,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={address}
 						placeholder="Address"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -256,7 +296,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={party}
 						placeholder="party name"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -269,7 +310,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={slogan}
 						placeholder="slogan"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -282,7 +324,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={edu}
 						placeholder="education"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -295,7 +338,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={area}
 						placeholder="Area of election"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -321,7 +365,8 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 						value={pos}
 						placeholder="party position"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
-					/>
+					/>{" "}
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">

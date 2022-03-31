@@ -18,14 +18,29 @@ const Even = ({ title, closeModal, isOpen }) => {
 	const [image, setImage] = useState("");
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
+	const [message, setMessage] = useState("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(addEvent(name, des, agenda, loc, date, time, link, image, userId));
+		if (name.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (loc.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (link.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		} else {
+			setTimeout(() => setMessage(""), 3000);
+			dispatch(
+				addEvent(name, des, agenda, loc, date, time, link, image, userId)
+			);
+		}
 	};
 	console.log(loc);
 
 	useEffect(() => {
+		setTimeout(() => setMessage(""), 3000);
 		if (successAdd) {
 			dispatch({ type: EVENT_ADD_RESET });
 			setImage("");
@@ -66,6 +81,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							type="text"
 							required
 						/>
+						<span className="text-red-700">{message}</span>
 					</div>
 					<div className="mt-2">
 						<label className="block text-sm font-medium text-gray-700">
@@ -107,6 +123,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							placeholder="Enter Location"
 							required
 						/>
+						<span className="text-red-700">{message}</span>
 					</div>
 					<div className="mt-2">
 						<label className="block text-sm font-medium text-gray-700">
@@ -147,7 +164,8 @@ const Even = ({ title, closeModal, isOpen }) => {
 							value={link}
 							placeholder="Enter Links"
 							type="url"
-						/>
+						/>{" "}
+						<span className="text-red-700">{message}</span>
 					</div>
 					<br />
 					<button

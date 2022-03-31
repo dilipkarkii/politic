@@ -5,26 +5,26 @@ import { addAchivement } from "../../actions/AchivementAction";
 import { ACHIVEMENT_ADD_RESET } from "../../constants/AchivementConstants";
 
 const Personal = ({ title, closeModal, isOpen }) => {
-  const dispatch = useDispatch();
-  const achivementAdd = useSelector((state) => state.AchivementAdd);
-  const { success: successAdd } = achivementAdd;
+	const dispatch = useDispatch();
+	const achivementAdd = useSelector((state) => state.AchivementAdd);
+	const { success: successAdd } = achivementAdd;
 
-  const [achiv, setAchiv] = useState("");
-  const getuserId = localStorage.getItem("userId");
-  const userId = JSON.parse(getuserId).id;
+	const [achiv, setAchiv] = useState("");
+	const getuserId = localStorage.getItem("userId");
+	const userId = JSON.parse(getuserId).id;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addAchivement(achiv, userId));
-  };
-  useEffect(() => {
-    if (successAdd) {
-      dispatch({ type: ACHIVEMENT_ADD_RESET });
-      setAchiv("");
-    }
-  }, [successAdd]);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(addAchivement(achiv, userId));
+	};
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: ACHIVEMENT_ADD_RESET });
+			setAchiv("");
+		}
+	}, [successAdd]);
 
-  return (
+	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 				<form onSubmit={handleSubmit}>

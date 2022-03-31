@@ -19,10 +19,12 @@ const Posts = ({ title, closeModal, isOpen }) => {
 
 	const postAdd = useSelector((state) => state.postAdd);
 	const { posts, success: successPost, loading: loadingPost } = postAdd;
+	const [message, setMessage] = useState("");
 
 	console.log("posts", posts);
 
 	useEffect(() => {
+		setTimeout(() => setMessage(""), 3000);
 		if (successPost) {
 			dispatch({ type: POST_ADD_RESET });
 			setTitle("");
@@ -30,54 +32,41 @@ const Posts = ({ title, closeModal, isOpen }) => {
 			setLink("");
 		}
 	}, [successPost]);
-	const handleSubmission = async (e) => {
-		e.preventDefault();
-		console.log("first");
-		dispatch(addPostImage(img, posts.id));
-		// var myHeaders = new Headers();
+	// const handleSubmission = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log("first");
+	// 	dispatch(addPostImage(img, posts.id));
+	// 	// var myHeaders = new Headers();
 
-		// var formdata = new FormData();
-		// formdata.append("image", img, img.name);
-		// formdata.append("post", formPost.id);
+	// 	// var formdata = new FormData();
+	// 	// formdata.append("image", img, img.name);
+	// 	// formdata.append("post", formPost.id);
 
-		// var requestOptions = {
-		// 	method: "POST",
-		// 	headers: myHeaders,
-		// 	body: formdata,
-		// 	redirect: "follow",
-		// };
+	// 	// var requestOptions = {
+	// 	// 	method: "POST",
+	// 	// 	headers: myHeaders,
+	// 	// 	body: formdata,
+	// 	// 	redirect: "follow",
+	// 	// };
 
-		// fetch("http://backend.publicaffairsnepal.com/create_post_image/", requestOptions)
-		// 	.then((response) => response.text())
-		// 	.then((result) => {
-		// 		if (result) {
-		// 			window.location.reload(true);
-		// 		}
-		// 	})
-		// 	.catch((error) => console.log("error", error));
-	};
+	// 	// fetch("http://backend.publicaffairsnepal.com/create_post_image/", requestOptions)
+	// 	// 	.then((response) => response.text())
+	// 	// 	.then((result) => {
+	// 	// 		if (result) {
+	// 	// 			window.location.reload(true);
+	// 	// 		}
+	// 	// 	})
+	// 	// 	.catch((error) => console.log("error", error));
+	// };
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// console.log(Title, description, img);
-		// let config = {
-		// 	headers: {
-		// 		"Content-Type": "multipart/form-data",
-		// 		Accept: "application/json",
-		// 		type: "formData",
-		// 	},
-		// };
-		// const { data } = await axios.post("http://backend.publicaffairsnepal.com/create_post/", {
-		// 	title: Title,
-		// 	description,
-		// 	posted_by: userId,
-		// });
-		// setFormPost(data);
-		dispatch(addPost(Title, description, link, userId, img));
-
-		// if (successPost) {
-		// 	dispatch(addPostImage(img, posts.id));
-		// }
+		if (title.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		} else {
+			setTimeout(() => setMessage(""), 3000);
+			dispatch(addPost(Title, description, link, userId, img));
+		}
 	};
 
 	return (
@@ -97,6 +86,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 							type="text"
 							required
 						/>
+						<span className="text-red-700">{message}</span>
 					</div>
 
 					<div className="mt-4">

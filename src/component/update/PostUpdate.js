@@ -13,8 +13,11 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
+	const [message, setMessage] = useState("");
 
 	const dispatch = useDispatch();
+	setTimeout(() => setMessage(""), 3000);
+
 	useEffect(() => {
 		if (postDetail) {
 			setpostTitle(postDetail.title);
@@ -25,9 +28,14 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(
-			updatePost(postTitle, description, link, img, postDetail.id, userId)
-		);
+		if (title.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		} else {
+			setTimeout(() => setMessage(""), 3000);
+			dispatch(
+				updatePost(postTitle, description, link, img, postDetail.id, userId)
+			);
+		}
 	};
 
 	// const handleSubmit = async (e) => {
@@ -66,6 +74,7 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 							placeholder="Enter Title"
 							type="text"
 						/>
+						<span className="text-red-700">{message}</span>
 					</div>
 
 					<div className="mt-4">

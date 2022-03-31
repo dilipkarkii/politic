@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { addPersonal } from "../../actions/PersonalAction";
 import { PERSONAL_ADD_RESET } from "../../constants/PersonalConstants";
+
 const Create = ({ title, closeModal, isOpen }) => {
 	const dispatch = useDispatch();
 	const personalAdd = useSelector((state) => state.personalAdd);
@@ -27,34 +27,68 @@ const Create = ({ title, closeModal, isOpen }) => {
 	const [flag, setFlag] = useState("");
 	const [photo, setPhoto] = useState("");
 	const [slogan, setSlogan] = useState("");
+	const [message, setMessage] = useState("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(
-			addPersonal(
-				fname,
-				mname,
-				lastname,
-				age,
-				uname,
-				email,
-				phone,
-				address,
-				edu,
-				area,
-				pos,
-				upass,
-				slogan,
-				party,
-				description,
-				flag,
-				photo,
-				member
-			)
-		);
+		if (fname.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (mname.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (lastname.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (uname.length > 15) {
+			setMessage("Please Enter less than 15 character");
+		}
+		if (phone.length > 100) {
+			setMessage("Please Enter only 10 character");
+		}
+		if (address.length > 50) {
+			setMessage("Please Enter less than 50 character");
+		}
+		if (edu.length > 255) {
+			setMessage("Please Enter less than 255 character");
+		}
+		if (area.length > 50) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (pos.length > 50) {
+			setMessage("Please Enter less than 100 character");
+		}
+		if (party.length > 100) {
+			setMessage("Please Enter less than 100 character");
+		} else {
+			setTimeout(() => setMessage(""), 3000);
+			dispatch(
+				addPersonal(
+					fname,
+					mname,
+					lastname,
+					age,
+					uname,
+					email,
+					phone,
+					address,
+					edu,
+					area,
+					pos,
+					upass,
+					slogan,
+					party,
+					description,
+					flag,
+					photo,
+					member
+				)
+			);
+		}
 	};
 
 	useEffect(() => {
+		setTimeout(() => setMessage(""), 3000);
 		if (successAdd) {
 			dispatch({ type: PERSONAL_ADD_RESET });
 			setFname("");
@@ -93,6 +127,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -106,6 +141,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						placeholder="middlename"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -120,6 +156,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						placeholder="lastname"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -134,6 +171,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -149,6 +187,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						placeholder="please enter only 10 no "
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -163,6 +202,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">Age</label>
@@ -175,6 +215,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -189,6 +230,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -203,6 +245,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						placeholder="party name"
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -217,6 +260,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -231,6 +275,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -245,6 +290,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
@@ -273,6 +319,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 						required
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
+					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
