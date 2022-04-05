@@ -33,6 +33,7 @@ import {
 import EventHome from "./component/client/eventHome";
 import Suggestion from "./component/client/Suggestion";
 import Policy from "./component/client/policy";
+import Sanjayapolicy from "./policy/Sanjayapolicy";
 
 const App = () => {
 	return (
@@ -204,6 +205,15 @@ const App = () => {
 						element={
 							<ProtectedRoute>
 								<Policy />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/policy1"
+						element={
+							<ProtectedRoute>
+								<Sanjayapolicy />
 							</ProtectedRoute>
 						}
 					/>
