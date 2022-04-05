@@ -73,7 +73,7 @@ const Gallary = () => {
 	const onDelete = async (id) => {
 		dispatch(deleteGallary(id));
 	};
-	let itemsPerPage = 2;
+	let itemsPerPage = 5;
 	const [currentItems, setCurrentItems] = useState(null);
 	const [pageCount, setPageCount] = useState(0);
 	// Here we use item offsets; we could also use page offsets

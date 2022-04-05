@@ -219,6 +219,15 @@ const App = () => {
 					/>
 					<Route
 						exact
+						path="/policyMandipChaudhary"
+						element={
+							<ProtectedRoute>
+								<Sanjayapolicy />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
 						path="/dashevent"
 						element={
 							<ProtectedRoute>
