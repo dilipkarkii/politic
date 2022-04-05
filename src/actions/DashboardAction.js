@@ -91,7 +91,7 @@ export const listDashboard = (id) => async (dispatch) => {
 				"Content-Type": "application/json",
 			},
 		};
-		const { data } = await axios.get(`${baseUrl}politician/`, config);
+		const { data } = await axios.get(`${baseUrl}politician/?page=1`, config);
 		console.log("data", data);
 		dispatch({
 			type: DASHBOARD_LIST_SUCCESS,

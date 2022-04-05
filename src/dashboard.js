@@ -7,7 +7,7 @@ import Sidebar from "./sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { PERSONAL_DELETE_RESET } from "./constants/PersonalConstants";
 import { listDashboard } from "./actions/DashboardAction";
-// import { deletePersonal } from "./actions/PersonalAction";
+import ReactPaginate from "react-paginate";
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const Dashboard = () => {
 
 	const dashboardList = useSelector((state) => state.dashboardList);
 	const { loading, success, dashboards } = dashboardList;
+	console.log(dashboards && dashboards.count);
 	// console.log(user);
 	// useEffect(() => {
 	// 	dispatch(listGallary(userId));
@@ -97,6 +98,8 @@ const Dashboard = () => {
 	// 	// await axios.delete(`http://backend.publicaffairsnepal.com/politician/${id}/`);
 	// };
 
+	const handlePageClick = () => {};
+
 	return (
 		<>
 			<Navbar />
@@ -152,8 +155,8 @@ const Dashboard = () => {
 									</div>
 								</div>
 							) : (
-								dashboards &&
-								dashboards.map((data, i) => (
+								dashboards.results &&
+								dashboards.results.map((data, i) => (
 									<tr className="my-10 border-b border-black" key={data.id}>
 										<td className="mt-10">{i + 1}</td>
 										<td className="mt-10">{data.firstName}</td>
@@ -215,6 +218,17 @@ const Dashboard = () => {
 										</td> */}
 									</tr>
 								))
+							)}
+							{dashboards && dashboards.count > 5 && (
+								<ReactPaginate
+									breakLabel="..."
+									nextLabel="next >"
+									onPageChange={handlePageClick}
+									pageRangeDisplayed={5}
+									pageCount={dashboards && dashboards.count / 3}
+									previousLabel="< previous"
+									renderOnZeroPageCount={null}
+								/>
 							)}
 						</tbody>
 					</table>
