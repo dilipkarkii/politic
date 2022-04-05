@@ -83,30 +83,35 @@ export const addDashboard =
 		}
 	};
 
-export const listDashboard = (id) => async (dispatch) => {
-	try {
-		dispatch({ type: DASHBOARD_LIST_REQUEST });
-		const config = {
-			Headers: {
-				"Content-Type": "application/json",
-			},
-		};
-		const { data } = await axios.get(`${baseUrl}politician/?page=1`, config);
-		console.log("data", data);
-		dispatch({
-			type: DASHBOARD_LIST_SUCCESS,
-			payload: data,
-		});
-	} catch (err) {
-		dispatch({
-			type: DASHBOARD_LIST_FAIL,
-			paylod:
-				err.response && err.response.data.message
-					? err.response.data.message
-					: err.message,
-		});
-	}
-};
+export const listDashboard =
+	(page = 1) =>
+	async (dispatch) => {
+		try {
+			dispatch({ type: DASHBOARD_LIST_REQUEST });
+			const config = {
+				Headers: {
+					"Content-Type": "application/json",
+				},
+			};
+			const { data } = await axios.get(
+				`${baseUrl}politician/?page=${page}`,
+				config
+			);
+			console.log("data", data);
+			dispatch({
+				type: DASHBOARD_LIST_SUCCESS,
+				payload: data,
+			});
+		} catch (err) {
+			dispatch({
+				type: DASHBOARD_LIST_FAIL,
+				paylod:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};
 export const deleteDashboard = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: DASHBOARD_DELETE_REQUEST });

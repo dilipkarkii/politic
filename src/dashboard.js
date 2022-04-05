@@ -98,7 +98,11 @@ const Dashboard = () => {
 	// 	// await axios.delete(`http://backend.publicaffairsnepal.com/politician/${id}/`);
 	// };
 
-	const handlePageClick = () => {};
+	const handlePageClick = (data) => {
+		let selectedPage = data.selected + 1;
+		console.log(selectedPage);
+		dispatch(listDashboard(selectedPage));
+	};
 
 	return (
 		<>
@@ -219,19 +223,22 @@ const Dashboard = () => {
 									</tr>
 								))
 							)}
-							{dashboards && dashboards.count > 5 && (
-								<ReactPaginate
-									breakLabel="..."
-									nextLabel="next >"
-									onPageChange={handlePageClick}
-									pageRangeDisplayed={5}
-									pageCount={dashboards && dashboards.count / 3}
-									previousLabel="< previous"
-									renderOnZeroPageCount={null}
-								/>
-							)}
 						</tbody>
 					</table>
+					{dashboards && dashboards.count > 5 && (
+						<ReactPaginate
+							breakLabel="..."
+							nextLabel=">"
+							breakClassName="break-me"
+							onPageChange={handlePageClick}
+							pageRangeDisplayed={5}
+							pageCount={dashboards && dashboards.count / 5}
+							previousLabel="<"
+							containerClassName="pagination"
+							activeClassName="active"
+							renderOnZeroPageCount={null}
+						/>
+					)}
 				</div>
 			</div>
 		</>

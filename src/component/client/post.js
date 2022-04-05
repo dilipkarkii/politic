@@ -11,6 +11,8 @@ import {
 	POSTIMAGE_UPDATE_RESET,
 	POSTIMAGE_DELETE_REQUEST,
 } from "../../constants/PostImageConstants";
+import ReactPaginate from "react-paginate";
+import { data } from "autoprefixer";
 
 const Post = () => {
 	const dispatch = useDispatch();
@@ -57,17 +59,32 @@ const Post = () => {
 
 	const onDelete = (id) => {
 		dispatch(deletePost(id));
-		// var raw = "";
-		// var requestOptions = {
-		// 	method: "DELETE",
-		// 	body: raw,
-		// 	redirect: "follow",
-		// };
-		// fetch(`http://backend.publicaffairsnepal.com/create_post/${id}/`, requestOptions)
-		// 	.then((response) => response.text())
-		// 	.then((result) => console.log(result))
-		// 	.catch((error) => console.log("error", error));
 	};
+
+	let itemsPerPage = 10;
+	const [currentItems, setCurrentItems] = useState(null);
+	const [pageCount, setPageCount] = useState(0);
+	// Here we use item offsets; we could also use page offsets
+	// following the API or data you're working with.
+	const [itemOffset, setItemOffset] = useState(0);
+
+	useEffect(() => {
+		// Fetch items from another resources.
+		const endOffset = itemOffset + itemsPerPage;
+		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+		setCurrentItems(posts && posts.slice(itemOffset, endOffset));
+		setPageCount(Math.ceil(posts && posts.length / itemsPerPage));
+	}, [itemOffset, itemsPerPage]);
+
+	// Invoke when user click to request another page.
+	const handlePageClick = (event) => {
+		const newOffset = (event.selected * itemsPerPage) % posts.length;
+		console.log(
+			`User requested page number ${event.selected}, which is offset ${newOffset}`
+		);
+		setItemOffset(newOffset);
+	};
+
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -84,8 +101,8 @@ const Post = () => {
 						</button>
 					</div>
 					<div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 ">
-						{posts &&
-							posts.map((data) => (
+						{currentItems &&
+							currentItems.map((data) => (
 								<div
 									key={data.id}
 									className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
@@ -172,6 +189,28 @@ const Post = () => {
 								</div>
 							))}
 					</div>
+					{/* {posts && posts.length < pageCount && ( */}
+					<ReactPaginate
+						nextLabel=">"
+						onPageChange={handlePageClick}
+						pageRangeDisplayed={3}
+						marginPagesDisplayed={2}
+						pageCount={pageCount}
+						previousLabel="<"
+						pageClassName="page-item"
+						pageLinkClassName="page-link"
+						previousClassName="page-item"
+						previousLinkClassName="page-link"
+						nextClassName="page-item"
+						nextLinkClassName="page-link"
+						breakLabel="..."
+						breakClassName="break-me"
+						breakLinkClassName="page-link"
+						containerClassName="pagination"
+						activeClassName="active"
+						renderOnZeroPageCount={null}
+					/>
+					{/* )} */}
 				</div>
 			</div>
 			<PostUpdate

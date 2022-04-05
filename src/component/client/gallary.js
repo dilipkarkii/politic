@@ -10,9 +10,13 @@ import {
 	GALLARY_UPDATE_RESET,
 } from "../../constants/GallaryConstants";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const Gallary = () => {
 	const dispatch = useDispatch();
+	const [start, setStart] = useState(0);
+	const [end, setEnd] = useState(4);
+
 	const gallaryList = useSelector((state) => state.gallaryList);
 	const { loading, success, gallarys } = gallaryList;
 	const gallaryAdd = useSelector((state) => state.gallaryAdd);
@@ -21,6 +25,8 @@ const Gallary = () => {
 	const { success: successDelete } = gallaryDelete;
 	const gallaryUpdate = useSelector((state) => state.gallaryUpdate);
 	const { success: successUpdate } = gallaryUpdate;
+
+	console.log("gallarys", gallarys);
 
 	useEffect(() => {
 		dispatch(listGallary(userId));
@@ -67,6 +73,29 @@ const Gallary = () => {
 	const onDelete = async (id) => {
 		dispatch(deleteGallary(id));
 	};
+	let itemsPerPage = 2;
+	const [currentItems, setCurrentItems] = useState(null);
+	const [pageCount, setPageCount] = useState(0);
+	// Here we use item offsets; we could also use page offsets
+	// following the API or data you're working with.
+	const [itemOffset, setItemOffset] = useState(0);
+
+	useEffect(() => {
+		// Fetch items from another resources.
+		const endOffset = itemOffset + itemsPerPage;
+		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+		setCurrentItems(gallarys && gallarys.slice(itemOffset, endOffset));
+		setPageCount(Math.ceil(gallarys && gallarys.length / itemsPerPage));
+	}, [itemOffset, itemsPerPage]);
+
+	// Invoke when user click to request another page.
+	const handlePageClick = (event) => {
+		const newOffset = (event.selected * itemsPerPage) % gallarys.length;
+		console.log(
+			`User requested page number ${event.selected}, which is offset ${newOffset}`
+		);
+		setItemOffset(newOffset);
+	};
 
 	return (
 		<>
@@ -107,8 +136,8 @@ const Gallary = () => {
 						</div>
 					) : (
 						<div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-							{gallarys &&
-								gallarys.map((images) => (
+							{currentItems &&
+								currentItems.map((images) => (
 									<div className="" key={images.id}>
 										<div className="grid grid-cols-12 gap-1">
 											<div className="relative col-span-10">
@@ -203,6 +232,26 @@ const Gallary = () => {
 								))}
 						</div>
 					)}
+					<ReactPaginate
+						nextLabel=">"
+						onPageChange={handlePageClick}
+						pageRangeDisplayed={3}
+						marginPagesDisplayed={2}
+						pageCount={pageCount}
+						previousLabel="<"
+						pageClassName="page-item"
+						pageLinkClassName="page-link"
+						previousClassName="page-item"
+						previousLinkClassName="page-link"
+						nextClassName="page-item"
+						nextLinkClassName="page-link"
+						breakLabel="..."
+						breakClassName="break-me"
+						breakLinkClassName="page-link"
+						containerClassName="pagination"
+						activeClassName="active"
+						renderOnZeroPageCount={null}
+					/>
 				</div>
 			</div>
 			<GalUpdate
