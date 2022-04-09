@@ -17,6 +17,19 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 	const userId = JSON.parse(getuserId).id;
 	const [message, setMessage] = useState("");
 
+	const [previewSource, setPreviewSource] = useState();
+
+	const previewFile = (file) => {
+		console.log(file);
+		const reader = new FileReader();
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+		reader.onloadend = () => {
+			setPreviewSource(reader.result);
+		};
+	};
+
 	useEffect(() => {
 		setTimeout(() => setMessage(""), 3000);
 		if (eventDetail) {
@@ -39,9 +52,10 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 		if (loc.length > 100) {
 			setMessage("Please Enter less than 100 character");
 		}
-		if (link.length > 100) {
-			setMessage("Please Enter less than 100 character");
-		} else {
+		// if (link.length > 100) {
+		// 	setMessage("Please Enter less than 100 character");
+		// }
+		else {
 			setTimeout(() => setMessage(""), 3000);
 			dispatch(
 				updateEvent(
@@ -69,12 +83,25 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 							Photo
 						</label>
 						<input
-							onChange={(e) => setImage(e.target.files[0])}
+							// onChange={(e) => setImage(e.target.files[0])}
+							onChange={(e) => (
+								setImage(e.target.files[0]), previewFile(e.target.files[0])
+							)}
 							accept="image/png, image/jpg, image/jpeg"
-							id="poto"
+							id="photo"
 							type="file"
-							className="block w-full border mt-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
+							required
+							className="block w-full mt-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 						/>
+						{previewSource && (
+							<div className="w-full mt-3 h-[260px]">
+								<img
+									src={previewSource}
+									className="w-full h-full object-fit profile-img"
+									alt="profile"
+								/>
+							</div>
+						)}
 					</div>
 					<div className="mt-2 ">
 						<label className="block text-sm font-medium text-gray-700">

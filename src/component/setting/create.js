@@ -34,17 +34,17 @@ const Create = ({ title, closeModal, isOpen }) => {
 		if (fname.length > 100) {
 			setMessage("Please Enter less than 100 character");
 		}
-		if (mname.length > 100) {
-			setMessage("Please Enter less than 100 character");
-		}
+		// if (mname.length > 100) {
+		// 	setMessage("Please Enter less than 100 character");
+		// }
 		if (lastname.length > 100) {
 			setMessage("Please Enter less than 100 character");
 		}
 		if (uname.length > 15) {
 			setMessage("Please Enter less than 15 character");
 		}
-		if (phone.length > 100) {
-			setMessage("Please Enter only 10 character");
+		if (phone.length < 10) {
+			setMessage("Please Enter  valid phone no");
 		}
 		if (address.length > 50) {
 			setMessage("Please Enter less than 50 character");
@@ -182,7 +182,9 @@ const Create = ({ title, closeModal, isOpen }) => {
 						type="tel"
 						id="phone"
 						name="phone"
-						pattern="[0-9]{10}"
+						// pattern="[0-9]{10}"
+						maxlength="10"
+						pattern="\d{10}"
 						required
 						placeholder="please enter only 10 no "
 						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "

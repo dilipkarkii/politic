@@ -14,6 +14,19 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
 
+	// const [previewSource, setPreviewSource] = useState();
+
+	// const previewFile = (file) => {
+	// 	console.log(file);
+	// 	const reader = new FileReader();
+	// 	if (file) {
+	// 		reader.readAsDataURL(file);
+	// 	}
+	// 	reader.onloadend = () => {
+	// 		setPreviewSource(reader.result);
+	// 	};
+	// };
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(addManifesto(file, userId));
@@ -36,6 +49,9 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 					</label>
 					<input
 						onChange={(e) => setFile(e.target.files[0])}
+						// onChange={(e) => (
+						// 	setFile(e.target.files[0]), previewFile(e.target.files[0])
+						// )}
 						accept="application/pdf,.docx,"
 						id="file"
 						type="file"
@@ -43,6 +59,15 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 						className="block w-full mt-4 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
+				{/* {previewSource && (
+					<div className="w-full h-[260px]">
+						<img
+							src={previewSource}
+							className="w-full h-full object-fit profile-img"
+							alt="profile"
+						/>
+					</div>
+				)} */}
 				<div className="mt-5 ">
 					<button
 						type="submit"

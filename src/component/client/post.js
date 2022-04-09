@@ -12,7 +12,7 @@ import {
 	POSTIMAGE_DELETE_REQUEST,
 } from "../../constants/PostImageConstants";
 import ReactPaginate from "react-paginate";
-import { data } from "autoprefixer";
+// import { data } from "autoprefixer";
 
 const Post = () => {
 	const dispatch = useDispatch();
@@ -33,6 +33,8 @@ const Post = () => {
 	const { success: successPostDelete } = postDelete;
 	const postImageUpdate = useSelector((state) => state.postImageUpdate);
 	const { success: successUpdate } = postImageUpdate;
+	const postUpdate = useSelector((state) => state.postUpdate);
+	const { success: successPostUpdate } = postUpdate;
 
 	console.log(postData);
 
@@ -51,39 +53,40 @@ const Post = () => {
 		dispatch({ type: POSTIMAGE_DELETE_REQUEST });
 		dispatch({ type: POSTIMAGE_ADD_RESET });
 		dispatch({ type: POSTIMAGE_UPDATE_RESET });
-		if (successUpdate) {
+		dispatch({ type: POST_UPDATE_RESET });
+		if (successUpdate || successPostUpdate) {
 			setIsOpen(false);
 			setOpenUpdate(false);
 		}
-	}, [successPostImage, successPostDelete, successUpdate]);
+	}, [successPostImage, successPostDelete, successUpdate, successPostUpdate]);
 
 	const onDelete = (id) => {
 		dispatch(deletePost(id));
 	};
 
-	let itemsPerPage = 10;
-	const [currentItems, setCurrentItems] = useState(null);
-	const [pageCount, setPageCount] = useState(0);
-	// Here we use item offsets; we could also use page offsets
-	// following the API or data you're working with.
-	const [itemOffset, setItemOffset] = useState(0);
+	// let itemsPerPage = 10;
+	// const [currentItems, setCurrentItems] = useState(null);
+	// const [pageCount, setPageCount] = useState(0);
+	// // Here we use item offsets; we could also use page offsets
+	// // following the API or data you're working with.
+	// const [itemOffset, setItemOffset] = useState(0);
 
-	useEffect(() => {
-		// Fetch items from another resources.
-		const endOffset = itemOffset + itemsPerPage;
-		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-		setCurrentItems(posts && posts.slice(itemOffset, endOffset));
-		setPageCount(Math.ceil(posts && posts.length / itemsPerPage));
-	}, [itemOffset, itemsPerPage]);
+	// useEffect(() => {
+	// 	// Fetch items from another resources.
+	// 	const endOffset = itemOffset + itemsPerPage;
+	// 	console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+	// 	setCurrentItems(posts && posts.slice(itemOffset, endOffset));
+	// 	setPageCount(Math.ceil(posts && posts.length / itemsPerPage));
+	// }, [itemOffset, itemsPerPage]);
 
-	// Invoke when user click to request another page.
-	const handlePageClick = (event) => {
-		const newOffset = (event.selected * itemsPerPage) % posts.length;
-		console.log(
-			`User requested page number ${event.selected}, which is offset ${newOffset}`
-		);
-		setItemOffset(newOffset);
-	};
+	// // Invoke when user click to request another page.
+	// const handlePageClick = (event) => {
+	// 	const newOffset = (event.selected * itemsPerPage) % posts.length;
+	// 	console.log(
+	// 		`User requested page number ${event.selected}, which is offset ${newOffset}`
+	// 	);
+	// 	setItemOffset(newOffset);
+	// };
 
 	return (
 		<>
@@ -101,8 +104,10 @@ const Post = () => {
 						</button>
 					</div>
 					<div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 ">
-						{currentItems &&
-							currentItems.map((data) => (
+						{/* {currentItems &&
+							currentItems.map((data) => ( */}
+						{posts &&
+							posts.map((data) => (
 								<div
 									key={data.id}
 									className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
@@ -190,7 +195,7 @@ const Post = () => {
 							))}
 					</div>
 					{/* {posts && posts.length < pageCount && ( */}
-					<ReactPaginate
+					{/* <ReactPaginate
 						nextLabel=">"
 						onPageChange={handlePageClick}
 						pageRangeDisplayed={3}
@@ -209,7 +214,7 @@ const Post = () => {
 						containerClassName="pagination"
 						activeClassName="active"
 						renderOnZeroPageCount={null}
-					/>
+					/> */}
 					{/* )} */}
 				</div>
 			</div>

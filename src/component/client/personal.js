@@ -103,8 +103,10 @@ const Personal = () => {
 			const { data } = await axios.get(
 				`http://backend.publicaffairsnepal.com/manifesto/`
 			);
-			const result = data.filter((value) => value.politician === userId);
-			console.log("data", result);
+			const result = data.results.filter(
+				(value) => value.politician === userId
+			);
+			console.log("datamenkjdlkjdf", data);
 			setManifestodata(result[0]);
 			setManifesto(data);
 		};
@@ -126,7 +128,7 @@ const Personal = () => {
 									<div>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
-											className="h-6 w-6 mr-4 mt-1"
+											className="w-6 h-6 mt-1 mr-4"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
@@ -268,7 +270,7 @@ const Personal = () => {
 													<p>Address: {personals && personals.address}</p>
 													<p>Education: {personals && personals.education}</p>
 													<p>
-														Political Party:
+														Political Party: &nbsp;
 														{personals && personals.politicalBackground}
 													</p>
 													<p>

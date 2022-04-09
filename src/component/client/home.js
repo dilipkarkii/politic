@@ -153,53 +153,53 @@ const Home = () => {
 						</Link>
 					</div>
 
-					{loading ? (
-						<div className="w-[85px] m-auto">
-							<div className="justify-center animate-spin">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="feather feather-refresh-cw"
-								>
-									<polyline points="23 4 23 10 17 10"></polyline>
-									<polyline points="1 20 1 14 7 14"></polyline>
-									<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-								</svg>
-							</div>
+					{/* {loading ? ( */}
+					{/* <div className="w-[85px] m-auto">
+						<div className="justify-center animate-spin">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								className="feather feather-refresh-cw"
+							>
+								<polyline points="23 4 23 10 17 10"></polyline>
+								<polyline points="1 20 1 14 7 14"></polyline>
+								<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+							</svg>
 						</div>
-					) : (
-						<div className="grid grid-cols-4 gap-4 mt-5">
-							{gallarys &&
-								gallarys.slice(0, 4).map((images) => (
-									<div className="" key={images.id}>
-										<div
-											className="relative max-w-xs bg-no-repeat bg-cover"
-											style={{ height: "200px", width: "265px" }}
-										>
-											<img
-												src={`http://backend.publicaffairsnepal.com/${
-													images.image.split("8000/")[1]
-												}`}
-												alt="Louvre"
-												className="block object-cover object-center w-full h-full mr-5 rounded-lg"
-												// onClick={() => setShowModal(true)}
-											/>
-											{/* px-5 bottom-0 pt-20 text-center */}
-											<div className="absolute top-0 left-0 right-0 block w-full h-full text-sm font-semibold text-gray-900 transition duration-300 ease-in-out bg-fixed border-solid rounded-lg opacity-0 hover:opacity-70 border-1 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-												<p className="bottom-0 px-5 pt-20 text-center">
-													{images.description}
-												</p>
-											</div>
+					</div> */}
+					{/* ) : ( */}
+					<div className="grid grid-cols-4 gap-4 mt-5">
+						{gallarys &&
+							gallarys.slice(0, 4).map((images) => (
+								<div className="" key={images.id}>
+									<div
+										className="relative max-w-xs bg-no-repeat bg-cover w-full h-[200px]"
+										// style={{ height: "200px", width: "265px" }}
+									>
+										<img
+											src={`http://backend.publicaffairsnepal.com/${
+												images.image.split("8000/")[1]
+											}`}
+											alt="Louvre"
+											className="block object-center w-full h-full mr-5 rounded-lg object-fit"
+											// onClick={() => setShowModal(true)}
+										/>
+										{/* px-5 bottom-0 pt-20 text-center */}
+										<div className="absolute top-0 left-0 right-0 block w-full h-full text-sm font-semibold text-gray-900 transition duration-300 ease-in-out bg-fixed border-solid rounded-lg opacity-0 hover:opacity-70 border-1 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+											<p className="bottom-0 px-5 pt-20 text-center">
+												{images.description}
+											</p>
 										</div>
 									</div>
-								))}
-						</div>
-					)}
+								</div>
+							))}
+					</div>
+					{/* )} */}
 
 					{/* posts start */}
 
@@ -216,7 +216,7 @@ const Home = () => {
 							</button>
 						</Link>
 					</div>
-					{postloading ? (
+					{/* {postloading ? (
 						<div className="w-[85px] m-auto">
 							<div className="justify-center animate-spin">
 								<svg
@@ -235,60 +235,60 @@ const Home = () => {
 								</svg>
 							</div>
 						</div>
-					) : (
-						<div className="grid gap-4 mt-5 sm:grid-cols-2 md:grid-cols-4">
-							{posts &&
-								posts.slice(0, 4).map((data) => (
-									<div
-										key={data.id}
-										className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
-									>
-										<img
-											className="w-full h-32 rounded-t-lg"
-											src={`http://backend.publicaffairsnepal.com/${
-												data.postimage_set[0].image.split("8000/")[1]
-											}`}
-											alt=""
-										/>
+					) : ( */}
+					<div className="grid gap-4 mt-5 sm:grid-cols-2 md:grid-cols-4">
+						{posts &&
+							posts.slice(0, 4).map((data) => (
+								<div
+									key={data.id}
+									className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
+								>
+									<img
+										className="w-full h-32 rounded-t-lg"
+										src={`http://backend.publicaffairsnepal.com/${
+											data.postimage_set[0].image.split("8000/")[1]
+										}`}
+										alt=""
+									/>
 
-										<div className="px-4 py-4">
-											<h5 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-												{/* {data.title.slice(0, 30)} */}
-												{data.title.length > 24
-													? data.title.substring(0, 21) + "..."
-													: data.title}
-											</h5>
+									<div className="px-4 py-4">
+										<h5 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
+											{/* {data.title.slice(0, 30)} */}
+											{data.title.length > 24
+												? data.title.substring(0, 21) + "..."
+												: data.title}
+										</h5>
 
-											<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-												{/* {data.description.slice(0, 10)} */}
-												{data.description.length > 81
-													? data.description.substring(0, 80) + "..."
-													: data.description}
-											</p>
-											<div className="flex justify-between">
-												<Link to={`/detail/${data.id}`}>
-													<button className="inline-flex items-start px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-														Read more
-														<svg
-															className="w-4 h-4 ml-2 -mr-1"
-															fill="currentColor"
-															viewBox="0 0 20 20"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																fillRule="evenodd"
-																d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-																clipRule="evenodd"
-															></path>
-														</svg>
-													</button>
-												</Link>
-											</div>
+										<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+											{/* {data.description.slice(0, 10)} */}
+											{data.description.length > 81
+												? data.description.substring(0, 80) + "..."
+												: data.description}
+										</p>
+										<div className="flex justify-between">
+											<Link to={`/detail/${data.id}`}>
+												<button className="inline-flex items-start px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+													Read more
+													<svg
+														className="w-4 h-4 ml-2 -mr-1"
+														fill="currentColor"
+														viewBox="0 0 20 20"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															fillRule="evenodd"
+															d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+															clipRule="evenodd"
+														></path>
+													</svg>
+												</button>
+											</Link>
 										</div>
 									</div>
-								))}
-						</div>
-					)}
+								</div>
+							))}
+					</div>
+					{/* )} */}
 					{/* post ends */}
 
 					{/* event start */}
@@ -306,7 +306,7 @@ const Home = () => {
 							</button>
 						</Link>
 					</div>
-					{eventloading ? (
+					{/* {eventloading ? (
 						<div className="w-[85px] m-auto">
 							<div className="justify-center animate-spin">
 								<svg
@@ -325,60 +325,60 @@ const Home = () => {
 								</svg>
 							</div>
 						</div>
-					) : (
-						<div className="grid gap-4 mt-5 sm:grid-cols-2 md:grid-cols-4">
-							{events &&
-								events.map((data) => (
-									<div
-										key={data.id}
-										className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
-									>
-										<img
-											className="w-full h-32 rounded-t-lg"
-											src={`http://backend.publicaffairsnepal.com/${
-												data.image.split("8000/")[1]
-											}`}
-											alt=""
-										/>
+					) : ( */}
+					<div className="grid gap-4 mt-5 sm:grid-cols-2 md:grid-cols-4">
+						{events &&
+							events.map((data) => (
+								<div
+									key={data.id}
+									className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
+								>
+									<img
+										className="w-full h-32 rounded-t-lg"
+										src={`http://backend.publicaffairsnepal.com/${
+											data.image.split("8000/")[1]
+										}`}
+										alt=""
+									/>
 
-										<div className="px-4 py-4">
-											<h5 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-												{/* {data.title.slice(0, 30)} */}
-												{data.title.length > 24
-													? data.title.substring(0, 21) + "..."
-													: data.title}
-											</h5>
+									<div className="px-4 py-4">
+										<h5 className="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
+											{/* {data.title.slice(0, 30)} */}
+											{data.title.length > 24
+												? data.title.substring(0, 21) + "..."
+												: data.title}
+										</h5>
 
-											<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-												{/* {data.description.slice(0, 10)} */}
-												{data.description.length > 81
-													? data.description.substring(0, 80) + "..."
-													: data.description}
-											</p>
-											<div className="flex justify-between">
-												<Link to={`/eventdetail/${data.id}`}>
-													<button className="inline-flex items-start px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-														Read more
-														<svg
-															className="w-4 h-4 ml-2 -mr-1"
-															fill="currentColor"
-															viewBox="0 0 20 20"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																fillRule="evenodd"
-																d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-																clipRule="evenodd"
-															></path>
-														</svg>
-													</button>
-												</Link>
-											</div>
+										<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+											{/* {data.description.slice(0, 10)} */}
+											{data.description.length > 81
+												? data.description.substring(0, 80) + "..."
+												: data.description}
+										</p>
+										<div className="flex justify-between">
+											<Link to={`/eventdetail/${data.id}`}>
+												<button className="inline-flex items-start px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+													Read more
+													<svg
+														className="w-4 h-4 ml-2 -mr-1"
+														fill="currentColor"
+														viewBox="0 0 20 20"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															fillRule="evenodd"
+															d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+															clipRule="evenodd"
+														></path>
+													</svg>
+												</button>
+											</Link>
 										</div>
 									</div>
-								))}
-						</div>
-					)}
+								</div>
+							))}
+					</div>
+					{/* )} */}
 					{/* event end */}
 				</div>
 			</div>

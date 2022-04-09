@@ -79,7 +79,7 @@ const Events = () => {
 			setEventsData(data);
 		};
 		fetchData();
-	}, [id]);
+	}, [id, successUpdate]);
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -148,7 +148,7 @@ const Events = () => {
 							<div className="border-t border-gray-200">
 								<dl>
 									<div className="">
-										<dd className="w-full h-[250px] md:h-[500px] m-auto">
+										<dd className="w-full h-[280px] md:h-[500px] m-auto">
 											<img
 												src={`http://backend.publicaffairsnepal.com/${
 													eventsData &&
@@ -156,7 +156,7 @@ const Events = () => {
 													eventsData.image.split("8000/")[1]
 												}`}
 												alt="Louvre"
-												className="object-cover w-full h-full"
+												className="w-full h-full object-fit"
 											/>
 										</dd>
 									</div>
@@ -216,7 +216,9 @@ const Events = () => {
 												target="_blank"
 												rel="noreferrer"
 											>
-												{eventsData && eventsData.link}
+												{eventsData && eventsData.link === "undefined"
+													? ""
+													: eventsData && eventsData.link}
 											</a>
 										</dd>
 									</div>

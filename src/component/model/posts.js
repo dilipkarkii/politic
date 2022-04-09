@@ -61,7 +61,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (title.length > 100) {
+		if (Title.length > 100) {
 			setMessage("Please Enter less than 100 character");
 		} else {
 			setTimeout(() => setMessage(""), 3000);
@@ -82,6 +82,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 							className="block w-full h-10 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 							onChange={(e) => setTitle(e.target.value)}
 							id="name"
+							value={Title}
 							placeholder="Enter Title"
 							type="text"
 							required
@@ -126,6 +127,7 @@ const Posts = ({ title, closeModal, isOpen }) => {
 							type="file"
 							onChange={(e) => setImg(e.target.files[0])}
 							multiple
+							required
 						/>
 					</div>
 					<button

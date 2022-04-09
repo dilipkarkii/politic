@@ -1,4 +1,3 @@
-// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Gal from "../model/gal";
 import GalUpdate from "../update/Galupdate";
@@ -9,8 +8,6 @@ import {
 	GALLARY_DELETE_RESET,
 	GALLARY_UPDATE_RESET,
 } from "../../constants/GallaryConstants";
-import axios from "axios";
-import ReactPaginate from "react-paginate";
 
 const Gallary = () => {
 	const dispatch = useDispatch();
@@ -73,29 +70,29 @@ const Gallary = () => {
 	const onDelete = async (id) => {
 		dispatch(deleteGallary(id));
 	};
-	let itemsPerPage = 5;
-	const [currentItems, setCurrentItems] = useState(null);
-	const [pageCount, setPageCount] = useState(0);
-	// Here we use item offsets; we could also use page offsets
-	// following the API or data you're working with.
-	const [itemOffset, setItemOffset] = useState(0);
+	// let itemsPerPage = 5;
+	// const [currentItems, setCurrentItems] = useState(null);
+	// const [pageCount, setPageCount] = useState(0);
+	// // Here we use item offsets; we could also use page offsets
+	// // following the API or data you're working with.
+	// const [itemOffset, setItemOffset] = useState(0);
 
-	useEffect(() => {
-		// Fetch items from another resources.
-		const endOffset = itemOffset + itemsPerPage;
-		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-		setCurrentItems(gallarys && gallarys.slice(itemOffset, endOffset));
-		setPageCount(Math.ceil(gallarys && gallarys.length / itemsPerPage));
-	}, [itemOffset, itemsPerPage]);
+	// useEffect(() => {
+	// 	// Fetch items from another resources.
+	// 	const endOffset = itemOffset + itemsPerPage;
+	// 	console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+	// 	setCurrentItems(gallarys && gallarys.slice(itemOffset, endOffset));
+	// 	setPageCount(Math.ceil(gallarys && gallarys.length / itemsPerPage));
+	// }, [itemOffset, itemsPerPage]);
 
 	// Invoke when user click to request another page.
-	const handlePageClick = (event) => {
-		const newOffset = (event.selected * itemsPerPage) % gallarys.length;
-		console.log(
-			`User requested page number ${event.selected}, which is offset ${newOffset}`
-		);
-		setItemOffset(newOffset);
-	};
+	// const handlePageClick = (event) => {
+	// 	const newOffset = (event.selected * itemsPerPage) % gallarys.length;
+	// 	console.log(
+	// 		`User requested page number ${event.selected}, which is offset ${newOffset}`
+	// 	);
+	// 	setItemOffset(newOffset);
+	// };
 
 	return (
 		<>
@@ -136,8 +133,10 @@ const Gallary = () => {
 						</div>
 					) : (
 						<div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-							{currentItems &&
-								currentItems.map((images) => (
+							{/* {currentItems &&
+								currentItems.map((images) => ( */}
+							{gallarys &&
+								gallarys.map((images) => (
 									<div className="" key={images.id}>
 										<div className="grid grid-cols-12 gap-1">
 											<div className="relative col-span-10">
@@ -232,7 +231,7 @@ const Gallary = () => {
 								))}
 						</div>
 					)}
-					<ReactPaginate
+					{/* <ReactPaginate
 						nextLabel=">"
 						onPageChange={handlePageClick}
 						pageRangeDisplayed={3}
@@ -251,7 +250,7 @@ const Gallary = () => {
 						containerClassName="pagination"
 						activeClassName="active"
 						renderOnZeroPageCount={null}
-					/>
+					/> */}
 				</div>
 			</div>
 			<GalUpdate
@@ -293,14 +292,14 @@ const Gallary = () => {
 								{/*body*/}
 								<div
 									className="relative flex-auto p-6 "
-									style={{ height: "500px", width: "900px" }}
+									style={{ height: "550px", width: "900px" }}
 								>
 									<img
 										src={`http://backend.publicaffairsnepal.com/${
 											showImage.image.split("8000/")[1]
 										}`}
 										alt="Louvre"
-										className="block object-cover object-center w-full h-full rounded-lg"
+										className="block object-center w-full h-full rounded-lg object-fit"
 										// onClick={() => setShowModal(true)}
 									/>
 								</div>

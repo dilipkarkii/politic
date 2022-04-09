@@ -20,6 +20,19 @@ const Even = ({ title, closeModal, isOpen }) => {
 	const userId = JSON.parse(getuserId).id;
 	const [message, setMessage] = useState("");
 
+	const [previewSource, setPreviewSource] = useState();
+
+	const previewFile = (file) => {
+		console.log(file);
+		const reader = new FileReader();
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+		reader.onloadend = () => {
+			setPreviewSource(reader.result);
+		};
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (name.length > 100) {
@@ -28,9 +41,10 @@ const Even = ({ title, closeModal, isOpen }) => {
 		if (loc.length > 100) {
 			setMessage("Please Enter less than 100 character");
 		}
-		if (link.length > 100) {
-			setMessage("Please Enter less than 100 character");
-		} else {
+		// if (link.length > 100) {
+		// 	setMessage("Please Enter less than 100 character");
+		// }
+		else {
 			setTimeout(() => setMessage(""), 3000);
 			dispatch(
 				addEvent(name, des, agenda, loc, date, time, link, image, userId)
@@ -53,6 +67,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 			setLink("");
 		}
 	}, [successAdd]);
+
 	return (
 		<>
 			<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -62,12 +77,25 @@ const Even = ({ title, closeModal, isOpen }) => {
 							Photo
 						</label>
 						<input
-							onChange={(e) => setImage(e.target.files[0])}
+							// onChange={(e) => setImage(e.target.files[0])}
+							onChange={(e) => (
+								setImage(e.target.files[0]), previewFile(e.target.files[0])
+							)}
 							accept="image/png, image/jpg, image/jpeg"
 							type="file"
 							className="w-full border border-gray-300 rounded-md"
+							required
 						/>
 					</div>
+					{previewSource && (
+						<div className="w-full mt-3 h-[260px]">
+							<img
+								src={previewSource}
+								className="w-full h-full object-fit profile-img"
+								alt="profile"
+							/>
+						</div>
+					)}
 					<div className="mt-2 ">
 						<label className="block text-sm font-medium text-gray-700">
 							Campaign Name
@@ -164,7 +192,7 @@ const Even = ({ title, closeModal, isOpen }) => {
 							value={link}
 							placeholder="Enter Links"
 							type="url"
-						/>{" "}
+						/>
 						<span className="text-red-700">{message}</span>
 					</div>
 					<br />

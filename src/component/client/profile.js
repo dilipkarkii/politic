@@ -398,13 +398,13 @@ const Profile = () => {
 				profileDetail={profileDetail}
 			/>
 			<AwardUpdate
-				title="Update achivements"
+				title="Update award"
 				closeModal={closeAwardUpdateModal}
 				isOpen={openAwardUpdate}
 				awardDetail={awardDetail}
 			/>
 			<ContriUpdate
-				title="Update achivements"
+				title="Update Contribution"
 				closeModal={closeContriUpdateModal}
 				isOpen={openContriUpdate}
 				contriDetail={contriDetail}
