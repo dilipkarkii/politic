@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { updateEvent } from "../../actions/EventAction";
+import { EVENT_UPDATE_RESET } from "../../constants/EventConstants";
 
 const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 	const dispatch = useDispatch();
@@ -29,6 +30,16 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 			setPreviewSource(reader.result);
 		};
 	};
+
+	const eventUpdate = useSelector((state) => state.eventUpdate);
+	const { success: successAdd } = eventUpdate;
+
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: EVENT_UPDATE_RESET });
+			setPreviewSource("");
+		}
+	}, [successAdd]);
 
 	useEffect(() => {
 		setTimeout(() => setMessage(""), 3000);

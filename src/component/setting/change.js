@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "../../sidebar";
-import Navbar from "../Dashboard/navbar";
+import Navbar from "../Dashboard/navbar1";
 
 const Change = () => {
 	const [newpwd, setNewpwd] = useState("");

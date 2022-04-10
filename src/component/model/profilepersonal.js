@@ -27,6 +27,8 @@ const PersonalProfile = ({ title, closeModal, isOpen }) => {
 	// 	};
 	// };
 
+	
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(addManifesto(file, userId));

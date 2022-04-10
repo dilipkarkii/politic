@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Planmodel from "../model/plan";
 import Dashnav from "./Dashnav";
-import Navbartop from "./navbar";
+import Navbartop from "./navbar1";
 
 const Dashplan = () => {
 	let [isOpen, setIsOpen] = useState(false);

@@ -53,6 +53,9 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 		}
 	}, [personalDetail]);
 
+
+	
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (fname.length > 100) {

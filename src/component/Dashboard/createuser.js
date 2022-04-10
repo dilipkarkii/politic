@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../sidebar";
-import Navbar from "./navbar";
+import Navbar from "./navbar1";
 
 const Createuser = () => {
 	const admin = "haha";

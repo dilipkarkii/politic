@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Gal from "../model/gal";
 import Dashnav from "./Dashnav";
 // import axios from "axios";
-import Navbartop from "./navbar";
+import Navbartop from "./navbar1";
 
 const Dashgall = () => {
 	let [isOpen, setIsOpen] = useState(false);

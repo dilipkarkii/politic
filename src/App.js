@@ -34,6 +34,7 @@ import EventHome from "./component/client/eventHome";
 import Suggestion from "./component/client/Suggestion";
 import Policy from "./component/client/policy";
 import Sanjayapolicy from "./policy/Sanjayapolicy";
+import Satkarphuyalpolicy from "./policy/Satkarphuyalpolicy";
 
 const App = () => {
 	return (
@@ -223,6 +224,15 @@ const App = () => {
 						element={
 							<ProtectedRoute>
 								<Sanjayapolicy />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/policySatkarphuyalpolicy"
+						element={
+							<ProtectedRoute>
+								<Satkarphuyalpolicy />
 							</ProtectedRoute>
 						}
 					/>

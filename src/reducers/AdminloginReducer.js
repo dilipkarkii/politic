@@ -97,11 +97,11 @@ export const adminloginUpdateReducer = (state = {}, action) => {
 			return {
 				loading: false,
 				success: true,
-				adminlogin: action.payload,
 			};
 		case ADMINLOGIN_UPDATE_FAIL:
 			return {
 				loading: true,
+				success: false,
 				error: action.payload,
 			};
 		case ADMINLOGIN_UPDATE_RESET:

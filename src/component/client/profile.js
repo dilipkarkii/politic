@@ -147,19 +147,7 @@ const Profile = () => {
 	const closeContriUpdateModal = () => {
 		setOpenContriUpdate(false);
 	};
-	// update close
-
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const { data } = await axios.get(
-	// 			`http://backend.publicaffairsnepal.com/politician/${userId}/`
-	// 		);
-	// 		console.log("data", data.politiciancontributions_set);
-	// 		setContriData(data.politiciancontributions_set);
-	// 	};
-	// 	fetchData();
-	// }, []);
-	// api call end
+	
 	return (
 		<>
 			<div className="bg-slate-300">

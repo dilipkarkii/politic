@@ -22,6 +22,13 @@ const Even = ({ title, closeModal, isOpen }) => {
 
 	const [previewSource, setPreviewSource] = useState();
 
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: EVENT_ADD_RESET });
+			setPreviewSource("");
+		}
+	}, [successAdd]);
+
 	const previewFile = (file) => {
 		console.log(file);
 		const reader = new FileReader();

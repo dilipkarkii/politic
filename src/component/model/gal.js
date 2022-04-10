@@ -3,7 +3,10 @@ import Modelwrapper from "./modelwrapper";
 // import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { addGallary } from "../../actions/GallaryAction";
-import { GALLARY_ADD_RESET } from "../../constants/GallaryConstants";
+import {
+	GALLARY_ADD_REQUEST,
+	GALLARY_ADD_RESET,
+} from "../../constants/GallaryConstants";
 
 const Gal = ({ title, closeModal, isOpen }) => {
 	// const url = "http://backend.publicaffairsnepal.com/gallery/";
@@ -20,8 +23,12 @@ const Gal = ({ title, closeModal, isOpen }) => {
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
 
-	
-
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: GALLARY_ADD_REQUEST });
+			setPreviewSource("");
+		}
+	}, [successAdd]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -114,21 +121,21 @@ const Gal = ({ title, closeModal, isOpen }) => {
 
 export default Gal;
 
-	// let formData = new FormData();
-	// formData.append("image", pic);
-	// formData.append("description", des);
-	// formData.append("owner", userId);
+// let formData = new FormData();
+// formData.append("image", pic);
+// formData.append("description", des);
+// formData.append("owner", userId);
 
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	console.log(des, pic);
-	// 	let config = {
-	// 		headers: {
-	// 			"Content-Type": "multipart/form-data",
-	// 		},
-	// 	};
-	// 	const { data } = await axios.post(url, formData, config);
-	// 	if (data) {
-	// 		window.location.reload(true);
-	// 	}
-	// };
+// const handleSubmit = async (e) => {
+// 	e.preventDefault();
+// 	console.log(des, pic);
+// 	let config = {
+// 		headers: {
+// 			"Content-Type": "multipart/form-data",
+// 		},
+// 	};
+// 	const { data } = await axios.post(url, formData, config);
+// 	if (data) {
+// 		window.location.reload(true);
+// 	}
+// };

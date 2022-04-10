@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../actions/PostAction";
 import { addPostImage } from "../../actions/PostImageAction";
 import { POST_ADD_RESET } from "../../constants/PostConstants";
+import { POSTIMAGE_ADD_RESET } from "../../constants/PostImageConstants";
 
 const Posts = ({ title, closeModal, isOpen }) => {
 	const dispatch = useDispatch();
@@ -58,6 +59,25 @@ const Posts = ({ title, closeModal, isOpen }) => {
 	// 	// 	})
 	// 	// 	.catch((error) => console.log("error", error));
 	// };
+	const [previewSource, setPreviewSource] = useState();
+
+	useEffect(() => {
+		if (successPost) {
+			dispatch({ type: POST_ADD_RESET });
+			setPreviewSource("");
+		}
+	}, [successPost]);
+
+	const previewFile = (file) => {
+		console.log(file);
+		const reader = new FileReader();
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+		reader.onloadend = () => {
+			setPreviewSource(reader.result);
+		};
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -125,11 +145,23 @@ const Posts = ({ title, closeModal, isOpen }) => {
 						<input
 							className="w-full mt-2 border border-gray-300 rounded-md"
 							type="file"
-							onChange={(e) => setImg(e.target.files[0])}
+							// onChange={(e) => setImg(e.target.files[0])}
+							onChange={(e) => (
+								setImg(e.target.files[0]), previewFile(e.target.files[0])
+							)}
 							multiple
 							required
 						/>
 					</div>
+					{previewSource && (
+						<div className="w-full mt-3 h-[260px]">
+							<img
+								src={previewSource}
+								className="w-full h-full object-fit profile-img"
+								alt="profile"
+							/>
+						</div>
+					)}
 					<button
 						type="submit"
 						// className="mt-5 border-2 rounded-md border-slate-900 bg-slate-300"

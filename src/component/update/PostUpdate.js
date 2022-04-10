@@ -3,6 +3,7 @@ import Modelwrapper from "../model/modelwrapper";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePost } from "../../actions/PostAction";
+import { POST_UPDATE_RESET } from "../../constants/PostConstants";
 
 const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 	const [postTitle, setpostTitle] = useState("");
@@ -14,6 +15,16 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 	const getuserId = localStorage.getItem("userId");
 	const userId = JSON.parse(getuserId).id;
 	const [message, setMessage] = useState("");
+
+	const postUpdate = useSelector((state) => state.postUpdate);
+	const { success: successAdd } = postUpdate;
+
+	useEffect(() => {
+		if (successAdd) {
+			dispatch({ type: POST_UPDATE_RESET });
+			setPreviewSource("");
+		}
+	}, [successAdd]);
 
 	const dispatch = useDispatch();
 	setTimeout(() => setMessage(""), 3000);
@@ -135,7 +146,7 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 						/>
 					</div>
 					{previewSource && (
-						<div className="w-full h-[260px]">
+						<div className="w-full mt-3 h-[260px]">
 							<img
 								src={previewSource}
 								className="w-full h-full object-fit profile-img"
