@@ -1,3 +1,4 @@
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Gal from "../model/gal";
 import GalUpdate from "../update/Galupdate";
@@ -8,6 +9,8 @@ import {
 	GALLARY_DELETE_RESET,
 	GALLARY_UPDATE_RESET,
 } from "../../constants/GallaryConstants";
+import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const Gallary = () => {
 	const dispatch = useDispatch();
@@ -85,7 +88,7 @@ const Gallary = () => {
 	// 	setPageCount(Math.ceil(gallarys && gallarys.length / itemsPerPage));
 	// }, [itemOffset, itemsPerPage]);
 
-	// Invoke when user click to request another page.
+	// // Invoke when user click to request another page.
 	// const handlePageClick = (event) => {
 	// 	const newOffset = (event.selected * itemsPerPage) % gallarys.length;
 	// 	console.log(
