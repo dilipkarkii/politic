@@ -295,7 +295,7 @@ const Satkarphuyalpolicy = () => {
 							}}
 						>
 							&nbsp;means the software program provided by the Company
-							downloaded by You on any electronic device, named Sanjaya Khadka.
+							downloaded by You on any electronic device, named Satkar Phuyal.
 						</span>
 					</li>
 					<li
