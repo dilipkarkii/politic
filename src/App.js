@@ -35,6 +35,7 @@ import Suggestion from "./component/client/Suggestion";
 import Policy from "./component/client/policy";
 import Sanjayapolicy from "./policy/Sanjayapolicy";
 import Satkarphuyalpolicy from "./policy/Satkarphuyalpolicy";
+import Raseeladhakaripolicy from "./policy/Raseeladhakaripolicy";
 
 const App = () => {
 	return (
@@ -233,6 +234,15 @@ const App = () => {
 						element={
 							// <ProtectedRoute>
 							<Satkarphuyalpolicy />
+							// </ProtectedRoute>
+						}
+					/>
+					<Route
+						exact
+						path="/policyRaseeladhakaripolicy"
+						element={
+							// <ProtectedRoute>
+							<Raseeladhakaripolicy />
 							// </ProtectedRoute>
 						}
 					/>
