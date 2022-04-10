@@ -231,9 +231,9 @@ const App = () => {
 						exact
 						path="/policySatkarphuyalpolicy"
 						element={
-							<ProtectedRoute>
-								<Satkarphuyalpolicy />
-							</ProtectedRoute>
+							// <ProtectedRoute>
+							<Satkarphuyalpolicy />
+							// </ProtectedRoute>
 						}
 					/>
 					<Route
