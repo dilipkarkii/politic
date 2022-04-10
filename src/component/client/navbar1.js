@@ -64,7 +64,6 @@ const Navbartop = () => {
             </div>
             {/* <!-- secondary nav --> */}
             <div className="items-center hidden space-x-1 md:flex">
-              
               <Setting />
             </div>
             {/* <!-- mobile button goes here --> */}
