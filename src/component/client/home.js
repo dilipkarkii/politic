@@ -328,7 +328,7 @@ const Home = () => {
 					) : ( */}
 					<div className="grid gap-4 mt-5 sm:grid-cols-2 md:grid-cols-4">
 						{events &&
-							events.map((data) => (
+							events.slice(0, 4).map((data) => (
 								<div
 									key={data.id}
 									className="bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
