@@ -240,7 +240,7 @@ export const listSuggestion = (userId) => async (dispatch) => {
 		console.log("data", data);
 		dispatch({
 			type: SUGGESTION_LIST_SUCCESS,
-			payload: data.reverse(),
+			payload: data.results.reverse(),
 		});
 	} catch (err) {
 		dispatch({
