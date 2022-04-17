@@ -18,22 +18,23 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 
   const postUpdate = useSelector((state) => state.postUpdate);
   const { success: successAdd } = postUpdate;
+  const [previewSource, setPreviewSource] = useState();
+  const [previewImage, setPreviewImage] = useState();
+  console.log("previewImage", previewImage);
 
   useEffect(() => {
     if (successAdd) {
       dispatch({ type: POST_UPDATE_RESET });
       setPreviewSource("");
     }
-    // if (isOpen === true) {
-    //   setPreviewImage("");
-    // }
+    if (isOpen === true) {
+      setPreviewImage("");
+      setPreviewSource("");
+    }
     // console.log("closeModal", isOpen);
-  }, [successAdd]);
+  }, [successAdd, isOpen]);
 
   const dispatch = useDispatch();
-
-  const [previewSource, setPreviewSource] = useState();
-  const [previewImage, setPreviewImage] = useState();
 
   setTimeout(() => setMessage(""), 3000);
   const previewFile = (file) => {

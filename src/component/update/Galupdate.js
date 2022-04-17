@@ -24,7 +24,11 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
       dispatch({ type: GALLARY_UPDATE_RESET });
       setPreviewSource("");
     }
-  }, [successAdd]);
+    if (isOpen === true) {
+      setPreviewImage("");
+      setPreviewSource("");
+    }
+  }, [successAdd, isOpen]);
 
   const previewFile = (file) => {
     console.log(file);
