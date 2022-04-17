@@ -104,7 +104,7 @@ const GalUpdate = ({ title, closeModal, isOpen, gallaryDetail }) => {
 						src={`http://backend.publicaffairsnepal.com/${
 							previewImage && previewImage.split("8000/")[1]
 						}`}
-						className="w-full h-full object-fit profile-img"
+						className="w-full h-full mt-3 object-fit profile-img"
 						alt="profile"
 					/>
 				)}

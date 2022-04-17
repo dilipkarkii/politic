@@ -71,7 +71,7 @@ const Profilephoto = ({ title, closeModal, isOpen }) => {
 							src={`http://backend.publicaffairsnepal.com/${
 								personals && personals.profilePhoto.split("8000/")[1]
 							}`}
-							className="w-full h-full object-fit profile-img"
+							className="w-full h-full mt-3 object-fit profile-img"
 							alt="profile"
 						/>
 					)}
