@@ -58,12 +58,12 @@ const Adminlogin = () => {
 
 				<form onSubmit={handleFormSubmit}>
 					<div>
-						<label htmlFor="Username">Username</label>
+						<label htmlFor="Username">Email</label>
 						<input
 							type="text"
 							className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
 							id="username"
-							placeholder="Your username"
+							placeholder="Your Email"
 							onChange={(e) => setName(e.target.value)}
 							value={name}
 						/>
@@ -88,7 +88,7 @@ const Adminlogin = () => {
 						</button>
 					</div>
 					{/* <Link to="/reset">
-						<div className="text-center mt-2 italic">
+						<div className="mt-2 italic text-center">
 							Forget your password?
 							<span className="underline"> Reset Here </span>
 						</div>
