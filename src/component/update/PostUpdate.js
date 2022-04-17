@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Modelwrapper from "../model/modelwrapper";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePost } from "../../actions/PostAction";
 import { POST_UPDATE_RESET } from "../../constants/PostConstants";
@@ -27,10 +26,10 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
       dispatch({ type: POST_UPDATE_RESET });
       setPreviewSource("");
     }
-    if (isOpen === true) {
-      setPreviewImage("");
-      setPreviewSource("");
-    }
+    // if (isOpen === true) {
+    //   setPreviewImage("");
+    //   setPreviewSource("");
+    // }
     // console.log("closeModal", isOpen);
   }, [successAdd, isOpen]);
 
@@ -72,25 +71,6 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  // 	e.preventDefault();
-  // 	console.log(postTitle, Description, img);
-  // 	let config = {
-  // 		headers: {
-  // 			"Content-Type": "multipart/form-data",
-  // 			Accept: "application/json",
-  // 			type: "formData",
-  // 		},
-  // 	};
-  // 	const { data } = await axios.post(
-  // 		url,
-  // 		{ postTitle, Description, img },
-  // 		config
-  // 	);
-  // 	if (data) {
-  // 		window.location.reload(true);
-  // 	}
-  // };
   return (
     <>
       <Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
@@ -186,3 +166,27 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 };
 
 export default PostUpdate;
+
+
+
+
+
+  // const handleSubmit = async (e) => {
+  // 	e.preventDefault();
+  // 	console.log(postTitle, Description, img);
+  // 	let config = {
+  // 		headers: {
+  // 			"Content-Type": "multipart/form-data",
+  // 			Accept: "application/json",
+  // 			type: "formData",
+  // 		},
+  // 	};
+  // 	const { data } = await axios.post(
+  // 		url,
+  // 		{ postTitle, Description, img },
+  // 		config
+  // 	);
+  // 	if (data) {
+  // 		window.location.reload(true);
+  // 	}
+  // };

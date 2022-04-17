@@ -12,7 +12,6 @@ import {
 	POSTIMAGE_DELETE_REQUEST,
 } from "../../constants/PostImageConstants";
 import ReactPaginate from "react-paginate";
-// import { data } from "autoprefixer";
 
 const Post = () => {
 	const dispatch = useDispatch();
@@ -208,6 +207,17 @@ const Post = () => {
 };
 
 export default Post;
+
+
+
+
+
+
+
+
+
+
+
 
 
 	// let itemsPerPage = 10;
