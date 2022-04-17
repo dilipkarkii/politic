@@ -14,8 +14,8 @@ import ReactPaginate from "react-paginate";
 
 const Gallary = () => {
 	const dispatch = useDispatch();
-	const [start, setStart] = useState(0);
-	const [end, setEnd] = useState(4);
+	// const [start, setStart] = useState(0);
+	// const [end, setEnd] = useState(4);
 
 	const gallaryList = useSelector((state) => state.gallaryList);
 	const { loading, success, gallarys } = gallaryList;

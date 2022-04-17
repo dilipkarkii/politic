@@ -27,7 +27,11 @@ const Profilephoto = ({ title, closeModal, isOpen }) => {
 		dispatch(updatePhoto(pic, userId));
 	};
 
+	const personalList = useSelector((state) => state.personalList);
+	const { loading, success, personals } = personalList;
+
 	const [previewSource, setPreviewSource] = useState();
+	// const [previewImage, setPreviewImage] = useState();
 
 	const previewFile = (file) => {
 		console.log(file);
@@ -54,7 +58,7 @@ const Profilephoto = ({ title, closeModal, isOpen }) => {
 						className="block w-full px-1 mt-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 						type="file"
 					/>{" "}
-					{previewSource && (
+					{previewSource ? (
 						<div className="w-full h-[260px] mt-3">
 							<img
 								src={previewSource}
@@ -62,6 +66,14 @@ const Profilephoto = ({ title, closeModal, isOpen }) => {
 								alt="profile"
 							/>
 						</div>
+					) : (
+						<img
+							src={`http://backend.publicaffairsnepal.com/${
+								personals && personals.profilePhoto.split("8000/")[1]
+							}`}
+							className="w-full h-full object-fit profile-img"
+							alt="profile"
+						/>
 					)}
 					<br />
 					<button

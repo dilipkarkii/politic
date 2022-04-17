@@ -33,6 +33,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 
 	const eventUpdate = useSelector((state) => state.eventUpdate);
 	const { success: successAdd } = eventUpdate;
+	const [previewImage, setPreviewImage] = useState();
 
 	useEffect(() => {
 		if (successAdd) {
@@ -52,6 +53,7 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 			setLink(eventDetail.link);
 			setImage(eventDetail.image);
 			setDes(eventDetail.agenda);
+			setPreviewImage(eventDetail.image);
 		}
 	}, [eventDetail]);
 
@@ -104,14 +106,22 @@ const EventUpdate = ({ title, closeModal, isOpen, eventDetail }) => {
 							required
 							className="block w-full mt-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 						/>
-						{previewSource && (
-							<div className="w-full mt-3 h-[260px]">
+						{previewSource ? (
+							<div className="w-full h-[260px] mt-3">
 								<img
 									src={previewSource}
 									className="w-full h-full object-fit profile-img"
 									alt="profile"
 								/>
 							</div>
+						) : (
+							<img
+								src={`http://backend.publicaffairsnepal.com/${
+									previewImage && previewImage.split("8000/")[1]
+								}`}
+								className="w-full h-full object-fit profile-img"
+								alt="profile"
+							/>
 						)}
 					</div>
 					<div className="mt-2 ">

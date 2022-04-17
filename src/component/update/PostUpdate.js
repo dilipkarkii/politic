@@ -30,6 +30,7 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 	setTimeout(() => setMessage(""), 3000);
 
 	const [previewSource, setPreviewSource] = useState();
+	const [previewImage, setPreviewImage] = useState();
 
 	const previewFile = (file) => {
 		console.log(file);
@@ -48,6 +49,7 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 			setDescription(postDetail.description);
 			setImg(postDetail.image);
 			setLink(postDetail.link);
+			setPreviewImage(postDetail.image);
 		}
 	}, [postDetail]);
 
@@ -145,14 +147,22 @@ const PostUpdate = ({ title, closeModal, isOpen, postDetail }) => {
 							multiple
 						/>
 					</div>
-					{previewSource && (
-						<div className="w-full mt-3 h-[260px]">
+					{previewSource ? (
+						<div className="w-full h-[260px] mt-3">
 							<img
 								src={previewSource}
 								className="w-full h-full object-fit profile-img"
 								alt="profile"
 							/>
 						</div>
+					) : (
+						<img
+							src={`http://backend.publicaffairsnepal.com/${
+								previewImage && previewImage.split("8000/")[1]
+							}`}
+							className="w-full h-full object-fit profile-img"
+							alt="profile"
+						/>
 					)}
 					<button
 						type="submit"
