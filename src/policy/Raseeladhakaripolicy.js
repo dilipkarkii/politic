@@ -2,7 +2,7 @@ import React from "react";
 
 const Raseeladhakaripolicy = () => {
 	return (
-		<div className="container mx-auto">
+		<div className="container px-10 py-10 mx-auto">
 			<div className="WordSection1">
 				<p
 					className="MsoNormal"
@@ -295,7 +295,8 @@ const Raseeladhakaripolicy = () => {
 							}}
 						>
 							&nbsp;means the software program provided by the Company
-							downloaded by You on any electronic device, named Raseel Adhakari.
+							downloaded by You on any electronic device, named{" "}
+							<span className="font-bold">Raseel Adhakari.</span>
 						</span>
 					</li>
 					<li

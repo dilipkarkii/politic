@@ -36,6 +36,7 @@ import Policy from "./component/client/policy";
 import Sanjayapolicy from "./policy/Sanjayapolicy";
 import Satkarphuyalpolicy from "./policy/Satkarphuyalpolicy";
 import Raseeladhakaripolicy from "./policy/Raseeladhakaripolicy";
+import Mandippolicy from "./policy/Mandippolicy";
 
 const App = () => {
 	return (
@@ -224,7 +225,7 @@ const App = () => {
 						path="/policyMandipChaudhary"
 						element={
 							<ProtectedRoute>
-								<Sanjayapolicy />
+								<Mandippolicy />
 							</ProtectedRoute>
 						}
 					/>

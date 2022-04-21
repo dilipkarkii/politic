@@ -295,7 +295,8 @@ const Satkarphuyalpolicy = () => {
 							}}
 						>
 							&nbsp;means the software program provided by the Company
-							downloaded by You on any electronic device, named Satkar Phuyal.
+							downloaded by You on any electronic device, named &nbsp;
+							<span className="font-bold">Satkar Phuyal.</span>
 						</span>
 					</li>
 					<li

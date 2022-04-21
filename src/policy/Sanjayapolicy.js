@@ -3,7 +3,7 @@ import React from "react";
 const Sanjayapolicy = () => {
 	return (
 		<>
-			<div className="WordSection1">
+			<div className="container px-10 py-10 mx-auto WordSection1">
 				<p
 					className="MsoNormal"
 					style={{
@@ -295,7 +295,8 @@ const Sanjayapolicy = () => {
 							}}
 						>
 							&nbsp;means the software program provided by the Company
-							downloaded by You on any electronic device, named Sanjaya Khadka.
+							downloaded by You on any electronic device, named{" "}
+							<span className="font-bold"> Sanjaya Khadka.</span>
 						</span>
 					</li>
 					<li
