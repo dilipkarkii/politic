@@ -147,7 +147,7 @@ const Profile = () => {
 	const closeContriUpdateModal = () => {
 		setOpenContriUpdate(false);
 	};
-	
+
 	return (
 		<>
 			<div className="bg-slate-300">
@@ -210,7 +210,7 @@ const Profile = () => {
 									</div>
 								) : (
 									achivements &&
-									achivements.slice(0, 3).map((value, i) => (
+									achivements.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
@@ -278,7 +278,7 @@ const Profile = () => {
 									</div>
 								) : (
 									awards &&
-									awards.slice(0, 3).map((value, i) => (
+									awards.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}
@@ -346,7 +346,7 @@ const Profile = () => {
 									</div>
 								) : (
 									contributions &&
-									contributions.slice(0, 3).map((value, i) => (
+									contributions.map((value, i) => (
 										<div
 											className="flex items-center justify-between px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 											style={{ display: "flex" }}

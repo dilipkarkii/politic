@@ -29,6 +29,10 @@ import {
 	PROFILEPHOTO_UPDATE_REQUEST,
 	PROFILEPHOTO_UPDATE_RESET,
 	PROFILEPHOTO_UPDATE_SUCCESS,
+	PARTYPHOTO_UPDATE_FAIL,
+	PARTYPHOTO_UPDATE_REQUEST,
+	PARTYPHOTO_UPDATE_RESET,
+	PARTYPHOTO_UPDATE_SUCCESS,
 } from "../constants/PersonalConstants";
 
 export const personalAddReducer = (state = {}, action) => {
@@ -215,6 +219,29 @@ export const profilephotoUpdateReducer = (state = {}, action) => {
 				error: action.payload,
 			};
 		case PROFILEPHOTO_UPDATE_RESET:
+			return {};
+		default:
+			return state;
+	}
+};
+export const flagUpdateReducer = (state = {}, action) => {
+	switch (action.type) {
+		case PARTYPHOTO_UPDATE_REQUEST:
+			return {
+				loading: true,
+			};
+		case PARTYPHOTO_UPDATE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				PARTYPHOTO: action.payload,
+			};
+		case PARTYPHOTO_UPDATE_FAIL:
+			return {
+				loading: true,
+				error: action.payload,
+			};
+		case PARTYPHOTO_UPDATE_RESET:
 			return {};
 		default:
 			return state;

@@ -16,6 +16,7 @@ import {
 } from "../../constants/PersonalConstants";
 import axios from "axios";
 import Profilephoto from "../update/Profilepicture";
+import FlagUpdate from "../update/FlagUpdate";
 
 const Personal = () => {
 	const dispatch = useDispatch();
@@ -26,6 +27,8 @@ const Personal = () => {
 	const { success: successUpdate } = personalUpdate;
 	const profilephotoUpdate = useSelector((state) => state.profilephotoUpdate);
 	const { success: successphotoUpdate } = profilephotoUpdate;
+	const flagUpdate = useSelector((state) => state.flagUpdate);
+	const { success: successAdd } = flagUpdate;
 	const manifestoDelete = useSelector((state) => state.manifestoDelete);
 	const { success: successDelete } = manifestoDelete;
 	const manifestoAdd = useSelector((state) => state.manifestoAdd);
@@ -33,6 +36,7 @@ const Personal = () => {
 
 	let [isOpen, setIsOpen] = useState(false);
 	let [isOpenphoto, setIsOpenphoto] = useState(false);
+	let [isOpenflag, setIsOpenflag] = useState(false);
 	let [openUpdate, setOpenUpdate] = useState(false);
 	let [personalDetail, setPersonalDetail] = useState();
 	let [manifesto, setManifesto] = useState([]);
@@ -45,6 +49,9 @@ const Personal = () => {
 		}
 		if (successphotoUpdate) {
 			setIsOpenphoto(false);
+		}
+		if (successAdd) {
+			setIsOpenflag(false);
 		}
 		if (successDelete) {
 			dispatch({ type: MANIFESTO_DELETE_RESET });
@@ -65,6 +72,7 @@ const Personal = () => {
 	}, [
 		dispatch,
 		successUpdate,
+		successAdd,
 		successDelete,
 		successAddManifesto,
 		iserror,
@@ -83,11 +91,17 @@ const Personal = () => {
 	function openphotoModal() {
 		setIsOpenphoto(true);
 	}
+	function openflagModal() {
+		setIsOpenflag(true);
+	}
 	const closeUpdateModal = () => {
 		setOpenUpdate(false);
 	};
 	const closephotoModal = () => {
 		setIsOpenphoto(false);
+	};
+	const closeflagModal = () => {
+		setIsOpenflag(false);
 	};
 
 	const onDelete = async (id) => {
@@ -171,12 +185,21 @@ const Personal = () => {
 									</svg>
 								</button>
 							</div>
+
 							<button
 								type="button"
 								onClick={openphotoModal}
 								className="px-2 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 "
 							>
-								{"Upload Profile picture"}
+								{"Upload profile photo"}
+							</button>
+							<button
+								type="button"
+								// onClick={openflagModal}
+								onClick={openflagModal}
+								className="px-2 py-2 text-sm font-medium text-center text-white rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 "
+							>
+								{"Upload party picture"}
 							</button>
 							<button
 								onClick={() => (
@@ -198,6 +221,11 @@ const Personal = () => {
 							title="update Profile Photo"
 							closeModal={closephotoModal}
 							isOpen={isOpenphoto}
+						/>
+						<FlagUpdate
+							title="update Profile Photo"
+							closeModal={closeflagModal}
+							isOpen={isOpenflag}
 						/>
 						<div className="relative w-auto max-w-3xl mx-auto ">
 							{/*content*/}

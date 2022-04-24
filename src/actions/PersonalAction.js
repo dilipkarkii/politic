@@ -23,6 +23,9 @@ import {
 	PROFILEPHOTO_UPDATE_REQUEST,
 	PROFILEPHOTO_UPDATE_SUCCESS,
 	PROFILEPHOTO_UPDATE_FAIL,
+	PARTYPHOTO_UPDATE_REQUEST,
+	PARTYPHOTO_UPDATE_SUCCESS,
+	PARTYPHOTO_UPDATE_FAIL,
 } from "../constants/PersonalConstants";
 import axios from "axios";
 import { baseUrl } from "../constant";
@@ -345,6 +348,36 @@ export const updatePhoto = (profilePhoto, id) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: PROFILEPHOTO_UPDATE_FAIL,
+			paylod:
+				err.response && err.response.data.message
+					? err.response.data.message
+					: err.message,
+		});
+	}
+};
+export const updateFlag = (flag, id) => async (dispatch) => {
+	try {
+		dispatch({ type: PARTYPHOTO_UPDATE_REQUEST });
+		const config = {
+			Headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		let formData = new FormData();
+		formData.append("flag", flag);
+
+		const { data } = await axios.patch(
+			`${baseUrl}politician/${id}/`,
+			formData,
+			config
+		);
+		dispatch({
+			type: PARTYPHOTO_UPDATE_SUCCESS,
+			payload: data,
+		});
+	} catch (err) {
+		dispatch({
+			type: PARTYPHOTO_UPDATE_FAIL,
 			paylod:
 				err.response && err.response.data.message
 					? err.response.data.message
