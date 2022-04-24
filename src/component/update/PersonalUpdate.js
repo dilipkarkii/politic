@@ -53,9 +53,6 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 		}
 	}, [personalDetail]);
 
-
-	
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (fname.length > 100) {
@@ -317,13 +314,13 @@ const PersonalUpdate = ({ title, closeModal, isOpen, personalDetail }) => {
 					<label className="block text-sm font-medium text-gray-700">
 						Description
 					</label>
-					<input
+					<textarea
 						type="text"
 						onChange={(e) => setDescription(e.target.value)}
 						id="description"
 						value={description}
 						placeholder="About"
-						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
+						className="block w-full mt-1 border-gray-300 rounded-md shadow-sm h-44 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm "
 					/>
 				</div>
 				{/* <div className="mt-4">s */}
