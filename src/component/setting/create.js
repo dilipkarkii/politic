@@ -116,7 +116,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						First Name
+						First Name / (पहिलो नाम)
 					</label>
 					<input
 						type="text"
@@ -131,7 +131,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Middle Name
+						Middle Name/ ( बीचको नाम)
 					</label>
 					<input
 						type="text"
@@ -145,7 +145,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Lastname
+						Lastname / (थर)
 					</label>
 					<input
 						type="text"
@@ -175,7 +175,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						phone
+						phone / (फोन नम्बरः)
 					</label>
 					<input
 						onChange={(e) => setPhone(e.target.value)}
@@ -193,7 +193,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Email
+						Email / (इमेल)
 					</label>
 					<input
 						onChange={(e) => setEmail(e.target.value)}
@@ -207,7 +207,9 @@ const Create = ({ title, closeModal, isOpen }) => {
 					<span className="text-red-700">{message}</span>
 				</div>
 				<div className="mt-4">
-					<label className="block text-sm font-medium text-gray-700">Age</label>
+					<label className="block text-sm font-medium text-gray-700">
+						Age / (उमेर )
+					</label>
 					<input
 						type="number"
 						onChange={(e) => setAge(e.target.value)}
@@ -221,7 +223,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Address
+						Address / (ठेगाना)
 					</label>
 					<input
 						type="text"
@@ -236,7 +238,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Political party
+						Political party /(राजनीतिक दल)
 					</label>
 					<input
 						type="text"
@@ -251,7 +253,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Slogan
+						Slogan / (नारा)
 					</label>
 					<input
 						type="text"
@@ -266,7 +268,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Education
+						Education / (शिक्षा ऐच्छिक)
 					</label>
 					<input
 						type="text"
@@ -281,7 +283,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Election Area
+						Election Area / (निर्वाचन क्षेत्र)
 					</label>
 					<input
 						type="text"
@@ -296,7 +298,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Member since
+						Member since / ( पार्टी आवद्धता वर्ष)
 					</label>
 					<input
 						type="date"
@@ -310,7 +312,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Position in Party
+						Candidacy/ (उम्मेदवारी)
 					</label>
 					<input
 						type="text"
@@ -325,7 +327,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Description
+						Description / (विवरण )
 					</label>
 					<input
 						type="text"
@@ -339,7 +341,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Flag
+						Flag / (पार्टी झण्डा)
 					</label>
 					<input
 						onChange={(e) => setFlag(e.target.files[0])}
@@ -353,7 +355,7 @@ const Create = ({ title, closeModal, isOpen }) => {
 				</div>
 				<div className="mt-4">
 					<label className="block text-sm font-medium text-gray-700">
-						Photo
+						Photo / ( फोटो)
 					</label>
 					<input
 						onChange={(e) => setPhoto(e.target.files[0])}

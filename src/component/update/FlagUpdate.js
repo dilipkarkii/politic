@@ -48,7 +48,7 @@ const FlagUpdate = ({ title, closeModal, isOpen }) => {
 		<Modelwrapper title={title} closeModal={closeModal} isOpen={isOpen}>
 			<form onSubmit={handleSubmit}>
 				<div className="mt-4">
-					<label> Update party Photo:</label>
+					<label> Update Party Flag:</label>
 					<input
 						// onChange={(e) => setPic(e.target.files[0])}
 						onChange={(e) => (

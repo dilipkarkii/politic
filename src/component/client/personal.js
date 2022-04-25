@@ -223,7 +223,7 @@ const Personal = () => {
 							isOpen={isOpenphoto}
 						/>
 						<FlagUpdate
-							title="update Profile Photo"
+							title="update Party Photo"
 							closeModal={closeflagModal}
 							isOpen={isOpenflag}
 						/>
