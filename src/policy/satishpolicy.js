@@ -296,7 +296,7 @@ const Satishpolicy = () => {
 						>
 							&nbsp;means the software program provided by the Company
 							downloaded by You on any electronic device, named{" "}
-							<span className="font-bold"> Sanjaya Khadka.</span>
+							<span className="font-bold"> Satish kumar singh.</span>
 						</span>
 					</li>
 					<li
