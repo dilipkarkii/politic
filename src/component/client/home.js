@@ -125,9 +125,7 @@ const Home = () => {
 												<p>
 													Member Since: {personals && personals.memberSince}
 												</p>
-												<p>
-													Position in Party: {personals && personals.position}
-												</p>
+												<p>Candidacy: {personals && personals.position}</p>
 											</div>
 										</div>
 									</p>
